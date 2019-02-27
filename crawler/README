@@ -1,0 +1,7 @@
+Crawler para coleta de centenas de pares de Projeto de Lei e lei final publicada
+
+Instruções:
+	1. Alterar os diretórios na função salva_dados conforme desejado
+	2. Manter junto ao diretório do arquivo fonte o arquivo de paginação por anos (contendo os anos dos quais deseja realizar a coleta)
+	3. Recomendado rodar no terminal utilizando o comando "until python3 crawler.py; do sleep 2; done", que reinicia automaticamente o crawler após dois segundos, se houver alguma falha, enquanto ele não terminar a tarefa (é útil porque surgem alguns problemas quase intratáveis, como limite de tempo no servidor, lentidão inesperada, erros de carregamento e etc.)
+
