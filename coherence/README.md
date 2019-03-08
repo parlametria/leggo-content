@@ -7,8 +7,11 @@ O dataset é composto atualmente por dois projetos de lei, a saber, 10 medidas c
 A organização de projetos de lei em seu texto original segue a seguinte estrutura:
 
 1st. Artigos
+
 	1 - Parágrafos
+
 		I. Subseções
+
 			a. Alíneas
 
 
