@@ -83,25 +83,24 @@ variances=[]
 stds = []
 sqdmeans = []
 totdists = []
-
+num = 0
 for sentences, file in zip(file_sentences, files):
     dirname = file.split('.txt')[0]
-    
     if not os.path.exists(outputPath/'features_inter'/ dirname):
-        os.makedirs(outputPath/'features_inter'/ dirname)    
+        #os.makedirs(outputPath/'features_inter'/ dirname)    
         print(f'Opening {dirname} number {num}')
         
     for sentences2, file2 in zip(file_sentences, files):
         #import pdb;pdb.set_trace()
         dirname2 = file2.split('.txt')[0]
         
+        
         if dirname2 != dirname:
             distances = []
             indexes =[]
             
             for i in range(0, len(sentences)):
-                if i % 1 == 0:
-                    print(i)
+                print(num)
                     
                 j = i
                 for j in range(len(sentences2)):
@@ -110,7 +109,7 @@ for sentences, file in zip(file_sentences, files):
                         indexes.append((i, j))
                         
             distances = np.array(distances)
-            distances = distances/np.sqrt((distances**2).sum())
+            #distances = distances/np.sqrt((distances**2).sum())
 
             mean = distances.mean()
             var = distances.var()
@@ -127,15 +126,16 @@ for sentences, file in zip(file_sentences, files):
             stds.append(std)
             sqdmeans.append(sqdmean)
             totdists.append(totdist)
+            num +=1
             
-            np.savetxt(os.path.join(outputPath,'features_inter', dirname, 'distances'+dirname2+'.csv'),distances.astype(float), fmt='%f', delimiter=",")
-            new_indexes = np.asarray(indexes)
-            np.savetxt(os.path.join(outputPath ,'features_inter', dirname, 'indexes'+dirname2+'.csv'), new_indexes.astype(int), fmt='%i',delimiter=',')
-            num-=1
+            #np.savetxt(os.path.join(outputPath,'features_inter', dirname, 'distances'+dirname2+'.csv'),distances.astype(float), fmt='%f', delimiter=",")
+            #new_indexes = np.asarray(indexes)
+            #np.savetxt(os.path.join(outputPath ,'features_inter', dirname, 'indexes'+dirname2+'.csv'), new_indexes.astype(int), fmt='%i',delimiter=',')
+            #num-=1
             
         else:
             print(filesPath.name + 'features_inter' + dirname + ' number ' +str(num) +  ' already exists')
-            num-=1
+            num+=1
 
 
 # In[13]:
@@ -146,6 +146,9 @@ for file in files:
     for file2 in files:
         if file2 != file:
             new_file_col.append(file.split('.txt')[0]+'_'+file2)
+means = np.array(means)
+means = means/np.sqrt((means**2).sum())
+
             
 df = pd.DataFrame(np.column_stack([new_file_col, means, variances, stds, sqdmeans, totdists]), 
                                columns=['files','mean_distance', 'variance', 'standard_deviation', 'sqd_means', 'total_distances']).to_csv(outputPath/'features.csv')
