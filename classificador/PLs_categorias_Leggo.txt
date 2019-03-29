@@ -1,0 +1,447 @@
+doc_2005_7_outubro__PL_4183__2004***Direitos Humanos
+doc_1985_29_outubro__PL_3986__2004***Agenda Governo
+doc_2011_2_dezembro__PL_6377__2009***Direito Penal e Processual Penal
+doc_2012_25_junho__PL_1833__2011***Trabalho e Emprego
+doc_1985_2_outubro__PL_3298__2004***Administração Pública
+doc_1985_27_janeiro__PL_3308__2004***Trabalho e Emprego
+doc_2014_22_dezembro__PL_522__2011***Comunicações
+doc_2004_21_dezembro__MPV_218__2004***Direito Penal e Processual Penal
+doc_2016_29_dezembro__PL_2387__2011***Comunicações
+doc_1985_18_julho__PL_510__2011***Direito Penal e Processual Penal
+doc_1985_2_setembro__PL_7625__2010***Direitos Humanos
+doc_2004_16_dezembro__MPV_211__2004***Direito Penal e Processual Penal
+doc_1985_24_novembro__PLN_4__2017_CN***Integridade e Transparência
+doc_2012_30_julho__PLN_16__2012_CN***Administração Pública
+doc_1985_22_novembro__PLN_36__2018_CN***Economia
+doc_2010_25_novembro__PL_2927__2004***Direito Penal e Processual Penal
+doc_1985_5_junho__PL_2330__2011***Agenda Governo
+doc_2010_19_agosto__PL_1090__2007***Economia
+doc_1985_26_agosto__MPV_189__2004***Agenda Governo
+doc_2018_11_abril__PL_2802__2015***Educação
+doc_2012_3_abril__PL_511__2011***Direito Penal e Processual Penal
+doc_1985_30_agosto__PL_6514__2009***Direito Penal e Processual Penal
+doc_2013_9_outubro__MPV_624__2013***Comunicações
+doc_2011_2_setembro__PL_7624__2010***Direitos Humanos
+doc_2008_14_julho__PL_689__2007***Administração Pública
+doc_1985_17_abril__PL_206__2007***Direitos Humanos
+doc_1985_21_junho__PL_4026__2008***Administração Pública
+doc_1985_9_julho__MPV_609__2013***Administração Pública
+doc_2013_26_junho__PL_3482__2004***Direitos Humanos
+doc_2004_26_agosto__MPV_189__2004***Agenda Governo
+doc_2016_29_julho__PL_4250__2015***Meio Ambiente
+doc_2006_24_julho__PL_4473__2004***Agenda Governo
+doc_2007_3_julho__PL_5429__2005***Economia
+doc_1985_26_dezembro__PLN_37__2018_CN***Economia
+doc_2017_28_dezembro__MPV_795__2017_***Educação
+doc_2004_20_dezembro__MPV_205__2004***Direito Penal e Processual Penal
+doc_2006_6_fevereiro__PL_3675__2004***Educação
+doc_2007_2_maio__MPV_342__2006***Comunicações
+doc_2018_19_junho__MPV_818__2018***Trabalho e Emprego
+doc_2007_28_dezembro__PL_2706__2003***Administração Pública
+doc_2017_7_dezembro__PL_3763__2004***Economia
+doc_2009_24_novembro__MPV_465__2009***Comunicações
+doc_2018_24_agosto__PL_2949__2011***Trabalho e Emprego
+doc_2010_12_abril__PL_2506__2007***Agenda Governo
+doc_2008_8_outubro__PL_7161__2006***Trabalho e Emprego
+doc_1985_25_novembro__PL_2927__2004***Direito Penal e Processual Penal
+doc_2018_22_novembro__PLN_33__2018_CN***Economia
+doc_2006_3_julho__PLV_12__2006_=>_MPV_283__2006***Administração Pública
+doc_2004_9_junho__PLV_29__2004_=>_MPV_170__2004***Agenda Governo
+doc_2012_5_junho__PL_1806__2011***Direitos Humanos
+doc_2015_24_novembro__PL_3161__2015***Educação
+doc_2006_2_marco__PL_4776__2005***Agenda Governo
+doc_2013_27_dezembro__PLN_37__2013_CN***Direito Penal e Processual Penal
+doc_2012_7_agosto__MPV_567__2012***Comunicações
+doc_2011_3_marco__PL_5255__2009***Comunicações
+doc_2009_16_junho__MPV_455__2009***Agenda Governo
+doc_2006_14_dezembro__MPV_323__2006***Agenda Governo
+doc_2016_20_dezembro__PLN_25__2016_CN***Economia
+doc_2004_19_maio__PLV_14__2004_=>_MPV_153__2003***Educação
+doc_2011_2_setembro__PL_7621__2010***Comunicações
+doc_2013_8_maio__PL_3943__2008***Agenda Governo
+doc_2013_9_julho__MPV_609__2013***Administração Pública
+doc_2010_11_junho__PL_5550__2009***Direito Penal e Processual Penal
+doc_2012_26_setembro__PL_1827__2011***Meio Ambiente
+doc_1985_29_julho__PL_7163__2006***Trabalho e Emprego
+doc_2007_31_maio__MPV_340__2006***Direito Penal e Processual Penal
+doc_1985_6_fevereiro__PL_3675__2004***Educação
+doc_1985_4_marco__PL_4628__2009***Agenda Governo
+doc_2009_30_outubro__MPV_467__2009***Direito Penal e Processual Penal
+doc_1985_14_maio__PL_5826__2016***Trabalho e Emprego
+doc_2011_2_setembro__PL_7622__2010***Comunicações
+doc_1985_4_janeiro__MPV_851__2018***Comunicações
+doc_1985_24_setembro__MPV_614__2013***Agenda Governo
+doc_2006_9_fevereiro__PL_4142__2004***Direitos Humanos
+doc_2014_5_fevereiro__PL_659__2011***Agenda Governo
+doc_1985_11_setembro__PLV_22__2003_MPV12203_=>_MPV_122__2003***Trabalho e Emprego
+doc_2009_17_abril__PL_4025__2004***Educação
+doc_2018_22_novembro__PLN_31__2018_CN***Economia
+doc_1985_9_dezembro__MPV_466__2009***Direito Penal e Processual Penal
+doc_2011_2_setembro__PL_7625__2010***Direitos Humanos
+doc_2015_22_outubro__PL_2742__2003***Economia
+doc_2011_7_outubro__MPV_538__2011***Direito Penal e Processual Penal
+doc_1985_19_junho__PL_7580__2010***Administração Pública
+doc_2018_14_maio__PL_5826__2016***Trabalho e Emprego
+doc_1985_16_junho__PL_5545__2009***Direito Penal e Processual Penal
+doc_1985_28_dezembro__PL_2706__2003***Administração Pública
+doc_2009_23_dezembro__PL_1746__2007***Administração Pública
+doc_2016_14_junho__MPV_707__2015_***Meio Ambiente
+doc_2010_11_junho__PL_5544__2009***Direito Penal e Processual Penal
+doc_2018_26_julho__PL_1118__2015***Comunicações
+doc_2016_20_julho__PL_6697__2009***Integridade e Transparência
+doc_2007_31_maio__MPV_335__2006***Economia
+doc_2003_11_setembro__PLV_22__2003_MPV12203_=>_MPV_122__2003***Trabalho e Emprego
+doc_2012_5_junho__PL_1831__2011***Trabalho e Emprego
+doc_2012_30_abril__PL_1830__2011***Trabalho e Emprego
+doc_1985_20_junho__MPV_708__2015_***Meio Ambiente
+doc_1985_17_dezembro__PLN_32__2018_CN***Economia
+doc_1985_25_agosto__PL_5913__2009***Educação
+doc_1985_21_dezembro__PL_6551__2009***Administração Pública
+doc_1985_27_maio__PL_3059__2004***Integridade e Transparência
+doc_2010_20_julho__PL_4760__2009***Educação
+doc_2014_24_junho__PL_6964__2010***Administração Pública
+doc_2009_17_junho__MPV_454__2009***Agenda Governo
+doc_1985_2_maio__MPV_342__2006***Comunicações
+doc_2009_1_outubro__PL_4681__2004***Comunicações
+doc_2009_11_novembro__PL_2592__2003***Integridade e Transparência
+doc_2016_20_dezembro__PLN_28__2016_CN***Economia
+doc_2013_5_novembro__PL_5643__2009***Agenda Governo
+doc_2004_30_dezembro__PL_3443__2004***Administração Pública
+doc_2009_9_dezembro__MPV_466__2009***Direito Penal e Processual Penal
+doc_2012_19_dezembro__PL_6562__2009***Comunicações
+doc_2013_24_setembro__MPV_614__2013***Agenda Governo
+doc_2015_28_dezembro__PL_6920__2010***Comunicações
+doc_2005_2_setembro__PL_4957__2005***Agenda Governo
+doc_1985_5_agosto__PL_5430__2005***Economia
+doc_2010_24_junho__MPV_482__2010***Trabalho e Emprego
+doc_1985_27_marco__PL_2866__2004***Agenda Governo
+doc_2011_2_setembro__PL_7623__2010***Direitos Humanos
+doc_1985_17_maio__PL_5278__2016***Agenda Governo
+doc_1985_27_dezembro__PLN_39__2013_CN***Direito Penal e Processual Penal
+doc_1985_11_abril__PL_2802__2015***Educação
+doc_1985_5_junho__PL_1832__2011***Trabalho e Emprego
+doc_1985_28_dezembro__PL_6920__2010***Comunicações
+doc_2008_27_maio__PL_3059__2004***Integridade e Transparência
+doc_1985_18_junho__MPV_817__2018***Trabalho e Emprego
+doc_1985_5_janeiro__PL_6437__2016***Educação
+doc_2011_4_marco__PL_4628__2009***Agenda Governo
+doc_2004_30_dezembro__MPV_220__2004***Direito Penal e Processual Penal
+doc_1985_16_junho__PL_2376__2015***Trabalho e Emprego
+doc_2018_18_junho__MPV_817__2018***Trabalho e Emprego
+doc_2016_20_junho__MPV_708__2015_***Meio Ambiente
+doc_1985_22_outubro__PL_2826__2015***Trabalho e Emprego
+doc_2005_6_setembro__PL_4300__2004***Agenda Governo
+doc_1985_8_marco__PL_4186__2004***Direito Penal e Processual Penal
+doc_2016_12_setembro__MPV_723__2016_***Educação
+doc_2012_18_julho__PL_510__2011***Direito Penal e Processual Penal
+doc_2013_27_dezembro__PLN_39__2013_CN***Direito Penal e Processual Penal
+doc_1985_23_novembro__PLN_38__2018_CN***Economia
+doc_2012_14_novembro__PL_7827__2010***Economia
+doc_1985_19_junho__MPV_818__2018***Trabalho e Emprego
+doc_2007_1_marco__MPV_326__2006***Administração Pública
+doc_1985_20_junho__MPV_341__2006***Comunicações
+doc_2005_29_julho__PL_4955__2005***Agenda Governo
+doc_2012_19_junho__PL_7580__2010***Administração Pública
+doc_2016_20_dezembro__PLN_24__2016_CN***Economia
+doc_2016_5_outubro__MPV_736__2016_***Trabalho e Emprego
+doc_1985_3_agosto__PL_3303__2004***Integridade e Transparência
+doc_2010_19_agosto__PL_5536__2009***Comunicações
+doc_1985_20_dezembro__PLN_28__2016_CN***Economia
+doc_1985_29_junho__PL_7824__2010***Economia
+doc_2012_30_abril__PL_1834__2011***Trabalho e Emprego
+doc_1985_10_agosto__PL_719__2015***Comunicações
+doc_1985_20_julho__PL_4198__2008***Agenda Governo
+doc_1985_23_dezembro__PL_1746__2007***Administração Pública
+doc_2005_21_novembro__MPV_255__2005***Agenda Governo
+doc_2011_26_agosto__PL_3232__2004***Meio Ambiente
+doc_1985_29_julho__PL_4251__2015***Meio Ambiente
+doc_1985_3_marco__PL_5255__2009***Comunicações
+doc_1985_15_setembro__PL_3946__2008***Agenda Governo
+doc_1985_27_dezembro__PL_3133__2004***Educação
+doc_2004_29_setembro__PLV_42__2004_=>_MPV_190__2004***Agenda Governo
+doc_2010_19_maio__MPV_480__2010***Administração Pública
+doc_2011_15_junho__PL_5549__2009***Direito Penal e Processual Penal
+doc_2016_12_janeiro__PL_2828__2003***Trabalho e Emprego
+doc_1985_15_maio__PL_3975__2008***Economia
+doc_1985_18_dezembro__PLN_40__2013_CN***Direito Penal e Processual Penal
+doc_2013_29_abril__PL_708__2007***Agenda Governo
+doc_2015_27_janeiro__PL_3308__2004***Trabalho e Emprego
+doc_1985_8_janeiro__PL_929__2007***Administração Pública
+doc_1985_12_abril__PL_2506__2007***Agenda Governo
+doc_1985_16_outubro__PL_1654__2011***Comunicações
+doc_1985_30_junho__PL_4918__2016***Integridade e Transparência
+doc_2004_22_setembro__PL_3885__2004***Meio Ambiente
+doc_1985_5_junho__PL_1828__2011***Trabalho e Emprego
+doc_2008_2_junho__PL_7708__2006***Comunicações
+doc_1985_29_setembro__PLV_42__2004_=>_MPV_190__2004***Agenda Governo
+doc_2016_20_dezembro__PLN_32__2016_CN***Economia
+doc_2006_10_maio__PL_5855__2005***Agenda Governo
+doc_2017_30_agosto__PL_6514__2009***Direito Penal e Processual Penal
+doc_1985_11_abril__PL_7083__2014***Comunicações
+doc_1985_28_marco__MPV_336__2006***Economia
+doc_2008_5_agosto__PL_5430__2005***Economia
+doc_1985_30_julho__PLN_16__2012_CN***Administração Pública
+doc_1985_7_dezembro__PL_3763__2004***Economia
+doc_2017_2_outubro__MPV_778__2017_***Integridade e Transparência
+doc_2004_30_dezembro__PL_2546__2003***Integridade e Transparência
+doc_2007_27_dezembro__PL_3133__2004***Educação
+doc_2006_13_marco__PL_3096__2004***Trabalho e Emprego
+doc_2016_20_dezembro__PLN_26__2016_CN***Economia
+doc_2012_5_junho__PL_1828__2011***Trabalho e Emprego
+doc_1985_26_julho__PL_1118__2015***Comunicações
+doc_2012_28_maio__PL_3331__2012***Comunicações
+doc_1985_15_janeiro__PL_2255__2015***Direitos Humanos
+doc_2018_13_junho__MPV_813__2017***Direitos Humanos
+doc_2007_20_junho__MPV_339__2006***Agenda Governo
+doc_1985_26_agosto__PL_3232__2004***Meio Ambiente
+doc_2005_13_janeiro__MPV_214__2004***Meio Ambiente
+doc_1985_30_junho__PL_5912__2009***Educação
+doc_1985_30_novembro__PL_2565__2011***Direito Penal e Processual Penal
+doc_2013_21_novembro__PL_4923__2013***Administração Pública
+doc_1985_24_junho__MPV_482__2010***Trabalho e Emprego
+doc_2005_4_janeiro__MPV_208__2004***Agenda Governo
+doc_2015_22_outubro__PL_2826__2015***Trabalho e Emprego
+doc_1985_11_junho__PL_5547__2009***Direito Penal e Processual Penal
+doc_2009_23_dezembro__PL_3246__2004***Agenda Governo
+doc_2009_29_julho__PL_7163__2006***Trabalho e Emprego
+doc_2011_15_dezembro__PL_3129__2004***Economia
+doc_1985_26_junho__PL_3482__2004***Direitos Humanos
+doc_2012_28_junho__MPV_560__2012***Comunicações
+doc_2004_25_junho__PLV_37__2004_=>_MPV_181__2004***Agenda Governo
+doc_2013_18_dezembro__PLN_40__2013_CN***Direito Penal e Processual Penal
+doc_1985_7_agosto__MPV_567__2012***Comunicações
+doc_2017_24_novembro__PLN_4__2017_CN***Integridade e Transparência
+doc_1985_26_maio__PL_7108__2014***Comunicações
+doc_2012_19_dezembro__PLN_10__2012_CN***Comunicações
+doc_2012_15_maio__PL_2871__2004***Trabalho e Emprego
+doc_2005_30_dezembro__PL_4293__2004***Direitos Humanos
+doc_1985_19_maio__PLV_14__2004_=>_MPV_153__2003***Educação
+doc_2010_15_setembro__PL_4061__2008***Agenda Governo
+doc_1985_19_dezembro__PLN_12__2012_CN***Comunicações
+doc_2008_24_dezembro__PL_6981__2006***Educação
+doc_2012_19_dezembro__PLN_12__2012_CN***Comunicações
+doc_2011_25_maio__PL_706__2007***Administração Pública
+doc_1985_17_dezembro__PLN_30__2018_CN***Economia
+doc_1985_29_dezembro__PL_2387__2011***Comunicações
+doc_1985_29_julho__PL_4253__2015***Trabalho e Emprego
+doc_2009_29_outubro__PL_3040__2004***Administração Pública
+doc_2011_8_dezembro__PL_3898__2008***Integridade e Transparência
+doc_1985_24_novembro__PL_3161__2015***Educação
+doc_2007_27_dezembro__PL_3174__2004***Educação
+doc_1985_27_dezembro__PL_7614__2010***Economia
+doc_1985_25_junho__PL_1833__2011***Trabalho e Emprego
+doc_2012_3_abril__PL_7105__2006***Agenda Governo
+doc_2011_16_junho__PL_5545__2009***Direito Penal e Processual Penal
+doc_1985_22_novembro__PLN_33__2018_CN***Economia
+doc_2011_11_outubro__PL_1085__2007***Educação
+doc_2012_23_marco__PL_4572__2009***Trabalho e Emprego
+doc_2008_4_abril__PL_7103__2006***Agenda Governo
+doc_2013_27_dezembro__PLN_36__2013_CN***Direito Penal e Processual Penal
+doc_2016_29_julho__PL_4253__2015***Trabalho e Emprego
+doc_1985_29_abril__PL_708__2007***Agenda Governo
+doc_2015_28_julho__PL_1336__2011***Agenda Governo
+doc_2012_3_abril__PL_6383__2009***Comunicações
+doc_2010_25_agosto__PL_5913__2009***Educação
+doc_2010_19_janeiro__PL_2821__2003***Integridade e Transparência
+doc_2010_24_junho__PL_3944__2008***Agenda Governo
+doc_1985_16_junho__PL_5548__2009***Direito Penal e Processual Penal
+doc_2007_19_abril__MPV_337__2006***Trabalho e Emprego
+doc_2015_26_maio__PL_7108__2014***Comunicações
+doc_2010_15_setembro__PL_3946__2008***Agenda Governo
+doc_1985_24_junho__PL_6964__2010***Administração Pública
+doc_2013_12_dezembro__PL_3341__2012***Comunicações
+doc_2006_27_marco__PL_2866__2004***Agenda Governo
+doc_2012_26_marco__PL_7579__2010***Administração Pública
+doc_1985_22_setembro__PL_3885__2004***Meio Ambiente
+doc_2016_1_setembro__MPV_725__2016_***Comunicações
+doc_2018_5_janeiro__PL_6437__2016***Educação
+doc_2016_29_novembro__PL_1767__2015***Direitos Humanos
+doc_2017_21_dezembro__PL_6970__2010***Direitos Humanos
+doc_1985_29_outubro__PL_3040__2004***Administração Pública
+doc_2017_29_novembro__PLN_18__2017_CN***Administração Pública
+doc_2017_24_outubro__PL_6376__2009***Direito Penal e Processual Penal
+doc_2005_7_abril__PL_2915__2004***Direitos Humanos
+doc_1985_4_outubro__MPV_376__2007***Comunicações
+doc_2006_2_janeiro__PL_3063__2004***Integridade e Transparência
+doc_1985_3_abril__PL_511__2011***Direito Penal e Processual Penal
+doc_2011_16_junho__PL_5543__2009***Direito Penal e Processual Penal
+doc_2016_30_junho__PL_4918__2016***Integridade e Transparência
+doc_1985_11_novembro__PL_2592__2003***Integridade e Transparência
+doc_2016_29_julho__PL_4254__2015***Trabalho e Emprego
+doc_1985_2_setembro__PL_7621__2010***Comunicações
+doc_2012_25_junho__PL_6721__2010***Economia
+doc_1985_21_novembro__MPV_255__2005***Agenda Governo
+doc_2011_29_junho__PL_7824__2010***Economia
+doc_2018_24_setembro__PL_5452__2016***Educação
+doc_2017_24_novembro__PLN_2__2017_CN***Educação
+doc_2011_17_junho__PL_5541__2009***Direito Penal e Processual Penal
+doc_1985_18_abril__PL_1119__2015***Comunicações
+doc_2012_30_novembro__PL_2565__2011***Direito Penal e Processual Penal
+doc_2004_16_setembro__PL_3294__2004***Economia
+doc_1985_31_maio__MPV_335__2006***Economia
+doc_1985_16_junho__MPV_455__2009***Agenda Governo
+doc_1985_6_novembro__PL_5664__2009***Direito Penal e Processual Penal
+doc_2016_20_dezembro__PLN_31__2016_CN***Economia
+doc_1985_26_setembro__PL_1827__2011***Meio Ambiente
+doc_2015_21_julho__MPV_670__2015***Comunicações
+doc_2005_7_janeiro__MPV_216__2004***Trabalho e Emprego
+doc_1985_21_novembro__PL_4923__2013***Administração Pública
+doc_2012_18_julho__MPV_559__2012***Comunicações
+doc_2012_15_maio__PL_3975__2008***Economia
+doc_2017_16_junho__PL_2376__2015***Trabalho e Emprego
+doc_1985_14_junho__MPV_707__2015_***Meio Ambiente
+doc_1985_11_junho__PL_5550__2009***Direito Penal e Processual Penal
+doc_1985_3_julho__PLV_12__2006_=>_MPV_283__2006***Administração Pública
+doc_2017_16_outubro__PL_1654__2011***Comunicações
+doc_1985_17_dezembro__PLN_34__2018_CN***Economia
+doc_1985_8_outubro__PL_7161__2006***Trabalho e Emprego
+doc_2010_21_junho__PL_5546__2009***Direito Penal e Processual Penal
+doc_1985_24_setembro__PL_5452__2016***Educação
+doc_2005_14_julho__PL_3062__2004***Integridade e Transparência
+doc_2013_27_dezembro__PLN_35__2013_CN***Direito Penal e Processual Penal
+doc_2005_13_janeiro__MPV_210__2004***Agenda Governo
+doc_1985_16_outubro__PL_7822__2010***Economia
+doc_2006_27_junho__PLV_11__2006_=>_MPV_281__2006***Agenda Governo
+doc_2013_27_dezembro__PLN_23__2013_CN***Direito Penal e Processual Penal
+doc_2009_7_dezembro__PL_5910__2009***Educação
+doc_1985_27_dezembro__PLN_23__2013_CN***Direito Penal e Processual Penal
+doc_1985_4_janeiro__MPV_208__2004***Agenda Governo
+doc_2013_9_julho__MPV_608__2013***Administração Pública
+doc_2010_29_junho__PL_5468__2009***Educação
+doc_2005_29_julho__PL_4819__2005***Educação
+doc_2006_24_julho__PL_5180__2005***Agenda Governo
+doc_1985_8_setembro__PL_5491__2009***Agenda Governo
+doc_2010_30_dezembro__MPV_499__2010***Administração Pública
+doc_2018_23_novembro__PLN_38__2018_CN***Economia
+doc_2004_16_junho__PL_3626__2004***Direito Penal e Processual Penal
+doc_2004_9_janeiro__PLV_28__2003_=>_MPV_132__2003***Trabalho e Emprego
+doc_2012_16_maio__PL_3905__2008***Direitos Humanos
+doc_2014_22_dezembro__PL_1009__2011***Agenda Governo
+doc_2009_17_abril__PL_206__2007***Direitos Humanos
+doc_2017_21_dezembro__PL_7404__2010***Direitos Humanos
+doc_2009_20_janeiro__PL_732__2007***Agenda Governo
+doc_2018_11_abril__PL_7083__2014***Comunicações
+doc_2004_29_abril__PL_2852__2003***Administração Pública
+doc_1985_11_junho__PL_5544__2009***Direito Penal e Processual Penal
+doc_1985_1_dezembro__PL_2487__2003***Meio Ambiente
+doc_2006_8_marco__PL_4186__2004***Direito Penal e Processual Penal
+doc_1985_12_janeiro__PL_2618__2011***Comunicações
+doc_2016_29_julho__PL_4252__2015***Meio Ambiente
+doc_2010_21_junho__PL_4026__2008***Administração Pública
+doc_2018_15_janeiro__PL_2255__2015***Direitos Humanos
+doc_1985_23_marco__PL_4572__2009***Trabalho e Emprego
+doc_2008_29_outubro__PL_3986__2004***Agenda Governo
+doc_1985_5_junho__PL_1806__2011***Direitos Humanos
+doc_2009_6_novembro__PL_5664__2009***Direito Penal e Processual Penal
+doc_2006_26_outubro__PL_6612__2006***Comunicações
+doc_1985_14_julho__PL_3062__2004***Integridade e Transparência
+doc_2015_25_marco__PL_5566__2009***Agenda Governo
+doc_2007_20_junho__MPV_355__2007***Direitos Humanos
+doc_2018_19_junho__MPV_812__2017***Direitos Humanos
+doc_1985_22_outubro__PL_2742__2003***Economia
+doc_1985_2_junho__PL_7708__2006***Comunicações
+doc_2012_16_outubro__PL_7822__2010***Economia
+doc_2018_17_maio__PL_5278__2016***Agenda Governo
+doc_1985_6_setembro__PL_4300__2004***Agenda Governo
+doc_2013_20_junho__PL_1804__2011***Direitos Humanos
+doc_2005_30_dezembro__PL_2520__2003***Administração Pública
+doc_1985_2_setembro__PL_4957__2005***Agenda Governo
+doc_1985_20_julho__PL_4760__2009***Educação
+doc_2016_26_dezembro__PLN_29__2016_CN***Economia
+doc_1985_4_marco__PL_5819__2009***Agenda Governo
+doc_2017_21_dezembro__PL_6551__2009***Administração Pública
+doc_2010_15_setembro__PL_3300__2004***Educação
+doc_2012_9_maio__PL_5513__2009***Integridade e Transparência
+doc_2017_6_outubro__PL_727__2015***Comunicações
+doc_2011_20_julho__PL_4198__2008***Agenda Governo
+doc_1985_25_julho__PL_3754__2012***Agenda Governo
+doc_2007_26_dezembro__PL_4526__2004***Educação
+doc_2004_3_agosto__PL_3303__2004***Integridade e Transparência
+doc_2016_20_dezembro__PLN_27__2016_CN***Economia
+doc_2016_14_setembro__MPV_724__2016_***Trabalho e Emprego
+doc_2005_1_dezembro__PL_2487__2003***Meio Ambiente
+doc_1985_26_dezembro__PLN_29__2016_CN***Economia
+doc_2007_20_junho__MPV_341__2006***Comunicações
+doc_1985_20_dezembro__PLN_25__2016_CN***Economia
+doc_2009_18_dezembro__PL_4024__2004***Educação
+doc_2013_18_dezembro__PLN_29__2013_CN***Direito Penal e Processual Penal
+doc_1985_25_junho__PL_6721__2010***Economia
+doc_1985_20_dezembro__PLN_32__2016_CN***Economia
+doc_1985_24_novembro__PLN_2__2017_CN***Educação
+doc_2018_18_abril__PL_1119__2015***Comunicações
+doc_1985_24_agosto__PL_2949__2011***Trabalho e Emprego
+doc_1985_21_julho__MPV_670__2015***Comunicações
+doc_1985_7_outubro__PL_4183__2004***Direitos Humanos
+doc_2010_15_setembro__PL_6611__2006***Educação
+doc_1985_2_setembro__PL_7624__2010***Direitos Humanos
+doc_2012_2_outubro__PL_1829__2011***Trabalho e Emprego
+doc_1985_19_agosto__PL_5536__2009***Comunicações
+doc_1985_27_dezembro__PLN_37__2013_CN***Direito Penal e Processual Penal
+doc_2012_5_junho__PL_2330__2011***Agenda Governo
+doc_1985_13_junho__MPV_813__2017***Direitos Humanos
+doc_2011_16_junho__PL_5548__2009***Direito Penal e Processual Penal
+doc_1985_22_novembro__PLN_31__2018_CN***Economia
+doc_2012_5_junho__PL_1832__2011***Trabalho e Emprego
+doc_2012_29_agosto__PL_1805__2011***Direitos Humanos
+doc_2015_26_junho__PL_5657__2009***Agenda Governo
+doc_2018_4_outubro__PL_6474__2009***Meio Ambiente
+doc_2016_27_julho__PL_4255__2015***Trabalho e Emprego
+doc_1985_31_maio__MPV_340__2006***Direito Penal e Processual Penal
+doc_2016_21_dezembro__PLN_30__2016_CN***Economia
+doc_2010_11_junho__PL_5547__2009***Direito Penal e Processual Penal
+doc_2014_5_fevereiro__PL_7437__2010***Administração Pública
+doc_2018_22_novembro__PLN_36__2018_CN***Economia
+doc_2013_27_dezembro__PLN_38__2013_CN***Direito Penal e Processual Penal
+doc_2015_30_julho__MPV_673__2015***Educação
+doc_2015_10_agosto__PL_719__2015***Comunicações
+doc_1985_15_setembro__PL_4061__2008***Agenda Governo
+doc_2014_20_junho__PL_4832__2012***Direito Penal e Processual Penal
+doc_1985_15_dezembro__PLV_26__2003_=>_MPV_131__2003***Direitos Humanos
+doc_1985_3_janeiro__PL_512__2011***Direito Penal e Processual Penal
+doc_1985_21_dezembro__PL_6970__2010***Direitos Humanos
+doc_1985_29_julho__PL_4250__2015***Meio Ambiente
+doc_1985_16_setembro__PL_3294__2004***Economia
+doc_2008_18_junho__PL_7324__2006***Trabalho e Emprego
+doc_1985_10_maio__PL_5855__2005***Agenda Governo
+doc_1985_17_dezembro__PLN_35__2018_CN***Economia
+doc_1985_29_novembro__PLN_18__2017_CN***Administração Pública
+doc_1985_19_abril__MPV_337__2006***Trabalho e Emprego
+doc_1985_7_janeiro__MPV_216__2004***Trabalho e Emprego
+doc_1985_27_dezembro__PLN_35__2013_CN***Direito Penal e Processual Penal
+doc_1985_16_maio__PL_3905__2008***Direitos Humanos
+doc_1985_4_outubro__PL_6474__2009***Meio Ambiente
+doc_2010_12_abril__PL_3687__2004***Direito Penal e Processual Penal
+doc_2015_29_dezembro__PL_4828__2012***Direito Penal e Processual Penal
+doc_1985_12_abril__PL_3687__2004***Direito Penal e Processual Penal
+doc_2012_25_julho__PL_3754__2012***Agenda Governo
+doc_2014_6_maio__PL_6953__2010***Comunicações
+doc_2010_30_junho__PL_5912__2009***Educação
+doc_2010_11_junho__PL_3945__2008***Agenda Governo
+doc_1985_23_marco__PL_7579__2010***Administração Pública
+doc_2009_21_agosto__PL_1191__2007***Direito Penal e Processual Penal
+doc_1985_18_dezembro__PLN_29__2013_CN***Direito Penal e Processual Penal
+doc_1985_21_agosto__PL_1191__2007***Direito Penal e Processual Penal
+doc_2016_29_julho__PL_4251__2015***Meio Ambiente
+doc_2015_8_janeiro__PL_929__2007***Administração Pública
+doc_2017_7_novembro__PL_592__2015***Administração Pública
+doc_2008_2_outubro__PL_3298__2004***Administração Pública
+doc_2004_29_dezembro__MPV_219__2004***Direito Penal e Processual Penal
+doc_2004_30_dezembro__PL_3015__2004***Agenda Governo
+doc_1985_6_outubro__PL_727__2015***Comunicações
+doc_2007_28_marco__MPV_336__2006***Economia
+doc_2010_8_setembro__PL_5491__2009***Agenda Governo
+doc_2015_6_julho__PL_846__2015***Direitos Humanos
+doc_2016_20_julho__PL_6526__2013***Administração Pública
+doc_2004_15_dezembro__MPV_200__2004***Agenda Governo
+doc_2007_4_outubro__MPV_376__2007***Comunicações
+doc_1950_24_julho__PL_1379__1948***Integridade e Transparência
+doc_2009_16_junho__MPV_453__2009***Educação
+doc_2015_12_janeiro__PL_2618__2011***Comunicações
+doc_1985_11_junho__PL_3945__2008***Agenda Governo
+doc_2014_21_julho__PL_2951__2011***Administração Pública
+doc_1985_15_maio__PL_2871__2004***Trabalho e Emprego
+doc_2012_15_maio__PL_2992__2004***Agenda Governo
+doc_2011_17_junho__PL_6180__2009***Educação
+doc_1985_19_junho__MPV_812__2017***Direitos Humanos
+doc_2011_4_marco__PL_5819__2009***Agenda Governo
+doc_2011_17_junho__PL_5542__2009***Direito Penal e Processual Penal
