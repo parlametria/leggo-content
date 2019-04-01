@@ -1,7 +1,5 @@
 #formatação
 import numpy as np
-import spacy
-from spacy.tokenizer import Tokenizer
 import re
 
 #embedding TF-IDF

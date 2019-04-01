@@ -1,7 +1,5 @@
 #formatação
 import numpy as np
-import spacy
-from spacy.tokenizer import Tokenizer
 import re
 
 #embedding TF-IDF
@@ -16,10 +14,10 @@ from sklearn import svm
 #resultados
 from sklearn import metrics
 
-#tokenização
+
+################################## leituras
 with open('PLs_categorias_Leggo.txt', 'r') as arquivo:
 	linhas = arquivo.readlines()
-
 
 lista_textos = []
 dicionario_categorias = {}
@@ -35,7 +33,7 @@ for linha in linhas:#[:15]:
 	dicionario_categorias[aux[1][:-1]] = 0
 
 
-#formatação de labels
+################################## formatação de labels
 i = 1
 for chave in dicionario_categorias.keys():
 	dicionario_categorias[chave] = i #atribuição de valor numérico para cada categoria
@@ -50,10 +48,22 @@ for linha in linhas:#[:15]:
 #print(Y)
 Y = np.array(Y)
 
-#vetorizador = TfidfVectorizer()
-#X = vetorizador.fit_transform(lista_textos).toarray()
+
+################################## treinos
 X = np.array(lista_textos)
 kf_5 = KFold(n_splits = 5, shuffle = True)
+acuracia_svm = 0.0
+acuracia_knn = 0.0
+acertos_por_classe_svm = {}
+erros_por_classe_svm = {}
+acertos_por_classe_knn = {}
+erros_por_classe_knn = {}
+for classe in dicionario_categorias.values():
+	acertos_por_classe_svm[classe] = 0.0
+	acertos_por_classe_knn[classe] = 0.0
+	erros_por_classe_knn[classe] = 0.0
+	erros_por_classe_svm[classe] = 0.0
+
 for indice_treino, indice_teste in kf_5.split(X):
 	X_treino, X_teste = X[indice_treino], X[indice_teste]
 	Y_treino, Y_teste = Y[indice_treino], Y[indice_teste]
@@ -63,23 +73,39 @@ for indice_treino, indice_teste in kf_5.split(X):
 	X_treino = vetorizador.transform(X_treino)
 	X_teste = vetorizador.transform(X_teste)
 
-	#treinos
-	#svm
-	classificador_svm = svm.SVC(gamma = 'auto', decision_function_shape = 'ovo')
-	classificador_svm.fit(X_treino, Y_treino)
-	#print(nomes_documentos[indice_treino])
 
-	#resultado = classificador_svm.predict(X_teste)
-	#print(resultado)
+	#svm
+	classificador_svm = svm.SVC(gamma = 'auto', decision_function_shape = 'ovo', C = 1000, kernel = 'linear')
+	classificador_svm.fit(X_treino, Y_treino)
+	pred_svm = classificador_svm.predict(X_teste)
+	for i in range(0, len(pred_svm)):
+		if(pred_svm[i] == Y_teste[i]):
+			acertos_por_classe_svm[pred_svm[i]] += 1.0
+		else:
+			erros_por_classe_svm[pred_svm[i]] += 1.0
 
 	#knn
-	classificador_knn = KNeighborsClassifier(n_neighbors = 3)
+	classificador_knn = KNeighborsClassifier(n_neighbors = 5, weights = 'distance', p = 1)
 	classificador_knn.fit(X_treino, Y_treino)
-	
-	#resultado = classificador_knn.predict(X_teste)
-	#print(resultado)
+	pred_knn = classificador_knn.predict(X_teste)
+	for i in range(0, len(pred_knn)):
+		if(pred_knn[i] == Y_teste[i]):
+			acertos_por_classe_knn[pred_knn[i]] += 1.0
+		else:
+			erros_por_classe_knn[pred_knn[i]] += 1.0
+
+print('Acurácias por classe SVM:')
+for classe in dicionario_categorias.keys():
+	acc_classe_atual = acertos_por_classe_svm[dicionario_categorias[classe]] / (acertos_por_classe_svm[dicionario_categorias[classe]] + erros_por_classe_svm[dicionario_categorias[classe]])
+	print(classe + ': ' + str(acc_classe_atual))
+
+print('Acurácias por classe KNN:')
+for classe in dicionario_categorias.keys():
+	acc_classe_atual = acertos_por_classe_knn[dicionario_categorias[classe]] / (acertos_por_classe_knn[dicionario_categorias[classe]] + erros_por_classe_knn[dicionario_categorias[classe]])
+	print(classe + ': ' + str(acc_classe_atual))
 
 
+	'''
 	#resultados
 	print('Score SVM e KNN: ')
 	print(f'SVM: {classificador_svm.score(X_teste, Y_teste)}')	
@@ -87,9 +113,7 @@ for indice_treino, indice_teste in kf_5.split(X):
 
 	print('F1 SVM e KNN: ')
 	print(f"SVM: {metrics.f1_score(Y_teste, classificador_svm.predict(X_teste), average = 'macro')}")	
-	print(f"KNN: {metrics.f1_score(Y_teste, classificador_knn.predict(X_teste), average = 'macro')}")	
-	#print(metrics.f1_score(Y_teste, classificador_svm.predict(X_teste), average = 'macro'))
-	#print(metrics.f1_score(Y_teste, classificador_knn.predict(X_teste), average = 'macro'))
-
+	print(f"KNN: {metrics.f1_score(Y_teste, classificador_knn.predict(X_teste), average = 'macro')}")
+	'''
 
 
