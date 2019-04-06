@@ -1,6 +1,9 @@
 #formatação
 import numpy as np
 import re
+#import nltk
+import string
+from preprocessamento import tokenizador #tokenizador próprio
 
 #embedding TF-IDF
 from sklearn.preprocessing import normalize
@@ -13,6 +16,10 @@ from sklearn import svm
 
 #resultados
 from sklearn import metrics
+
+
+
+
 
 
 ################################## leituras
@@ -68,37 +75,49 @@ for indice_treino, indice_teste in kf_5.split(X):
 	X_treino, X_teste = X[indice_treino], X[indice_teste]
 	Y_treino, Y_teste = Y[indice_treino], Y[indice_teste]
 
-	vetorizador = TfidfVectorizer()
+	vetorizador = TfidfVectorizer(analyzer = 'word', tokenizer = tokenizador)
+	#vetorizador = TfidfVectorizer()
 	vetorizador.fit(X_treino)
 	X_treino = vetorizador.transform(X_treino)
 	X_teste = vetorizador.transform(X_teste)
-
+	print('a')
 
 	#svm
 	classificador_svm = svm.SVC(gamma = 'auto', decision_function_shape = 'ovo', C = 1000, kernel = 'linear')
 	classificador_svm.fit(X_treino, Y_treino)
 	pred_svm = classificador_svm.predict(X_teste)
+	acuracia_media_svm = 0.0
 	for i in range(0, len(pred_svm)):
 		if(pred_svm[i] == Y_teste[i]):
 			acertos_por_classe_svm[pred_svm[i]] += 1.0
+			acuracia_media_svm += 1.0
 		else:
 			erros_por_classe_svm[pred_svm[i]] += 1.0
+	acuracia_svm += acuracia_media_svm / len(pred_svm)
+
 
 	#knn
 	classificador_knn = KNeighborsClassifier(n_neighbors = 5, weights = 'distance', p = 1)
 	classificador_knn.fit(X_treino, Y_treino)
 	pred_knn = classificador_knn.predict(X_teste)
+	acuracia_media_knn = 0.0
 	for i in range(0, len(pred_knn)):
 		if(pred_knn[i] == Y_teste[i]):
 			acertos_por_classe_knn[pred_knn[i]] += 1.0
+			acuracia_media_knn += 1.0
 		else:
 			erros_por_classe_knn[pred_knn[i]] += 1.0
+	acuracia_knn += acuracia_media_knn / len(pred_knn)
 
+
+print('Acurácia total SVM: ' + str(acuracia_svm / 5.0))
 print('Acurácias por classe SVM:')
 for classe in dicionario_categorias.keys():
 	acc_classe_atual = acertos_por_classe_svm[dicionario_categorias[classe]] / (acertos_por_classe_svm[dicionario_categorias[classe]] + erros_por_classe_svm[dicionario_categorias[classe]])
 	print(classe + ': ' + str(acc_classe_atual))
 
+print()
+print(print('Acurácia total KNN: ' + str(acuracia_knn / 5.0)))
 print('Acurácias por classe KNN:')
 for classe in dicionario_categorias.keys():
 	acc_classe_atual = acertos_por_classe_knn[dicionario_categorias[classe]] / (acertos_por_classe_knn[dicionario_categorias[classe]] + erros_por_classe_knn[dicionario_categorias[classe]])

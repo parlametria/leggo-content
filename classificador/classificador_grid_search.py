@@ -1,6 +1,7 @@
 #formatação
 import numpy as np
 import re
+from preprocessamento import tokenizador #tokenizador próprio
 
 #embedding TF-IDF
 from sklearn.preprocessing import normalize
@@ -66,12 +67,13 @@ melhor_acuracia = -1.0
 melhores_parametros = {'gamma' : 'auto', 'decision_function_shape' : 'ovo'}
 for C_atual in C:
 	for kernel_atual in kernels:
+		print('SVM')
 		acuracia_media = 0.0
 		for indice_treino, indice_teste in kf_5.split(X):
 			X_treino, X_teste = X[indice_treino], X[indice_teste]
 			Y_treino, Y_teste = Y[indice_treino], Y[indice_teste]
 
-			vetorizador = TfidfVectorizer()
+			vetorizador = TfidfVectorizer(analyzer = 'word', tokenizer = tokenizador)
 			vetorizador.fit(X_treino) #o vetor tem apenas as posições do treino e isso é salvo no objeto vetorizador
 			X_treino = vetorizador.transform(X_treino)
 			X_teste = vetorizador.transform(X_teste) #as posições (palavras) que existem no teste mas não no treino são ignoradas
@@ -92,7 +94,7 @@ for C_atual in C:
 
 		print(acuracia_media)
 
-		with open('SVM_parametros.txt', 'w') as arquivo:
+		with open('SVM_parametros_2.txt', 'w') as arquivo:
 			arquivo.write(str(melhores_parametros))		
 
 
@@ -106,12 +108,13 @@ melhores_parametros = {}
 for N in n_vizinhos:
 	for peso in pesos:
 		for norma in p_norma:
+			print('KNN')
 			acuracia_media = 0.0
 			for indice_treino, indice_teste in kf_5.split(X):
 				X_treino, X_teste = X[indice_treino], X[indice_teste]
 				Y_treino, Y_teste = Y[indice_treino], Y[indice_teste]
 
-				vetorizador = TfidfVectorizer()
+				vetorizador = TfidfVectorizer(analyzer = 'word', tokenizer = tokenizador)
 				vetorizador.fit(X_treino) #o vetor tem apenas as posições do treino e isso é salvo no objeto vetorizador
 				X_treino = vetorizador.transform(X_treino)
 				X_teste = vetorizador.transform(X_teste) #as posições (palavras) que existem no teste mas não no treino são ignoradas
@@ -133,5 +136,5 @@ for N in n_vizinhos:
 
 			print(acuracia_media)
 
-			with open('KNN_parametros.txt', 'w') as arquivo:
+			with open('KNN_parametros_2.txt', 'w') as arquivo:
 				arquivo.write(str(melhores_parametros))
