@@ -32,13 +32,14 @@ import pandas as pd
 # -3º: Path para a pasta onde a tabela de features deve ser salva
 # -4º: Path para o arquivo Inteiro Teor
 
-#files = os.listdir('C:/Users/lucas/Documents/UFMG/Projeto/coherence/leggo-content/coherence/mpv870/teste') # mudar path para pasta das justificações 
+
 emdPath = Path(sys.argv[1])
 modelPath = Path(sys.argv[2])
 outputPath = Path(sys.argv[3])
 intPath = Path(sys.argv[4])
 
 # =============================================================================
+# Paths para teste
 # emdPath = Path('../mpv870/teste')
 # modelPath = Path('../languagemodel/vectors_skipgram_lei_aprovadas.bin')
 # outputPath = Path('../teste1')
