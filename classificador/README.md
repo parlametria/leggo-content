@@ -1,4 +1,5 @@
 classificador_kfold.py
+
 	Instruções:
 		1. Certifique-se que as bibliotecas numpy, nltk e scikit-learn estão instaladas
 		2. Coloque o arquivo preprocessamento.py no mesmo diretório
@@ -9,6 +10,7 @@ classificador_kfold.py
 
 
 classificador_grid_search.py
+
 	Instruções:
 		1. Certifique-se que as bibliotecas numpy, nltk e scikit-learn estão instaladas
 		2. Coloque o arquivo preprocessamento.py no mesmo diretório
