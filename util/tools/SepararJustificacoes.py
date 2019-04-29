@@ -21,7 +21,7 @@ justificacoesPath = sys.argv[2]
 
 pat = re.compile(r"\njustificação\n",flags = re.IGNORECASE)
 
-# # Cria pasta com as justificações
+# # Cria diretrio se não existe
 def createDirsIfNotExists(path):
     if not os.path.exists(path):
         os.makedirs(path)
