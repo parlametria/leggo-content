@@ -11,27 +11,33 @@ import sys
 
 
 
-if len(sys.argv) > 2:
+if len(sys.argv) > 3:
 	print("Número de argumentos maior que um, insira somente o path para a pasta onde estão as PLs")
 	
-dir_path = sys.argv[1]
+dirPath = sys.argv[1]
+justificacoesPath = sys.argv[2]
 
 # # Expressões regulares utilizadas
 
 pat = re.compile(r"\njustificação\n",flags = re.IGNORECASE)
 
 # # Cria pasta com as justificações
-
-os.mkdir('justificacoes')
-
-dirPath = sys.argv[1]
+def createDirsIfNotExists(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
 
 #dirPath = "./pls_leis_tramitacoes/textos_iniciais_txt"
+#justificacoesPath = "./justificacoes/"
+createDirsIfNotExists(justificacoesPath)
 
 fps = []
 
 for dirpath, dirnames, filenames in os.walk(dirPath):
     for filename in filenames:
+        
+        # Cria diretórios no formato /justificacoes/numProposicao/arquivos.txt
+        newPath = justificacoesPath + "/" + filename.split("_")[1] + "/"
+        createDirsIfNotExists(newPath)
         
         with open(os.path.normpath(os.path.join(dirpath,filename)), 'r', encoding = 'utf-8') as pl:
             ProjetoDeLei = pl.read()
@@ -39,6 +45,6 @@ for dirpath, dirnames, filenames in os.walk(dirPath):
             if re.search(pat,ProjetoDeLei):
                 justificacao = re.split(r"\njustificação\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[1]
                 
-                with open("./justificacoes/" + os.path.splitext(filename)[0] + '_jus.txt', 'w',encoding = 'utf-8') as j:
+                with open(newPath + os.path.splitext(filename)[0] + '_jus.txt', 'w',encoding = 'utf-8') as j:
                     j.write(justificacao)
                     
