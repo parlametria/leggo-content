@@ -22,7 +22,8 @@ pat = re.compile(r"\njustificação\n",flags = re.IGNORECASE)
 
 # # Cria pasta com as justificações
 
-os.mkdir('justificacoes')
+if not os.path.exists('justificacoes'):
+    os.mkdir('justificacoes')
 
 dirPath = sys.argv[1]
 
