@@ -72,6 +72,7 @@ def resultados(arquivo_modelo, X_teste, y_teste):
 	Imprime os resultados (precisão e recall)
 	'''
 
+
 	labels_possiveis = ['O', 'B-SUB', 'B-MOD', 'B-ADD', 'B-SUP', 'I-SUB', 'I-MOD', 'I-ADD', 'I-SUP', 'E-SUB', 'E-MOD', 'E-ADD', 'E-SUP']
 	mapa_labels = {
 		'O': 0,
@@ -93,9 +94,10 @@ def resultados(arquivo_modelo, X_teste, y_teste):
 	tagger.open(arquivo_modelo)
 
 
-	y_pred = [tagger.tag([unidade_x_teste]) for unidade_x_teste in X_teste]
-	y_pred_np = np.array([mapa_labels[''.join(y_pred_i)] for y_pred_i in y_pred])
-	y_teste_np = np.array([mapa_labels[y_teste_i] for y_teste_i in y_teste])
+	y_pred = [tagger.tag(unidade_x_teste) for unidade_x_teste in X_teste] #predições
+	y_pred_np = np.array([mapa_labels[y_pred_i] for preds_documento in y_pred for y_pred_i in preds_documento]) #formato para avaliação do classification_report
+	y_teste_np = np.array([mapa_labels[y_teste_i] for labels_documento in y_teste for y_teste_i in labels_documento]) #labels corretas
+
 
 	print(classification_report(y_teste_np, y_pred_np, labels = np.arange(len(mapa_labels)), target_names = labels_possiveis))
 	
@@ -108,6 +110,8 @@ def main():
 	Função principal
 	'''
 
+	np.random.seed(123)
+
 	pares_palavra_tag = leitura_de_dados('exemplo_entrada.txt')
 
 	#pares_com_O = [tupla for tupla in pares_palavra_tag if tupla[1] == 'O'] #pares apenas com out of segment
@@ -115,27 +119,26 @@ def main():
 	
 	documentos = separa_em_blocos(pares_palavra_tag) #cada segmento é um documento, as tags B e E indicam o início e o fim de um segmento
 
-	X = [] #vetor de features, cada posição contém as features de uma palavra
+	X = [] #lista de lista, cada lista contém as features de palavras de um mesmo documento
+	y = [] #lista de lista, cada lista contém as labels de palavras de um mesmo documento
 	for documento in documentos:
+		Xi = [] #vetor de features, cada posição contém as features de uma palavra
+		yi = [] #vetor de labels, cada posição contém as labels de uma palavra
 		for i in range(len(documento)):
-			X.append(criador_de_features(documento, i))
-
-	y = []
-	for par in pares_palavra_tag:
-		y.append(par[1])
+			Xi.append(criador_de_features(documento, i))
+			yi.append(documento[i][1])
+		X.append(Xi)
+		y.append(yi)
 
 
 	X_treino, X_teste, y_treino, y_teste = train_test_split(X, y, test_size = 0.2)
 
-	print(X_treino[0], y_treino[0])
-	print(len(X_treino), len(y_treino))
-	print(list(zip(X_treino, y_treino))[0])
-	#exit(0)
+
 	modelo = pycrfsuite.Trainer(verbose = True)
 
 
 	for unidade_x, unidade_y in zip(X_treino, y_treino):
-		modelo.append([unidade_x], [unidade_y])
+		modelo.append(unidade_x, unidade_y)
 
 
 	modelo.set_params({
