@@ -1,13 +1,11 @@
 '''
-Classificador CRF
+Script puramente para teste de saída de predições
 '''
 
-
 import pycrfsuite
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
 import numpy as np
 import os
+
 
 def leitura_de_dados(arquivo_de_entrada):
 	'''
@@ -50,6 +48,7 @@ def separa_em_blocos(pares_palavra_tag):
 	return documentos
 
 
+
 def criador_de_features(documento, posicao_do_par):
 	'''
 	Dado um documento/bloco e a posição do par palavra-tag atual obtém as features desse par.
@@ -73,52 +72,33 @@ def criador_de_features(documento, posicao_do_par):
 	return features
 
 
-def resultados(arquivo_modelo, X_teste, y_teste):
-	'''
-	Imprime os resultados (precisão e recall)
-	'''
 
-
-	labels_possiveis = ['O', 'B-SUB', 'B-MOD', 'B-ADD', 'B-SUP', 'I-SUB', 'I-MOD', 'I-ADD', 'I-SUP', 'E-SUB', 'E-MOD', 'E-ADD', 'E-SUP']
-	mapa_labels = {
-		'O': 0,
-		'B-SUB': 1,
-		'B-MOD': 2,
-		'B-ADD': 3,
-		'B-SUP': 4,
-		'I-SUB': 5,
-		'I-MOD': 6,
-		'I-ADD': 7,
-		'I-SUP': 8,
-		'E-SUB': 9,
-		'E-MOD': 10,
-		'E-ADD': 11,
-		'E-SUP': 12
-	}
+def teste_predicao(arquivo_modelo, documentos, X_teste, y_teste):
+	'''
+	Função auxiliar, apenas para teste de saída de predições.
+	'''
 
 	tagger = pycrfsuite.Tagger()
 	tagger.open(arquivo_modelo)
-
-
 	y_pred = [tagger.tag(unidade_x_teste) for unidade_x_teste in X_teste] #predições
-	y_pred_np = np.array([mapa_labels[y_pred_i] for preds_documento in y_pred for y_pred_i in preds_documento]) #formato para avaliação do classification_report
-	y_teste_np = np.array([mapa_labels[y_teste_i] for labels_documento in y_teste for y_teste_i in labels_documento]) #labels corretas
 
+	k = 0 #iterador de documentos
+	for doc in documentos:
+		i = 0 #iterador de palavras em cada documento
+		for palavra in doc:
+			with open('predicoes.txt', 'a') as arquivo:
+				arquivo.write(str(list(zip(palavra, y_pred[k][i]))))
+				arquivo.write('\n')
+			i += 1
+		k += 1
 
-	print(classification_report(y_teste_np, y_pred_np, labels = np.arange(len(mapa_labels)), target_names = labels_possiveis))
-	
-	
 
 def main():
-	'''
-	Função principal
-	'''
-
 	np.random.seed(123)
 
 	pares_palavra_tag = []
-	for arquivo in os.listdir('tagFiles/'): #diretório com arquivos de treino e teste
-		#print(arquivo)
+	for arquivo in os.listdir('tagFiles/'):
+		print(arquivo)
 		pares_palavra_tag += leitura_de_dados('tagFiles/' + arquivo)
 
 
@@ -140,29 +120,11 @@ def main():
 		y.append(yi)
 
 
-	X_treino, X_teste, y_treino, y_teste = train_test_split(X, y, test_size = 0.2)
-
-
-	modelo = pycrfsuite.Trainer(verbose = True)
-
-
-	for unidade_x, unidade_y in zip(X_treino, y_treino):
-		modelo.append(unidade_x, unidade_y)
-
-
-	modelo.set_params({
-		'c1': 0.1,
-		'c2': 0.01,
-		'max_iterations': 10000,
-		'feature.possible_transitions': True
-	})
-
-	modelo.train('modelo10000.model')
-
-	resultados('modelo10000.model', X_teste, y_teste) 
-	
-
+	predicao('modelo10000.model', documentos, X, y)
 
 
 if __name__ == "__main__":
 	main()
+
+
+
