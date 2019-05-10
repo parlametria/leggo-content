@@ -14,15 +14,11 @@ import math
 import sys
 from pathlib import Path
 
-
 download('stopwords')
-
 
 # In[9]:
 
-
 import pandas as pd
-
 
 # In[10]:
 
@@ -36,14 +32,12 @@ import pandas as pd
 emdPath = sys.argv[1]
 modelPath = sys.argv[2]
 outputPath = sys.argv[3]
-intPath = sys.argv[4]
 
 # =============================================================================
 # Paths para teste
 # emdPath = Path('../mpv870/teste')
 # modelPath = Path('../languagemodel/vectors_skipgram_lei_aprovadas.bin')
 # outputPath = Path('../teste1')
-# intPath = Path('../mpv870/inteiroteor/inteiroteor.pdf.txt')
 # =============================================================================
 
 files = os.listdir(emdPath)
@@ -57,9 +51,6 @@ sqdmeans = []
 totdists = []
 model = KeyedVectors.load_word2vec_format(modelPath, binary=True)
 
-
-
-
 # # Intercoerência
 
 # In[11]:
@@ -68,25 +59,32 @@ model = KeyedVectors.load_word2vec_format(modelPath, binary=True)
     
 emdSentences = []
 finalTokenizedSentences = []
+intFile = ""
 for file in files:
-    file = open(emdPath + '/' + str(file), 'r', encoding = 'UTF8')
-    line = file.read()
-    tokenized_sentences = []
-    line = re.sub(r'[^\w\d\s]+', '', line)
-    tokenized_sentences.append(line.lower().split())
-    stop_words = set(stopwords.words('portuguese') + list(punctuation))
-    for t in tokenized_sentences:
-        emdSentences.append([w for w in t if w not in stop_words])
+    #Verifica se o texto é de uma emenda
+    if "emenda" in str(file):
+        file = open(emdPath + '/' + str(file), 'r', encoding = 'UTF8')
+        line = file.read()
+        tokenized_sentences = []
+        line = re.sub(r'[^\w\d\s]+', '', line)
+        tokenized_sentences.append(line.lower().split())
+        stop_words = set(stopwords.words('portuguese') + list(punctuation))
+        for t in tokenized_sentences:
+            emdSentences.append([w for w in t if w not in stop_words])
 
+    #Verifica se existe o texto inicial da materia
+    if "avulso_inicial_da_materia" in str(file) or "apresentacao_de_proposicao" in str(file):
+        intFile = open(emdPath + '/' + str(file), 'r', encoding = 'UTF8')
 
-
-# Lista de sentenças do inteiro teor
-    
-intFile = open(intPath, 'r', encoding = 'UTF8')
+if len(emdSentences) == 0:
+    print("Não existe Emendas para esta proposição")
+    sys.exit() 
 # =============================================================================
 # lines = intFile.readlines()
 # =============================================================================
-
+if intFile == "":
+    print("Texto inicial da proposição não encontrado")
+    sys.exit() 
 
 finalTokenizedSentences = []
 intSentences = []
@@ -98,10 +96,7 @@ for line in intFile:
     for t in tokenized_sentences:
         intSentences.append([w for w in t if w not in stop_words])
 
-
-
 # In[12]:
-
 
 means = []
 variances=[]
