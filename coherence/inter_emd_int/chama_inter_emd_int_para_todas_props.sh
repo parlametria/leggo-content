@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#Pasta com as emendas
 DIR_DATA=$1
 
 for folder in $(ls $DIR_DATA/); do
