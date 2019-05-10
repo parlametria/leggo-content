@@ -33,10 +33,10 @@ import pandas as pd
 # -4º: Path para o arquivo Inteiro Teor
 
 
-emdPath = Path(sys.argv[1])
-modelPath = Path(sys.argv[2])
-outputPath = Path(sys.argv[3])
-intPath = Path(sys.argv[4])
+emdPath = sys.argv[1]
+modelPath = sys.argv[2]
+outputPath = sys.argv[3]
+intPath = sys.argv[4]
 
 # =============================================================================
 # Paths para teste
@@ -69,7 +69,7 @@ model = KeyedVectors.load_word2vec_format(modelPath, binary=True)
 emdSentences = []
 finalTokenizedSentences = []
 for file in files:
-    file = open(emdPath/file, 'r', encoding = 'UTF8')
+    file = open(emdPath + '/' + str(file), 'r', encoding = 'UTF8')
     line = file.read()
     tokenized_sentences = []
     line = re.sub(r'[^\w\d\s]+', '', line)
@@ -126,12 +126,12 @@ for emd,i in zip(emdSentences,files):
             # dists é uma lista de todas as distâncias calculadas
             indexes.append('_'.join([i, str(j)]))
             
-        
     distances = np.array(distances)
+    distances[distances > 1e308] = 0
     distances = distances/np.sqrt((distances**2).sum())
     
-    allDists.extend(distances)
 
+    allDists.extend(distances)
     mean = distances.mean()
     var = distances.var()
     std = math.sqrt(distances.var())
@@ -155,7 +155,7 @@ allDists = np.array(allDists)
 indexes = np.array(indexes)
 
 df = pd.DataFrame(np.column_stack([files, means, variances, stds, sqdmeans, totdists]), 
-                  columns=['files','mean_distance', 'variance', 'standard_deviation', 'sqd_means', 'total_distances']).to_csv(outputPath/'features_inter.csv')
+                  columns=['files','mean_distance', 'variance', 'standard_deviation', 'sqd_means', 'total_distances']).to_csv('features_inter.csv')
 
 df2 = pd.DataFrame(np.column_stack([indexes, allDists]), 
-                  columns=['comparacao','distancia']).to_csv(outputPath/'all_dist.csv')
+                  columns=['comparacao','distancia']).to_csv('all_dist.csv')
