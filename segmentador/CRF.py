@@ -8,6 +8,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 import numpy as np
 import os
+import spacy
+from spacy.lang.pt.examples import sentences 
 
 def leitura_de_dados(arquivo_de_entrada):
 	'''
@@ -50,14 +52,16 @@ def separa_em_blocos(pares_palavra_tag):
 	return documentos
 
 
-def criador_de_features(documento, posicao_do_par):
+def criador_de_features(documento, posicao_do_par, doc_nlp):
 	'''
 	Dado um documento/bloco e a posição do par palavra-tag atual obtém as features desse par.
 	Retorna uma lista de features.
 	'''
-
+	
 	palavra = documento[posicao_do_par][0]
 	tag = documento[posicao_do_par][1]
+
+
 
 	features = [ 
 		'bias',
@@ -66,9 +70,53 @@ def criador_de_features(documento, posicao_do_par):
 		'e_titulo=%s' % palavra.istitle(),
 		'e_digito=%s' % palavra.isdigit()
 	] #features genéricas, servem para qualquer palavra no documento/bloco, independentemente de sua posição
+	
+	pos_tag = ''
+	for token in doc_nlp:
+		if token.text == palavra:
+			pos_tag = token.pos_
+	if pos_tag != '': #se há pos tagging para essa palavra (necessário conferir já que o nlp() do spacy tokeniza diferente do arquivo de entrada)
+		features.extend(['pos_tag=' + pos_tag])
 
 	#aqui podem ser acrescentadas features dependendo da posição da palavra no documento/bloco
 	#por exemplo, palavras que estão entre as primeira e última palavras do bloco podem tomar como features as palavras ao redor
+	
+	if posicao_do_par > 0: #se houver palavras anteriores
+		palavra_anterior = documento[posicao_do_par - 1][0]
+		
+		features.extend([
+			'palavra_anterior_minusculo=' + palavra_anterior.lower(),
+			'anterior_esta_em_maiusculo=%s' % palavra_anterior.isupper(),
+			'anterior_e_titulo=%s' % palavra_anterior.istitle(),
+			'anterior_e_digito=%s' % palavra_anterior.isdigit()
+		])
+
+		pos_tag_ant = ''
+		for token in doc_nlp:
+			if token.text == palavra_anterior:
+				pos_tag_ant = token.pos_
+		if pos_tag_ant != '':
+			features.extend(['pos_tag=' + pos_tag_ant])
+
+		
+
+	if posicao_do_par < len(documento) - 1:
+		palavra_posterior = documento[posicao_do_par + 1][0]
+		
+		features.extend([
+			'palavra_posterior_minusculo=' + palavra_posterior.lower(),
+			'posterior_esta_em_maiusculo=%s' % palavra_posterior.isupper(),
+			'posterior_e_titulo=%s' % palavra_posterior.istitle(),
+			'posterior_e_digito=%s' % palavra_posterior.isdigit()
+		])
+
+		pos_tag_post = ''
+		for token in doc_nlp:
+			if token.text == palavra_posterior:
+				pos_tag_post = token.pos_
+		if pos_tag_post != '':
+			features.extend(['pos_tag=' + pos_tag_post])
+	
 
 	return features
 
@@ -79,21 +127,22 @@ def resultados(arquivo_modelo, X_teste, y_teste):
 	'''
 
 
-	labels_possiveis = ['O', 'B-SUB', 'B-MOD', 'B-ADD', 'B-SUP', 'I-SUB', 'I-MOD', 'I-ADD', 'I-SUP', 'E-SUB', 'E-MOD', 'E-ADD', 'E-SUP']
+	#labels_possiveis = ['O', 'B-SUB', 'B-MOD', 'B-ADD', 'B-SUP', 'I-SUB', 'I-MOD', 'I-ADD', 'I-SUP', 'E-SUB', 'E-MOD', 'E-ADD', 'E-SUP']
+	labels_possiveis = ['O', 'B-MOD', 'B-ADD', 'B-SUP', 'I-MOD', 'I-ADD', 'I-SUP', 'E-MOD', 'E-ADD', 'E-SUP']
 	mapa_labels = {
 		'O': 0,
-		'B-SUB': 1,
-		'B-MOD': 2,
-		'B-ADD': 3,
-		'B-SUP': 4,
-		'I-SUB': 5,
-		'I-MOD': 6,
-		'I-ADD': 7,
-		'I-SUP': 8,
-		'E-SUB': 9,
-		'E-MOD': 10,
-		'E-ADD': 11,
-		'E-SUP': 12
+		#'B-SUB': 1,
+		'B-MOD': 1,
+		'B-ADD': 2,
+		'B-SUP': 3,
+		#'I-SUB': 5,
+		'I-MOD': 4,
+		'I-ADD': 5,
+		'I-SUP': 6,
+		#'E-SUB': 9,
+		'E-MOD': 7,
+		'E-ADD': 8,
+		'E-SUP': 9
 	}
 
 	tagger = pycrfsuite.Tagger()
@@ -115,6 +164,7 @@ def main():
 	'''
 
 	np.random.seed(123)
+	nlp = spacy.load('pt_core_news_sm')
 
 	pares_palavra_tag = []
 	for arquivo in os.listdir('tagFiles/'): #diretório com arquivos de treino e teste
@@ -133,8 +183,10 @@ def main():
 	for documento in documentos:
 		Xi = [] #vetor de features, cada posição contém as features de uma palavra
 		yi = [] #vetor de labels, cada posição contém as labels de uma palavra
+		aux = list(zip(*documento))[0]
+		doc_nlp = nlp(' '.join(aux))
 		for i in range(len(documento)):
-			Xi.append(criador_de_features(documento, i))
+			Xi.append(criador_de_features(documento, i, doc_nlp))
 			yi.append(documento[i][1])
 		X.append(Xi)
 		y.append(yi)
@@ -157,9 +209,9 @@ def main():
 		'feature.possible_transitions': True
 	})
 
-	modelo.train('modelo10000.model')
+	modelo.train('modelo1000_contexto.model')
 
-	resultados('modelo10000.model', X_teste, y_teste) 
+	resultados('modelo1000_contexto.model', X_teste, y_teste) 
 	
 
 
