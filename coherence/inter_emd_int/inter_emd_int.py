@@ -26,7 +26,6 @@ import pandas as pd
 # -1º: Path para pasta onde estão os textos das emendas extraídas
 # -2º: Path para o arquivo .bin do modelo Word2Vec treinado 
 # -3º: Path para a pasta onde a tabela de features deve ser salva
-# -4º: Path para o arquivo Inteiro Teor
 
 
 emdPath = sys.argv[1]
@@ -37,7 +36,6 @@ outputPath = sys.argv[3]
 # Paths para teste
 # emdPath = Path('../mpv870/teste')
 # modelPath = Path('../languagemodel/vectors_skipgram_lei_aprovadas.bin')
-# outputPath = Path('../teste1')
 # =============================================================================
 
 files = os.listdir(emdPath)
@@ -73,8 +71,9 @@ for file in files:
             emdSentences.append([w for w in t if w not in stop_words])
 
     #Verifica se existe o texto inicial da materia
-    if "avulso_inicial_da_materia" in str(file) or "apresentacao_de_proposicao" in str(file):
-        intFile = open(emdPath + '/' + str(file), 'r', encoding = 'UTF8')
+    elif "avulso_inicial_da_materia" in str(file) or "apresentacao_de_proposicao" in str(file):
+        intFile = open(emdPath + '/' + str(file), 'r', encoding = 'UTF8')     
+        files.remove(file)
 
 if len(emdSentences) == 0:
     print("Não existe Emendas para esta proposição")
@@ -107,9 +106,13 @@ num = 0
 
 allDists = []
 indexes = []
+files_read = []
 
 for emd,i in zip(emdSentences,files):
-    print("abrindo emenda:",i.split('.txt')[0])
+    prefixo_emenda = i.split('.txt')[0]
+    files_read.append(prefixo_emenda)
+
+    print("abrindo emenda:",prefixo_emenda)
     distances = []
     
     for teor,j in zip(intSentences,range(len(intSentences))):
@@ -149,8 +152,10 @@ allDists = np.array(allDists)
 
 indexes = np.array(indexes)
 
-df = pd.DataFrame(np.column_stack([files, means, variances, stds, sqdmeans, totdists]), 
-                  columns=['files','mean_distance', 'variance', 'standard_deviation', 'sqd_means', 'total_distances']).to_csv('features_inter.csv')
+
+df = pd.DataFrame(np.column_stack([files_read, means, variances, stds, sqdmeans, totdists]), 
+	          columns=['files','mean_distance', 'variance', 'standard_deviation', 'sqd_means', 'total_distances']).to_csv(str(prefixo_emenda) + '_features_inter.csv')
 
 df2 = pd.DataFrame(np.column_stack([indexes, allDists]), 
-                  columns=['comparacao','distancia']).to_csv('all_dist.csv')
+	          columns=['comparacao','distancia']).to_csv(str(prefixo_emenda) + '_all_dist.csv')
+

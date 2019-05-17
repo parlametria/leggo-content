@@ -20,6 +20,7 @@ justificacoesPath = sys.argv[2]
 # # Expressões regulares utilizadas
 
 pat = re.compile(r"\njustificação\n",flags = re.IGNORECASE)
+pat2 = re.compile(r"\njustificativa\n",flags = re.IGNORECASE)
 
 # # Cria diretrio se não existe
 def createDirsIfNotExists(path):
@@ -34,17 +35,23 @@ fps = []
 
 for dirpath, dirnames, filenames in os.walk(dirPath):
     for filename in filenames:
+            # Cria diretórios no formato /justificacoes/numProposicao/arquivos.txt
+            newPath = justificacoesPath + "/" + filename.split("_")[1] + "/"
+            createDirsIfNotExists(newPath)
         
-        # Cria diretórios no formato /justificacoes/numProposicao/arquivos.txt
-        newPath = justificacoesPath + "/" + filename.split("_")[1] + "/"
-        createDirsIfNotExists(newPath)
-        
-        with open(os.path.normpath(os.path.join(dirpath,filename)), 'r', encoding = 'utf-8') as pl:
-            ProjetoDeLei = pl.read()
+            with open(os.path.normpath(os.path.join(dirpath,filename)), 'r', encoding = 'utf-8') as pl:
+                ProjetoDeLei = pl.read()
             
-            if re.search(pat,ProjetoDeLei):
-                justificacao = re.split(r"\njustificação\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[1]
+                if re.search(pat,ProjetoDeLei):
+                    justificacao = re.split(r"\njustificação\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[1]
                 
-                with open(newPath + os.path.splitext(filename)[0] + '_jus.txt', 'w',encoding = 'utf-8') as j:
-                    j.write(justificacao)
+                    with open(newPath + os.path.splitext(filename)[0] + '_jus.txt', 'w',encoding = 'utf-8') as j:
+                        j.write(justificacao)
+
+                if re.search(pat2,ProjetoDeLei):
+                    justificacao = re.split(r"\njustificativa\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[1]
+                
+                    with open(newPath + os.path.splitext(filename)[0] + '_jus.txt', 'w',encoding = 'utf-8') as j:
+                        j.write(justificacao)
+                    
                     

@@ -10,7 +10,7 @@ for subdir, dirs, files in os.walk(data_links):
     for file in files:
         file_path = os.path.join(subdir, file)
         #Apaga os txts gerados por pfds que eram imagens
-        if os.stat(file_path).st_size == 0 or 'Document Outline' in open(file_path).read():
+        if os.stat(file_path).st_size < 100 or 'Document Outline' in open(file_path).read():
             os.remove(file_path)
             print "Removing file: " + file_path
 
