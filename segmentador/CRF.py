@@ -6,8 +6,11 @@ Classificador CRF
 import pycrfsuite
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
+from sklearn.model_selection import KFold
 import numpy as np
 import os
+
+
 import spacy
 from spacy.lang.pt.examples import sentences 
 
@@ -71,12 +74,13 @@ def criador_de_features(documento, posicao_do_par, doc_nlp):
 		'e_digito=%s' % palavra.isdigit()
 	] #features genéricas, servem para qualquer palavra no documento/bloco, independentemente de sua posição
 	
-	pos_tag = ''
+	'''pos_tag = ''
 	for token in doc_nlp:
 		if token.text == palavra:
 			pos_tag = token.pos_
 	if pos_tag != '': #se há pos tagging para essa palavra (necessário conferir já que o nlp() do spacy tokeniza diferente do arquivo de entrada)
 		features.extend(['pos_tag=' + pos_tag])
+	'''
 
 	#aqui podem ser acrescentadas features dependendo da posição da palavra no documento/bloco
 	#por exemplo, palavras que estão entre as primeira e última palavras do bloco podem tomar como features as palavras ao redor
@@ -91,12 +95,13 @@ def criador_de_features(documento, posicao_do_par, doc_nlp):
 			'anterior_e_digito=%s' % palavra_anterior.isdigit()
 		])
 
-		pos_tag_ant = ''
+		'''pos_tag_ant = ''
 		for token in doc_nlp:
 			if token.text == palavra_anterior:
 				pos_tag_ant = token.pos_
 		if pos_tag_ant != '':
 			features.extend(['pos_tag=' + pos_tag_ant])
+		'''
 
 		
 
@@ -110,18 +115,19 @@ def criador_de_features(documento, posicao_do_par, doc_nlp):
 			'posterior_e_digito=%s' % palavra_posterior.isdigit()
 		])
 
-		pos_tag_post = ''
+		'''pos_tag_post = ''
 		for token in doc_nlp:
 			if token.text == palavra_posterior:
 				pos_tag_post = token.pos_
 		if pos_tag_post != '':
 			features.extend(['pos_tag=' + pos_tag_post])
+		'''
 	
 
 	return features
 
 
-def resultados(arquivo_modelo, X_teste, y_teste):
+def resultados_parciais(arquivo_modelo, X_teste, y_teste):
 	'''
 	Imprime os resultados (precisão e recall)
 	'''
@@ -131,15 +137,12 @@ def resultados(arquivo_modelo, X_teste, y_teste):
 	labels_possiveis = ['O', 'B-MOD', 'B-ADD', 'B-SUP', 'I-MOD', 'I-ADD', 'I-SUP', 'E-MOD', 'E-ADD', 'E-SUP']
 	mapa_labels = {
 		'O': 0,
-		#'B-SUB': 1,
 		'B-MOD': 1,
 		'B-ADD': 2,
 		'B-SUP': 3,
-		#'I-SUB': 5,
 		'I-MOD': 4,
 		'I-ADD': 5,
 		'I-SUP': 6,
-		#'E-SUB': 9,
 		'E-MOD': 7,
 		'E-ADD': 8,
 		'E-SUP': 9
@@ -153,10 +156,39 @@ def resultados(arquivo_modelo, X_teste, y_teste):
 	y_pred_np = np.array([mapa_labels[y_pred_i] for preds_documento in y_pred for y_pred_i in preds_documento]) #formato para avaliação do classification_report
 	y_teste_np = np.array([mapa_labels[y_teste_i] for labels_documento in y_teste for y_teste_i in labels_documento]) #labels corretas
 
+	dic_results = classification_report(y_teste_np, y_pred_np, labels = np.arange(len(mapa_labels)), target_names = labels_possiveis, output_dict = True)
+	#print(dic_results)
 
-	print(classification_report(y_teste_np, y_pred_np, labels = np.arange(len(mapa_labels)), target_names = labels_possiveis))
+	return dic_results
 	
 	
+
+def resultados_validacao_cruzada(todos_resultados):
+	labels_possiveis = ['O', 'B-MOD', 'B-ADD', 'B-SUP', 'I-MOD', 'I-ADD', 'I-SUP', 'E-MOD', 'E-ADD', 'E-SUP']
+	dic_resultados_kfold = {}
+	for label_atual in labels_possiveis:
+		dic_resultados_kfold[label_atual] = {}
+
+
+	for label_atual in labels_possiveis:
+		dic_resultados_kfold[label_atual]['precision'] = 0
+		dic_resultados_kfold[label_atual]['recall'] = 0
+		dic_resultados_kfold[label_atual]['f1-score'] = 0
+
+
+	for i in range(len(todos_resultados)):
+		for label_atual in labels_possiveis:
+			dic_resultados_kfold[label_atual]['precision'] += todos_resultados[i][label_atual]['precision'] / 5.0
+			dic_resultados_kfold[label_atual]['recall'] += todos_resultados[i][label_atual]['recall'] / 5.0
+			dic_resultados_kfold[label_atual]['f1-score'] += todos_resultados[i][label_atual]['f1-score'] / 5.0
+	
+	
+	print('\t\t\t\tResultados 5-Fold\n')
+	print('label \t\t precision \t\t recall \t\t f1-score')
+	for label in dic_resultados_kfold.keys():
+		print(label + '\t\t' + str(round(dic_resultados_kfold[label]['precision'], 4)) + '\t\t\t' + str(round(dic_resultados_kfold[label]['recall'], 4)) + '\t\t\t' + str(round(dic_resultados_kfold[label]['f1-score'], 4)))
+
+
 
 def main():
 	'''
@@ -192,28 +224,43 @@ def main():
 		y.append(yi)
 
 
-	X_treino, X_teste, y_treino, y_teste = train_test_split(X, y, test_size = 0.2)
+	#5-Fold
+	X = np.array(X)
+	y = np.array(y)
+	kf_5 = KFold(n_splits = 5, shuffle = True)
+	todos_resultados = [] #sumarização dos resultados
+	for indice_treino, indice_teste in kf_5.split(X):
+		print('em treino...')
+		X_treino, X_teste = X[indice_treino], X[indice_teste]
+		y_treino, y_teste = y[indice_treino], y[indice_teste]	
 
 
-	modelo = pycrfsuite.Trainer(verbose = True)
+
+		modelo = pycrfsuite.Trainer(verbose = True)
 
 
-	for unidade_x, unidade_y in zip(X_treino, y_treino):
-		modelo.append(unidade_x, unidade_y)
+		for unidade_x, unidade_y in zip(X_treino, y_treino):
+			modelo.append(unidade_x, unidade_y)
 
 
-	modelo.set_params({
-		'c1': 0.1,
-		'c2': 0.01,
-		'max_iterations': 10000,
-		'feature.possible_transitions': True
-	})
+		modelo.set_params({
+			'c1': 0.1,
+			'c2': 0.01,
+			'max_iterations': 1000,
+			#'all_possible_transitions': True
+			'feature.possible_transitions': True
+		})
 
-	modelo.train('modelo1000_contexto.model')
+		modelo.train('modelo.model')
 
-	resultados('modelo1000_contexto.model', X_teste, y_teste) 
+		dic_results = resultados_parciais('modelo.model', X_teste, y_teste)
+
+		todos_resultados.append(dic_results)
+
+
+	resultados_validacao_cruzada(todos_resultados)
 	
-
+	
 
 
 if __name__ == "__main__":
