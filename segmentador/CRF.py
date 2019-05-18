@@ -93,6 +93,8 @@ def criador_de_features(documento, posicao_do_par, pos_tags_documento):
 			'anterior_e_digito=%s' % palavra_anterior.isdigit(),
 			'pos_tag_ant=' + pos_tags_documento[posicao_do_par - 1][1]
 		])
+	else:
+		features.append('BOS') #início de documento
 
 
 
@@ -108,7 +110,8 @@ def criador_de_features(documento, posicao_do_par, pos_tags_documento):
 			'posterior_e_digito=%s' % palavra_posterior.isdigit(),
 			'pos_tag_post=' + pos_tags_documento[posicao_do_par + 1][1]
 		])
-
+	else:
+		features.append('EOS') #fim de documento
 
 	
 
