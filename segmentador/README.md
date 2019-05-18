@@ -1,7 +1,7 @@
 Segmentador de Emendas <br /> <br />
 
 As emendas à PLs possuem uma estrutura que consiste, no geral, em uma introdução seguida de pares de anúncio do que será feito (emenda substitutiva/modificativa, aditiva ou supressiva) e a alteração em si. A ideia é segmentar o texto dessas emendas de forma que todas essas partes fiquem separadas. <br />
-Para isso foi utilizado uma abordagem supervisionada com o modelo de Conditional Random Fields (CRF), que tem como entrada uma lista de features (para cada segmento) e uma tag que identifica o tipo de segmento. <br />
+Para isso foi utilizado uma abordagem supervisionada com o modelo de Conditional Random Fields (CRF), que tem como entrada uma lista de features para cada palavra e uma tag que identifica o que essa palavra representa para o segmento (nada, início, meio ou fim). Tudo isso para cada um dos segmentos <br />
 As features são construídas a partir de cada palavra no segmento e as utilizadas (no momento) são: <br />
 	* A palavra em minúsculo <br />
 	* Se a palavra está em maiúsculo (booleano) <br />
