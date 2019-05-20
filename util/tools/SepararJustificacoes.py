@@ -3,6 +3,7 @@
 
 # # Programa para separar as justificações dos textos de lei em Projetos de Lei
 # Assumindo como entrada em linha de comando o caminho/path da pasta contendo os textos de projetos de lei
+
 import os
 import re
 import sys
@@ -44,14 +45,10 @@ for dirpath, dirnames, filenames in os.walk(dirPath):
                     with open(newPath + os.path.splitext(filename)[0] + '_jus.txt', 'w',encoding = 'utf-8') as j:
                         j.write(justificacao)
 
-                elif re.search(pat2,ProjetoDeLei):
+                if re.search(pat2,ProjetoDeLei):
                     justificacao = re.split(r"\njustificativa\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[1]
                 
                     with open(newPath + os.path.splitext(filename)[0] + '_jus.txt', 'w',encoding = 'utf-8') as j:
                         j.write(justificacao)
-               
-                else:
-                    with open(newPath + "log_arquivos_removidos_justificacoes.txt","w+", encoding = 'utf-8') as j:
-                        j.write("Remove o arquivo " + ProjetoDeLei)
                     
                     
