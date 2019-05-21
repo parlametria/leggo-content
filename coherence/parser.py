@@ -8,7 +8,7 @@ files = os.listdir('/Users/andre/Documents/LegGo/Proposicoes/textos_publicados')
 for f in files:
     if f != '.DS_Store':
         with open('textos_publicados/'+f, 'r', encoding='UTF8') as doc:
-            text = doc.read().replace('\n', '')
+            text = doc.read().replace('\n', ' ')
             phrases = []
             texto = ""
             arts = text.split('Art.')
