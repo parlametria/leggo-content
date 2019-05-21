@@ -1,0 +1,1 @@
+{'n_vizinhos': 5, 'pesos': 'distance', 'norma': 1, 'acuracia': 0.637378277153558}

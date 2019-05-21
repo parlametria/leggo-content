@@ -1,0 +1,1 @@
+{'gamma': 'auto', 'decision_function_shape': 'ovo', 'C': 1000, 'kernel': 'linear', 'acuracia': 0.6332084893882647}
