@@ -157,5 +157,5 @@ df = pd.DataFrame(np.column_stack([files_read, means, variances, stds, sqdmeans,
 	          columns=['files','mean_distance', 'variance', 'standard_deviation', 'sqd_means', 'total_distances']).to_csv(str(prefixo_emenda) + '_features_inter.csv')
 
 df2 = pd.DataFrame(np.column_stack([indexes, allDists]), 
-	          columns=['comparacao','distancia']).to_csv('jus_all_dist/' + str(prefixo_emenda) + '_all_dist.csv')
+	          columns=['comparacao','distancia']).to_csv(str(outputPath) + str(prefixo_emenda) + '_all_dist.csv')
 
