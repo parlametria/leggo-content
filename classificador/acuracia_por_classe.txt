@@ -1,0 +1,24 @@
+Acurácias por classe SVM:
+Direitos Humanos: 0.7368421052631579
+Agenda Governo: 0.3937007874015748
+Direito Penal e Processual Penal: 0.75
+Trabalho e Emprego: 0.868421052631579
+Administração Pública: 0.7428571428571429
+Comunicações: 0.5294117647058824
+Integridade e Transparência: 1.0
+Economia: 0.8260869565217391
+Educação: 0.76
+Meio Ambiente: 0.8421052631578947
+
+Acurácias por classe KNN:
+Direitos Humanos: 0.3684210526315789
+Agenda Governo: 0.5280898876404494
+Direito Penal e Processual Penal: 0.86
+Trabalho e Emprego: 0.717391304347826
+Administração Pública: 0.6585365853658537
+Comunicações: 0.5606060606060606
+Integridade e Transparência: 0.6666666666666666
+Economia: 0.9487179487179487
+Educação: 0.9473684210526315
+Meio Ambiente: 0.68
+
