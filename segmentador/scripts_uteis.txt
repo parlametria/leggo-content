@@ -1,0 +1,2 @@
+* Substituir em todos arquivos do diretório
+	sed -i 's/E-SUB/E-MOD/g' *

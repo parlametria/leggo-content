@@ -1,0 +1,11 @@
+Direitos Humanos;33
+Agenda Governo;72
+Direito Penal e Processual Penal;64
+Trabalho e Emprego;50
+Administração Pública;43
+Comunicações;56
+Integridade e Transparência;20
+Economia;51
+Educação;38
+Meio Ambiente;20
+Total;447
