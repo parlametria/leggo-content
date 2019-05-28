@@ -5,6 +5,6 @@ DIR_DATA=$1
 
 for folder in $(ls $DIR_DATA/); do
         echo $DIR_DATA$folder
-	python3 ../../coherence/inter_emd_int/inter_emd_int.py $DIR_DATA$folder ../../coherence/languagemodel/vectors_skipgram_lei_aprovadas.bin jus_all_dist/
+	python3 ../../coherence/inter_emd_int/inter_emd_int.py $DIR_DATA$folder ../../coherence/languagemodel/vectors_skipgram_lei_aprovadas.bin emendas_all_dist/
 
 done
