@@ -125,8 +125,11 @@ for emd,i in zip(emdSentences,files):
             indexes.append('_'.join([i, str(j)]))
             
     distances = np.array(distances)
-    distances[distances > 1e308] = sys.maxint
-    distances = distances/np.sqrt((distances**2).sum())
+
+    if (np.sqrt((distances**2).sum() == 0):
+        distances = 10000
+    else:
+        distances = distances/np.sqrt((distances**2).sum())
     
 
     allDists.extend(distances)
