@@ -42,13 +42,13 @@ for dirpath, dirnames, filenames in os.walk(dirPath):
                 if re.search(pat,ProjetoDeLei):
                     justificacao = re.split(r"\njustificação\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[0]
                 
-                    with open(newPath + os.path.splitext(filename)[0] + '_emenda.txt', 'w',encoding = 'utf-8') as j:
+                    with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
                         j.write(justificacao)
 
                 if re.search(pat2,ProjetoDeLei):
                     justificacao = re.split(r"\njustificativa\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[0]
                 
-                    with open(newPath + os.path.splitext(filename)[0] + '_emenda.txt', 'w',encoding = 'utf-8') as j:
+                    with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
                         j.write(justificacao)
                     
                     
