@@ -14,8 +14,6 @@ import math
 import sys
 from pathlib import Path
 
-download('stopwords')
-
 # In[9]:
 
 import pandas as pd
@@ -74,6 +72,8 @@ for file in files:
     elif "avulso_inicial_da_materia" in str(file) or "apresentacao_de_proposicao" in str(file):
         intFile = open(emdPath + '/' + str(file), 'r', encoding = 'UTF8')     
         files.remove(file)
+    else:
+        files.remove(file)
 
 if len(emdSentences) == 0:
     print("Não existe Emendas para esta proposição")
@@ -119,18 +119,15 @@ for emd,i in zip(emdSentences,files):
         
         if len(emd) > 4 and len(teor)> 4:
             d = model.wmdistance(emd,teor)
+            if float("inf") == d:
+                continue
+
             # Distância para calcular a média
             distances.append(d)
             # dists é uma lista de todas as distâncias calculadas
             indexes.append('_'.join([i, str(j)]))
             
-    distances = np.array(distances)
-
-    if (np.sqrt((distances**2).sum() == 0):
-        distances = 10000
-    else:
-        distances = distances/np.sqrt((distances**2).sum())
-    
+    distances = np.array(distances) 
 
     allDists.extend(distances)
     mean = distances.mean()
@@ -160,5 +157,7 @@ df = pd.DataFrame(np.column_stack([files_read, means, variances, stds, sqdmeans,
 	          columns=['files','mean_distance', 'variance', 'standard_deviation', 'sqd_means', 'total_distances']).to_csv(str(prefixo_emenda) + '_features_inter.csv')
 
 df2 = pd.DataFrame(np.column_stack([indexes, allDists]), 
-	          columns=['comparacao','distancia']).to_csv(str(outputPath) + str(prefixo_emenda) + '_all_dist.csv')
+	          columns=['comparacao','distancia'])
+df2.index.name = 'index'
+df2.to_csv(str(outputPath) + str(prefixo_emenda) + '_all_dist.csv')
 
