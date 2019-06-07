@@ -1,8 +1,8 @@
 #!/bin/bash
 
-
+cd ../versoes-de-proposicoes/
 #Gera a tabela com os links para os arquivos dos textos e emendas
-Rscript ../versoes-de-proposicoes/fetcher.R -i ../leggoR/data/tabela_geral_ids_casa.csv -e ../leggo-backend/data/emendas_raw.csv -o novas_emendas.csv -a avulsos_iniciais.csv
+Rscript fetcher.R -i ../leggoR/data/tabela_geral_ids_casa.csv -e ../leggo-backend/data/emendas_raw.csv -o novas_emendas.csv -a avulsos_iniciais.csv
 
 #Verifica se há novas emendas
 if [ $(cat novas_emendas.csv | wc -l) -lt 2 ]
@@ -13,7 +13,7 @@ else
     mkdir -p emendas
 
     #Entra na pasta data do leggo-content
-    cd util/data/
+    cd ../leggo-content/util/data/
 
     #Download dos arquivos em pdf
     python3 download_csv_prop.py ../../../versoes-de-proposicoes/novas_emendas.csv ../../../versoes-de-proposicoes/emendas/ 
