@@ -4,8 +4,8 @@ import sys
 import urllib.request
 import unidecode
 
-links_arquivos = sys.argv[1]
-output_dir = sys.argv[2]
+def print_usage():
+  print("Número errado de parâmetros,o certo é: donwload_csv_props.py <caminho_csv_links_arquivos> <output_dir>")
 
 def download_pdfs_from_path(csv_path):
   df = pd.read_csv(csv_path)
@@ -34,5 +34,10 @@ def download_pdfs_from_path(csv_path):
       print(file_name)
       urllib.request.urlretrieve(link, file_name)
 
+if (len(sys.argv) != 3):
+  print_usage()
+else:
+  links_arquivos = sys.argv[1]
+  output_dir = sys.argv[2]
 
-download_pdfs_from_path(links_arquivos)
+  download_pdfs_from_path(links_arquivos)
