@@ -4,9 +4,8 @@ import sys
 import urllib.request
 import unidecode
 
-emendas_links = sys.argv[1]
+links_arquivos = sys.argv[1]
 output_dir = sys.argv[2]
-inteiro_links = sys.argv[3]
 
 def download_pdfs_from_path(csv_path):
   df = pd.read_csv(csv_path)
@@ -36,5 +35,4 @@ def download_pdfs_from_path(csv_path):
       urllib.request.urlretrieve(link, file_name)
 
 
-download_pdfs_from_path(emendas_links)
-download_pdfs_from_path(inteiro_links)
+download_pdfs_from_path(links_arquivos)
