@@ -10,24 +10,24 @@ then
     echo "Não há novas emendas"
     exit 0
 else
-    mkdir -p emendas
+    mkdir -p documentos
 
     #Entra na pasta data do leggo-content
     cd ../leggo-content/util/data/
 
     #Download dos arquivos em pdf
-    python3 download_csv_prop.py ../../../versoes-de-proposicoes/novas_emendas.csv ../../../versoes-de-proposicoes/emendas/ 
-    python3 download_csv_prop.py ../../../versoes-de-proposicoes/avulsos_iniciais.csv ../../../versoes-de-proposicoes/emendas/ 
+    python3 download_csv_prop.py ../../../versoes-de-proposicoes/novas_emendas.csv ../../../versoes-de-proposicoes/documentos/ 
+    python3 download_csv_prop.py ../../../versoes-de-proposicoes/avulsos_iniciais.csv ../../../versoes-de-proposicoes/documentos/ 
 
     #Converte de pdf para txt
-    ./calibre_convert.sh ../../../versoes-de-proposicoes/emendas
+    ./calibre_convert.sh ../../../versoes-de-proposicoes/documentos
 
     #Verifica se os pdfs baixados eram imagens
-    python verifica_se_pdf_imagem.py ../../../versoes-de-proposicoes/emendas
+    python verifica_se_pdf_imagem.py ../../../versoes-de-proposicoes/documentos
 
     #Separa Justificacoes
     #Pasta com as emendas
-    DIR_DATA="../../../versoes-de-proposicoes/emendas"
+    DIR_DATA="../../../versoes-de-proposicoes/documentos"
 
     for folder in $(ls $DIR_DATA/); do
             echo $DIR_DATA/$folder/txt
