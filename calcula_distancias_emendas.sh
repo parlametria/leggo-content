@@ -22,11 +22,8 @@ else
     #Converte de pdf para txt
     ./calibre_convert.sh ../../../versoes-de-proposicoes/documentos
 
-    #Verifica se os pdfs baixados eram imagens
-    python verifica_se_pdf_imagem.py ../../../versoes-de-proposicoes/documentos
-
     #Separa Justificacoes
-    #Pasta com as emendas
+    #Pasta com as emendas e respectivos inteiro teor de cada lei
     DIR_DATA="../../../versoes-de-proposicoes/documentos"
 
     for folder in $(ls $DIR_DATA/); do

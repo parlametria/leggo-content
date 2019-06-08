@@ -8,47 +8,53 @@ import os
 import re
 import sys
 
+def print_usage():
+    print("Número errado de parâmetros,o certo é: SepararJustificacoes.py <caminho_com_txt_com_emendas_e_avulsos> <caminho_pasta_escrita>")
+
 if len(sys.argv) > 3:
-	print("Número de argumentos maior que um, insira somente o path para a pasta onde estão as PLs")
+	print_usage()
+else:
 	
-dirPath = sys.argv[1]
-justificacoesPath = sys.argv[2]
+    dirPath = sys.argv[1]
+    justificacoesPath = sys.argv[2]
 
-# # Expressões regulares utilizadas
+    $DIR_DATA/$folder/txt ./emendas_sem_justificacoes/
 
-pat = re.compile(r"\njustificação\n",flags = re.IGNORECASE)
-pat2 = re.compile(r"\njustificativa\n",flags = re.IGNORECASE)
+    # # Expressões regulares utilizadas
 
-# # Cria diretrio se não existe
-def createDirsIfNotExists(path):
-    if not os.path.exists(path):
-        os.makedirs(path)
+    pat = re.compile(r"\njustificação\n",flags = re.IGNORECASE)
+    pat2 = re.compile(r"\njustificativa\n",flags = re.IGNORECASE)
 
-#dirPath = "./pls_leis_tramitacoes/textos_iniciais_txt"
-#justificacoesPath = "./justificacoes/"
-createDirsIfNotExists(justificacoesPath)
+    # # Cria diretrio se não existe
+    def createDirsIfNotExists(path):
+        if not os.path.exists(path):
+            os.makedirs(path)
 
-fps = []
+    #dirPath = "./pls_leis_tramitacoes/textos_iniciais_txt"
+    #justificacoesPath = "./justificacoes/"
+    createDirsIfNotExists(justificacoesPath)
 
-for dirpath, dirnames, filenames in os.walk(dirPath):
-    for filename in filenames:
-            # Cria diretórios no formato /justificacoes/numProposicao/arquivos.txt
-            newPath = justificacoesPath + "/" + filename.split("_")[1] + "/"
-            createDirsIfNotExists(newPath)
-        
-            with open(os.path.normpath(os.path.join(dirpath,filename)), 'r', encoding = 'utf-8') as pl:
-                ProjetoDeLei = pl.read()
+    fps = []
+
+    for dirpath, dirnames, filenames in os.walk(dirPath):
+        for filename in filenames:
+                # Cria diretórios no formato /justificacoes/numProposicao/arquivos.txt
+                newPath = justificacoesPath + "/" + filename.split("_")[1] + "/"
+                createDirsIfNotExists(newPath)
             
-                if re.search(pat,ProjetoDeLei):
-                    justificacao = re.split(r"\njustificação\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[0]
+                with open(os.path.normpath(os.path.join(dirpath,filename)), 'r', encoding = 'utf-8') as pl:
+                    ProjetoDeLei = pl.read()
                 
-                    with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
-                        j.write(justificacao)
+                    if re.search(pat,ProjetoDeLei):
+                        justificacao = re.split(r"\njustificação\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[0]
+                    
+                        with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
+                            j.write(justificacao)
 
-                if re.search(pat2,ProjetoDeLei):
-                    justificacao = re.split(r"\njustificativa\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[0]
-                
-                    with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
-                        j.write(justificacao)
+                    if re.search(pat2,ProjetoDeLei):
+                        justificacao = re.split(r"\njustificativa\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[0]
+                    
+                        with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
+                            j.write(justificacao)
                     
                     
