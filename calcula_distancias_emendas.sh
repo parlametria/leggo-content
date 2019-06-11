@@ -1,75 +1,78 @@
 #!/bin/bash
 
-#if [ ]
-#then
-#fi
+# Prints message with delimiters.
+pretty_print() {
+    printf "\n===============================\n$1\n===============================\n"
+}
 
+# Prints script usage
+print_usage() {
+    printf "Chamada Correta: calcula_distancias_emendas.sh <LEGGO_R_REPO_PATH> <LEGGO_BACKEND_REPO_PATH> <LEGGO_CONTENT_REPO_PATH> <VERSOES_PROPOSICOES_REPO_PATH> <DATA_DIR_PATH>"
+}
 
-#VERSOES_PROPOSICOES_REPO_PATH=$1
-#LEGGO_CONTENT_REPO_PATH=$2
-#LEGGOR_REPO_PATH=$3
-#DATA_DIR_PATH=$4
+if [ "$#" -lt 5 ]; then
+  echo "Número errado de parâmetros!"
+  print_usage
+  exit 1
+fi
 
-cd ../versoes-de-proposicoes/
-#Gera a tabela com os links para os arquivos dos textos e emendas
-Rscript fetcher.R -i ../leggoR/data/tabela_geral_ids_casa.csv -e ../leggo-backend/data/emendas_raw.csv -o novas_emendas.csv -a avulsos_iniciais.csv
+LEGGO_R_REPO_PATH=$1
+LEGGO_BACKEND_REPO_PATH=$2
+LEGGO_CONTENT_REPO_PATH=$3
+VERSOES_PROPOSICOES_REPO_PATH=$4
+DATA_DIR_PATH=$5
 
-#Verifica se há novas emendas
-if [ $(cat novas_emendas.csv | wc -l) -lt 2 ]
+cd $VERSOES_PROPOSICOES_REPO_PATH
+
+pretty_print "Gerando a tabela com os links para os arquivos dos textos e emendas"
+Rscript $VERSOES_PROPOSICOES_REPO_PATH/fetcher.R -i $LEGGO_R_REPO_PATH/data/tabela_geral_ids_casa.csv -e $LEGGO_BACKEND_REPO_PATH/data/emendas_raw.csv -o $DATA_DIR_PATH/novas_emendas.csv -a $DATA_DIR_PATH/avulsos_iniciais.csv
+
+pretty_print "Verificando se há novas emendas"
+if [ $(cat $DATA_DIR_PATH/novas_emendas.csv | wc -l) -lt 2 ]
 then
     echo "Não há novas emendas"
     exit 0
 else
-    mkdir -p documentos
+    mkdir -p $DATA_DIR_PATH/documentos
 
-    #Entra na pasta data do leggo-content
-    cd ../leggo-content/util/data/
+pretty_print "Baixando os arquivos em pdf"
+    python3 $LEGGO_CONTENT_REPO_PATH/util/data/download_csv_prop.py $DATA_DIR_PATH/novas_emendas.csv $DATA_DIR_PATH/documentos/ 
+    python3 $LEGGO_CONTENT_REPO_PATH/util/data/download_csv_prop.py $DATA_DIR_PATH/avulsos_iniciais.csv $DATA_DIR_PATH/documentos/ 
 
-    #Download dos arquivos em pdf
-    python3 download_csv_prop.py ../../../versoes-de-proposicoes/novas_emendas.csv ../../../versoes-de-proposicoes/documentos/ 
-    python3 download_csv_prop.py ../../../versoes-de-proposicoes/avulsos_iniciais.csv ../../../versoes-de-proposicoes/documentos/ 
+pretty_print "Convertendo de pdf para txt"
+    $LEGGO_CONTENT_REPO_PATH/util/data/calibre_convert.sh $DATA_DIR_PATH/documentos $DATA_DIR_PATH/documentos/log-arquivos-sem-texto.txt
 
-    #Converte de pdf para txt
-    ./calibre_convert.sh ../../../versoes-de-proposicoes/documentos log-arquivos-sem-texto.txt
-
-    #Separa Justificacoes
+pretty_print "Separando Justificações"
     #Pasta com as emendas e respectivos inteiro teor de cada lei
-    DIR_DATA="../../../versoes-de-proposicoes/documentos"
+    DIR_DATA=$DATA_DIR_PATH/documentos
 
     for folder in $(ls $DIR_DATA/); do
             echo $DIR_DATA/$folder/txt
-            python3 ../tools/SepararJustificacoes.py $DIR_DATA/$folder/txt ./documentos_sem_justificacoes/
+            python3 $LEGGO_CONTENT_REPO_PATH/util/tools/SepararJustificacoes.py $DIR_DATA/$folder/txt $DATA_DIR_PATH/documentos_sem_justificacoes/
     done
 
-    mkdir -p emendas_all_dist
+    mkdir -p $DATA_DIR_PATH/emendas_all_dist
 
-    #Calcula todas as distancias para todas as props
-    EMENDAS_FOLDERPATH="./documentos_sem_justificacoes/"
+pretty_print "Calculando as distâncias entre as emendas e seus respectivos inteiros teores"
+    EMENDAS_FOLDERPATH=$DATA_DIR_PATH/documentos_sem_justificacoes/
 
     #Baixa stopwords atualizadas
     python3 -c "from nltk import download;download('stopwords')"
 
-    #Calcula distâncias entre as emendas e seus respectivos inteiros teores
     for folder in $(ls $EMENDAS_FOLDERPATH/); do
-        python3 ../../coherence/inter_emd_int/inter_emd_int.py $EMENDAS_FOLDERPATH$folder ../../coherence/languagemodel/vectors_skipgram_lei_aprovadas.bin emendas_all_dist/
+        python3 $LEGGO_CONTENT_REPO_PATH/coherence/inter_emd_int/inter_emd_int.py $EMENDAS_FOLDERPATH/$folder $LEGGO_CONTENT_REPO_PATH/coherence/languagemodel/vectors_skipgram_lei_aprovadas.bin $DATA_DIR_PATH/emendas_all_dist/
     done
 
-    #Adicionar a coluna distancia a tabela de emendas do back
-    cd ../../../leggoR
+pretty_print "Adicionando a coluna distancia a tabela de emendas do back"
+    #Instalar versão mais recente do código R
+    cd $LEGGO_R_REPO_PATH; git pull; Rscript -e "devtools::install()"
 
     #Verifica se há distâncias
-    if [ $(ls ../leggo-content/util/data/emendas_all_dist/ | wc -l) -eq 0 ]
+    if [ $(ls $DATA_DIR_PATH/emendas_all_dist/ | wc -l) -eq 0 ]
     then
         echo "Não há novas distâncias"
         exit 0
     else
-        Rscript scripts/update_emendas_dist.R ../leggo-content/util/data/emendas_all_dist/ data/distancias/ ../leggo-backend/data/emendas_raw.csv ../leggo-backend/data/emendas.csv 
+        Rscript $LEGGO_R_REPO_PATH/scripts/update_emendas_dist.R $DATA_DIR_PATH/emendas_all_dist/ $LEGGO_R_REPO_PATH/data/distancias/ $LEGGO_BACKEND_REPO_PATH/data/emendas_raw.csv $LEGGO_BACKEND_REPO_PATH/data/emendas.csv 
     fi
 fi
-
-
-
-
-
-
-
