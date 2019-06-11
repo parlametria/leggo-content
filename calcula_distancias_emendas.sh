@@ -1,5 +1,15 @@
 #!/bin/bash
 
+#if [ ]
+#then
+#fi
+
+
+#VERSOES_PROPOSICOES_REPO_PATH=$1
+#LEGGO_CONTENT_REPO_PATH=$2
+#LEGGOR_REPO_PATH=$3
+#DATA_DIR_PATH=$4
+
 cd ../versoes-de-proposicoes/
 #Gera a tabela com os links para os arquivos dos textos e emendas
 Rscript fetcher.R -i ../leggoR/data/tabela_geral_ids_casa.csv -e ../leggo-backend/data/emendas_raw.csv -o novas_emendas.csv -a avulsos_iniciais.csv
@@ -20,7 +30,7 @@ else
     python3 download_csv_prop.py ../../../versoes-de-proposicoes/avulsos_iniciais.csv ../../../versoes-de-proposicoes/documentos/ 
 
     #Converte de pdf para txt
-    ./calibre_convert.sh ../../../versoes-de-proposicoes/documentos
+    ./calibre_convert.sh ../../../versoes-de-proposicoes/documentos log-arquivos-sem-texto.txt
 
     #Separa Justificacoes
     #Pasta com as emendas e respectivos inteiro teor de cada lei
@@ -28,13 +38,21 @@ else
 
     for folder in $(ls $DIR_DATA/); do
             echo $DIR_DATA/$folder/txt
-            python3 ../tools/SepararJustificacoes.py $DIR_DATA/$folder/txt ./emendas_sem_justificacoes/
+            python3 ../tools/SepararJustificacoes.py $DIR_DATA/$folder/txt ./documentos_sem_justificacoes/
     done
 
     mkdir -p emendas_all_dist
 
     #Calcula todas as distancias para todas as props
-    ../../coherence/inter_emd_int/chama_inter_emd_int_para_todas_props.sh emendas_sem_justificacoes/
+    EMENDAS_FOLDERPATH="./documentos_sem_justificacoes/"
+
+    #Baixa stopwords atualizadas
+    python3 -c "from nltk import download;download('stopwords')"
+
+    #Calcula distâncias entre as emendas e seus respectivos inteiros teores
+    for folder in $(ls $EMENDAS_FOLDERPATH/); do
+        python3 ../../coherence/inter_emd_int/inter_emd_int.py $EMENDAS_FOLDERPATH$folder ../../coherence/languagemodel/vectors_skipgram_lei_aprovadas.bin emendas_all_dist/
+    done
 
     #Adicionar a coluna distancia a tabela de emendas do back
     cd ../../../leggoR
