@@ -11,14 +11,12 @@ import sys
 def print_usage():
     print("Número errado de parâmetros,o certo é: SepararJustificacoes.py <caminho_com_txt_com_emendas_e_avulsos> <caminho_pasta_escrita>")
 
-if len(sys.argv) > 3:
+if len(sys.argv) < 3:
 	print_usage()
 else:
 	
     dirPath = sys.argv[1]
     justificacoesPath = sys.argv[2]
-
-    $DIR_DATA/$folder/txt ./emendas_sem_justificacoes/
 
     # # Expressões regulares utilizadas
 

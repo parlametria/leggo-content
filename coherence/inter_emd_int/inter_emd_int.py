@@ -70,7 +70,9 @@ for file in files:
 
     #Verifica se existe o texto inicial da materia
     elif "avulso_inicial_da_materia" in str(file) or "apresentacao_de_proposicao" in str(file):
-        intFile = open(emdPath + '/' + str(file), 'r', encoding = 'UTF8')     
+        intFile = open(emdPath + '/' + str(file), 'r', encoding = 'UTF8') 
+        id_proposicao = str(file).split('_')[1]
+        print("ID Proposição: " + id_proposicao)
         files.remove(file)
     else:
         files.remove(file)
@@ -102,7 +104,6 @@ variances=[]
 stds = []
 sqdmeans = []
 totdists = []
-num = 0
 
 allDists = []
 indexes = []
@@ -146,18 +147,17 @@ for emd,i in zip(emdSentences,files):
     stds.append(std)
     sqdmeans.append(sqdmean)
     totdists.append(totdist)
-    num +=1
 
 allDists = np.array(allDists)
 
 indexes = np.array(indexes)
 
 
-df = pd.DataFrame(np.column_stack([files_read, means, variances, stds, sqdmeans, totdists]), 
-	          columns=['files','mean_distance', 'variance', 'standard_deviation', 'sqd_means', 'total_distances']).to_csv(str(prefixo_emenda) + '_features_inter.csv')
+#df = pd.DataFrame(np.column_stack([files_read, means, variances, stds, sqdmeans, totdists]), 
+#	          columns=['files','mean_distance', 'variance', 'standard_deviation', 'sqd_means', 'total_distances']).to_csv(str(id_proposicao) + '_features_inter.csv')
 
-df2 = pd.DataFrame(np.column_stack([indexes, allDists]), 
+prop_emendas_dists = pd.DataFrame(np.column_stack([indexes, allDists]), 
 	          columns=['comparacao','distancia'])
-df2.index.name = 'index'
-df2.to_csv(str(outputPath) + str(prefixo_emenda) + '_all_dist.csv')
+prop_emendas_dists.index.name = 'index'
+prop_emendas_dists.to_csv(str(outputPath) + str(id_proposicao) + '_all_dist.csv')
 
