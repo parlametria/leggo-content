@@ -4,41 +4,55 @@
 # # Programa para separar as justificações dos textos de lei em Projetos de Lei
 # Assumindo como entrada em linha de comando o caminho/path da pasta contendo os textos de projetos de lei
 
-
 import os
 import re
 import sys
 
+def print_usage():
+    print("Número errado de parâmetros,o certo é: SepararJustificacoes.py <caminho_com_txt_com_emendas_e_avulsos> <caminho_pasta_escrita>")
 
-
-if len(sys.argv) > 2:
-	print("Número de argumentos maior que um, insira somente o path para a pasta onde estão as PLs")
+if len(sys.argv) < 3:
+	print_usage()
+else:
 	
-dir_path = sys.argv[1]
+    dirPath = sys.argv[1]
+    justificacoesPath = sys.argv[2]
 
-# # Expressões regulares utilizadas
+    # # Expressões regulares utilizadas
 
-pat = re.compile(r"\njustificação\n",flags = re.IGNORECASE)
+    pat = re.compile(r"\njustificação\n",flags = re.IGNORECASE)
+    pat2 = re.compile(r"\njustificativa\n",flags = re.IGNORECASE)
 
-# # Cria pasta com as justificações
+    # # Cria diretrio se não existe
+    def createDirsIfNotExists(path):
+        if not os.path.exists(path):
+            os.makedirs(path)
 
-os.mkdir('justificacoes')
+    #dirPath = "./pls_leis_tramitacoes/textos_iniciais_txt"
+    #justificacoesPath = "./justificacoes/"
+    createDirsIfNotExists(justificacoesPath)
 
-dirPath = sys.argv[1]
+    fps = []
 
-#dirPath = "./pls_leis_tramitacoes/textos_iniciais_txt"
-
-fps = []
-
-for dirpath, dirnames, filenames in os.walk(dirPath):
-    for filename in filenames:
-        
-        with open(os.path.normpath(os.path.join(dirpath,filename)), 'r', encoding = 'utf-8') as pl:
-            ProjetoDeLei = pl.read()
+    for dirpath, dirnames, filenames in os.walk(dirPath):
+        for filename in filenames:
+                # Cria diretórios no formato /justificacoes/numProposicao/arquivos.txt
+                newPath = justificacoesPath + "/" + filename.split("_")[1] + "/"
+                createDirsIfNotExists(newPath)
             
-            if re.search(pat,ProjetoDeLei):
-                justificacao = re.split(r"\njustificação\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[1]
+                with open(os.path.normpath(os.path.join(dirpath,filename)), 'r', encoding = 'utf-8') as pl:
+                    ProjetoDeLei = pl.read()
                 
-                with open("./justificacoes/" + os.path.splitext(filename)[0] + '_jus.txt', 'w',encoding = 'utf-8') as j:
-                    j.write(justificacao)
+                    if re.search(pat,ProjetoDeLei):
+                        justificacao = re.split(r"\njustificação\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[0]
+                    
+                        with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
+                            j.write(justificacao)
+
+                    if re.search(pat2,ProjetoDeLei):
+                        justificacao = re.split(r"\njustificativa\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[0]
+                    
+                        with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
+                            j.write(justificacao)
+                    
                     

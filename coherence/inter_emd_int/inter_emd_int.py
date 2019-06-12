@@ -14,15 +14,9 @@ import math
 import sys
 from pathlib import Path
 
-
-download('stopwords')
-
-
 # In[9]:
 
-
 import pandas as pd
-
 
 # In[10]:
 
@@ -30,20 +24,16 @@ import pandas as pd
 # -1º: Path para pasta onde estão os textos das emendas extraídas
 # -2º: Path para o arquivo .bin do modelo Word2Vec treinado 
 # -3º: Path para a pasta onde a tabela de features deve ser salva
-# -4º: Path para o arquivo Inteiro Teor
 
 
-emdPath = Path(sys.argv[1])
-modelPath = Path(sys.argv[2])
-outputPath = Path(sys.argv[3])
-intPath = Path(sys.argv[4])
+emdPath = sys.argv[1]
+modelPath = sys.argv[2]
+outputPath = sys.argv[3]
 
 # =============================================================================
 # Paths para teste
 # emdPath = Path('../mpv870/teste')
 # modelPath = Path('../languagemodel/vectors_skipgram_lei_aprovadas.bin')
-# outputPath = Path('../teste1')
-# intPath = Path('../mpv870/inteiroteor/inteiroteor.pdf.txt')
 # =============================================================================
 
 files = os.listdir(emdPath)
@@ -57,9 +47,6 @@ sqdmeans = []
 totdists = []
 model = KeyedVectors.load_word2vec_format(modelPath, binary=True)
 
-
-
-
 # # Intercoerência
 
 # In[11]:
@@ -68,25 +55,37 @@ model = KeyedVectors.load_word2vec_format(modelPath, binary=True)
     
 emdSentences = []
 finalTokenizedSentences = []
+intFile = ""
 for file in files:
-    file = open(emdPath/file, 'r', encoding = 'UTF8')
-    line = file.read()
-    tokenized_sentences = []
-    line = re.sub(r'[^\w\d\s]+', '', line)
-    tokenized_sentences.append(line.lower().split())
-    stop_words = set(stopwords.words('portuguese') + list(punctuation))
-    for t in tokenized_sentences:
-        emdSentences.append([w for w in t if w not in stop_words])
+    #Verifica se o texto é de uma emenda
+    if "emenda" in str(file):
+        file = open(emdPath + '/' + str(file), 'r', encoding = 'UTF8')
+        line = file.read()
+        tokenized_sentences = []
+        line = re.sub(r'[^\w\d\s]+', '', line)
+        tokenized_sentences.append(line.lower().split())
+        stop_words = set(stopwords.words('portuguese') + list(punctuation))
+        for t in tokenized_sentences:
+            emdSentences.append([w for w in t if w not in stop_words])
 
+    #Verifica se existe o texto inicial da materia
+    elif "avulso_inicial_da_materia" in str(file) or "apresentacao_de_proposicao" in str(file):
+        intFile = open(emdPath + '/' + str(file), 'r', encoding = 'UTF8') 
+        id_proposicao = str(file).split('_')[1]
+        print("ID Proposição: " + id_proposicao)
+        files.remove(file)
+    else:
+        files.remove(file)
 
-
-# Lista de sentenças do inteiro teor
-    
-intFile = open(intPath, 'r', encoding = 'UTF8')
+if len(emdSentences) == 0:
+    print("Não existe Emendas para esta proposição")
+    sys.exit() 
 # =============================================================================
 # lines = intFile.readlines()
 # =============================================================================
-
+if intFile == "":
+    print("Texto inicial da proposição não encontrado")
+    sys.exit() 
 
 finalTokenizedSentences = []
 intSentences = []
@@ -98,40 +97,40 @@ for line in intFile:
     for t in tokenized_sentences:
         intSentences.append([w for w in t if w not in stop_words])
 
-
-
 # In[12]:
-
 
 means = []
 variances=[]
 stds = []
 sqdmeans = []
 totdists = []
-num = 0
 
 allDists = []
 indexes = []
+files_read = []
 
 for emd,i in zip(emdSentences,files):
-    print("abrindo emenda:",i.split('.txt')[0])
+    prefixo_emenda = i.split('.txt')[0]
+    files_read.append(prefixo_emenda)
+
+    print("abrindo emenda:",prefixo_emenda)
     distances = []
     
     for teor,j in zip(intSentences,range(len(intSentences))):
         
         if len(emd) > 4 and len(teor)> 4:
             d = model.wmdistance(emd,teor)
+            if float("inf") == d:
+                continue
+
             # Distância para calcular a média
             distances.append(d)
             # dists é uma lista de todas as distâncias calculadas
             indexes.append('_'.join([i, str(j)]))
             
-        
-    distances = np.array(distances)
-    distances = distances/np.sqrt((distances**2).sum())
-    
-    allDists.extend(distances)
+    distances = np.array(distances) 
 
+    allDists.extend(distances)
     mean = distances.mean()
     var = distances.var()
     std = math.sqrt(distances.var())
@@ -148,14 +147,17 @@ for emd,i in zip(emdSentences,files):
     stds.append(std)
     sqdmeans.append(sqdmean)
     totdists.append(totdist)
-    num +=1
 
 allDists = np.array(allDists)
 
 indexes = np.array(indexes)
 
-df = pd.DataFrame(np.column_stack([files, means, variances, stds, sqdmeans, totdists]), 
-                  columns=['files','mean_distance', 'variance', 'standard_deviation', 'sqd_means', 'total_distances']).to_csv(outputPath/'features_inter.csv')
 
-df2 = pd.DataFrame(np.column_stack([indexes, allDists]), 
-                  columns=['comparacao','distancia']).to_csv(outputPath/'all_dist.csv')
+#df = pd.DataFrame(np.column_stack([files_read, means, variances, stds, sqdmeans, totdists]), 
+#	          columns=['files','mean_distance', 'variance', 'standard_deviation', 'sqd_means', 'total_distances']).to_csv(str(id_proposicao) + '_features_inter.csv')
+
+prop_emendas_dists = pd.DataFrame(np.column_stack([indexes, allDists]), 
+	          columns=['comparacao','distancia'])
+prop_emendas_dists.index.name = 'index'
+prop_emendas_dists.to_csv(str(outputPath) + str(id_proposicao) + '_all_dist.csv')
+
