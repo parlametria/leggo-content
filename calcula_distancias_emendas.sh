@@ -2,29 +2,31 @@
 
 # Prints message with delimiters.
 pretty_print() {
-    printf "\n===============================\n$1\n===============================\n"
+    printf "\n=========================================\n$1\n=========================================\n"
 }
 
 # Prints script usage
 print_usage() {
-    printf "Chamada Correta: calcula_distancias_emendas.sh <LEGGO_R_REPO_PATH> <LEGGO_BACKEND_REPO_PATH> <LEGGO_CONTENT_REPO_PATH> <VERSOES_PROPOSICOES_REPO_PATH> <DATA_DIR_PATH>"
+    printf "Chamada Correta: calcula_distancias_emendas.sh <REPOS_BASE_PATH> <DATA_DIR_PATH>"
 }
 
-if [ "$#" -lt 5 ]; then
+if [ "$#" -lt 2 ]; then
   echo "Número errado de parâmetros!"
   print_usage
   exit 1
 fi
 
-LEGGO_R_REPO_PATH=$1
-LEGGO_BACKEND_REPO_PATH=$2
-LEGGO_CONTENT_REPO_PATH=$3
-VERSOES_PROPOSICOES_REPO_PATH=$4
-DATA_DIR_PATH=$5
+REPOS_BASE_PATH=$1
+DATA_DIR_PATH=$2
 
+LEGGO_R_REPO_PATH=$REPOS_BASE_PATH/leggoR/
+LEGGO_BACKEND_REPO_PATH=$REPOS_BASE_PATH/leggo-backend/
+LEGGO_CONTENT_REPO_PATH=$REPOS_BASE_PATH/leggo-content/
+VERSOES_PROPOSICOES_REPO_PATH=$REPOS_BASE_PATH/versoes-de-proposicoes/
+
+
+pretty_print "Gerando a tabela com os links \npara os arquivos dos textos e emendas"
 cd $VERSOES_PROPOSICOES_REPO_PATH
-
-pretty_print "Gerando a tabela com os links para os arquivos dos textos e emendas"
 Rscript $VERSOES_PROPOSICOES_REPO_PATH/fetcher.R -i $LEGGO_R_REPO_PATH/data/tabela_geral_ids_casa.csv -e $LEGGO_BACKEND_REPO_PATH/data/emendas_raw.csv -o $DATA_DIR_PATH/novas_emendas.csv -a $DATA_DIR_PATH/avulsos_iniciais.csv
 
 pretty_print "Verificando se há novas emendas"
@@ -40,7 +42,7 @@ pretty_print "Baixando os arquivos em pdf"
     python3 $LEGGO_CONTENT_REPO_PATH/util/data/download_csv_prop.py $DATA_DIR_PATH/avulsos_iniciais.csv $DATA_DIR_PATH/documentos/ 
 
 pretty_print "Convertendo de pdf para txt"
-    $LEGGO_CONTENT_REPO_PATH/util/data/calibre_convert.sh $DATA_DIR_PATH/documentos $DATA_DIR_PATH/documentos/log-arquivos-sem-texto.txt
+    $LEGGO_CONTENT_REPO_PATH/util/data/calibre_convert.sh $DATA_DIR_PATH/documentos $DATA_DIR_PATH/log-arquivos-sem-texto.txt
 
 pretty_print "Separando Justificações"
     #Pasta com as emendas e respectivos inteiro teor de cada lei
@@ -53,7 +55,7 @@ pretty_print "Separando Justificações"
 
     mkdir -p $DATA_DIR_PATH/emendas_all_dist
 
-pretty_print "Calculando as distâncias entre as emendas e seus respectivos inteiros teores"
+pretty_print "Calculando as distâncias entre as emendas \ne seus respectivos inteiros teores"
     EMENDAS_FOLDERPATH=$DATA_DIR_PATH/documentos_sem_justificacoes/
 
     #Baixa stopwords atualizadas
@@ -63,9 +65,9 @@ pretty_print "Calculando as distâncias entre as emendas e seus respectivos inte
         python3 $LEGGO_CONTENT_REPO_PATH/coherence/inter_emd_int/inter_emd_int.py $EMENDAS_FOLDERPATH/$folder $LEGGO_CONTENT_REPO_PATH/coherence/languagemodel/vectors_skipgram_lei_aprovadas.bin $DATA_DIR_PATH/emendas_all_dist/
     done
 
-pretty_print "Adicionando a coluna distancia a tabela de emendas do back"
-    #Instalar versão mais recente do código R
-    cd $LEGGO_R_REPO_PATH; git pull; Rscript -e "devtools::install()"
+pretty_print "Adicionando a coluna distancia na tabela \nde emendas do back"
+    echo "Instalando versão mais recente do código leggoR..."
+    cd $LEGGO_R_REPO_PATH; git pull; Rscript -e "devtools::install(quiet=TRUE)"
 
     #Verifica se há distâncias
     if [ $(ls $DATA_DIR_PATH/emendas_all_dist/ | wc -l) -eq 0 ]
