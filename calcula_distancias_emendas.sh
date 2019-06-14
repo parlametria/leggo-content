@@ -24,10 +24,12 @@ LEGGO_BACKEND_REPO_PATH=$REPOS_BASE_PATH/leggo-backend/
 LEGGO_CONTENT_REPO_PATH=$REPOS_BASE_PATH/leggo-content/
 VERSOES_PROPOSICOES_REPO_PATH=$REPOS_BASE_PATH/versoes-de-proposicoes/
 
+pretty_print "Limpando as pastas antes de iniciar o pipeline"
+rm -rf $DATA_DIR_PATH/documentos $DATA_DIR_PATH/documentos_sem_justificacoes/ $DATA_DIR_PATH/novas_emendas.csv $DATA_DIR_PATH/avulsos_iniciais.csv $LEGGO_BACKEND_REPO_PATH/data/textos.csv
 
 pretty_print "Gerando a tabela com os links \npara os arquivos dos textos e emendas"
 cd $VERSOES_PROPOSICOES_REPO_PATH
-Rscript $VERSOES_PROPOSICOES_REPO_PATH/fetcher.R -e $LEGGO_BACKEND_REPO_PATH/data/emendas_raw.csv -o $DATA_DIR_PATH/novas_emendas.csv -a $DATA_DIR_PATH/avulsos_iniciais.csv -t $LEGGO_BACKEND_REPO_PATH/data/textos.csv -f 1
+Rscript $VERSOES_PROPOSICOES_REPO_PATH/fetcher.R -o $LEGGO_BACKEND_REPO_PATH/data/emendas_raw_old.csv -e $LEGGO_BACKEND_REPO_PATH/data/emendas_raw.csv -n $DATA_DIR_PATH/novas_emendas.csv -a $DATA_DIR_PATH/avulsos_iniciais.csv -t $LEGGO_BACKEND_REPO_PATH/data/textos.csv -f 1
 
 pretty_print "Verificando se há novas emendas"
 if [ $(cat $DATA_DIR_PATH/novas_emendas.csv | wc -l) -lt 2 ]
