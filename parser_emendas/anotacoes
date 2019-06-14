@@ -1,0 +1,11 @@
+Tarefas do experimento
+
+	1. Fazer parser com objetos e hierarquia (lista de listas)
+
+	2. Pra cada "documento" da emenda qual o tipo (aditiva, modificativa, supressiva)
+
+	3. Pra cada "documento" da emenda à qual "documento" da PL se refere (RI, query)
+
+
+Observar exceções:
+	A emenda pode não ter artigos (considerar "documento" único (?))
