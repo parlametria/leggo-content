@@ -75,6 +75,14 @@ pretty_print "Adicionando a coluna distancia na tabela \nde emendas do back"
         echo "Não há novas distâncias"
         exit 0
     else
-        Rscript $LEGGO_R_REPO_PATH/scripts/update_emendas_dist.R $DATA_DIR_PATH/emendas_all_dist/ $LEGGO_R_REPO_PATH/data/distancias/ $LEGGO_BACKEND_REPO_PATH/data/emendas_raw.csv $LEGGO_BACKEND_REPO_PATH/data/emendas.csv 
+       api_container_id=$(sudo docker ps | grep back_api | cut -f 1 -d ' ')
+       sudo docker cp $DATA_DIR_PATH/emendas_all_dist/. $api_container_id:agora-digital-backend/data/emendas_with_distances
+       sudo docker-compose run --rm rmod \
+       Rscript scripts/update_emendas_dist.R \
+       exported/emendas_with_distances \
+       data/distancias \
+       exported/emendas_raw.csv \
+       exported/novas_emendas.csv \
+       exported/emendas.csv    
     fi
 fi
