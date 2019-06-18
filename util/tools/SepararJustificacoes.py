@@ -22,6 +22,7 @@ else:
 
     pat = re.compile(r"\njustificação\n",flags = re.IGNORECASE)
     pat2 = re.compile(r"\njustificativa\n",flags = re.IGNORECASE)
+    pat3 = re.compile(r"projeto de lei|emenda|avulso|inteiro teor|materia|substitutivo", flags = re.IGNORECASE)
 
     # # Cria diretrio se não existe
     def createDirsIfNotExists(path):
@@ -43,16 +44,12 @@ else:
                 with open(os.path.normpath(os.path.join(dirpath,filename)), 'r', encoding = 'utf-8') as pl:
                     ProjetoDeLei = pl.read()
                 
-                    if re.search(pat,ProjetoDeLei):
+                    if re.search(pat,ProjetoDeLei) or re.search(pat2,ProjetoDeLei) or re.search(pat3, ProjetoDeLei):
                         justificacao = re.split(r"\njustificação\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[0]
-                    
                         with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
                             j.write(justificacao)
 
-                    if re.search(pat2,ProjetoDeLei):
-                        justificacao = re.split(r"\njustificativa\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[0]
                     
-                        with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
-                            j.write(justificacao)
+
                     
                     
