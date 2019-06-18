@@ -11,14 +11,18 @@ import sys
 def print_usage():
     print("Número errado de parâmetros,o certo é: SepararJustificacoes.py <caminho_com_txt_com_emendas_e_avulsos> <caminho_pasta_escrita>")
 
-def writeFile(pattern, pl, textoPat, newPath, filename):
-    if re.search(pattern,pl):
-        if textoPat == '':
-            textoParaEscrever = pl
-        else:
-            textoParaEscrever = re.split(textoPat, pl, maxsplit = 1, flags = re.IGNORECASE)[0]
-        with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
-            j.write(textoParaEscrever)
+#Retorna a proposição toda se não houver justificação ou
+#da o split quando há justificação e retorna o texto completo
+#ou quando não de match com nenhum padrão retorna uma string vazia
+def getTextoPrincipal(patterns, pl, textosPat):
+    for i in range(len(patterns)):
+        if re.search(patterns[i], pl):
+            if textosPat[i] == "":
+                return (pl)
+            else:
+                return(re.split(textosPat[i], pl, maxsplit = 1, flags = re.IGNORECASE)[0])
+    
+    return ""
 
 if len(sys.argv) < 3:
 	print_usage()
@@ -32,6 +36,8 @@ else:
     pat = re.compile(r"\njustificação\n",flags = re.IGNORECASE)
     pat2 = re.compile(r"\njustificativa\n",flags = re.IGNORECASE)
     pat3 = re.compile(r"projeto de lei|emenda|avulso|inteiro teor|materia|substitutivo", flags = re.IGNORECASE)
+    patterns = [pat, pat2, pat3]
+    textosPat = [r"\njustificação\n", r"\njustificativa\n", ""]
 
     # # Cria diretrio se não existe
     def createDirsIfNotExists(path):
@@ -50,11 +56,13 @@ else:
                 newPath = justificacoesPath + "/" + filename.split("_")[1] + "/"
                 createDirsIfNotExists(newPath)
             
-                with open(os.path.normpath(os.path.join(dirpath,filename)), 'r', encoding = 'utf-8') as pl:
+                with open(os.path.normpath(os.path.join(dirpath,filename)), "r", encoding = "utf-8") as pl:
                     ProjetoDeLei = pl.read()
-                    writeFile(pat, ProjetoDeLei, r"\njustificação\n", newPath, filename)
-                    writeFile(pat2, ProjetoDeLei, r"\njustificativa\n", newPath, filename)
-                    writeFile(pat3, ProjetoDeLei, '', newPath, filename)
+                    textoPrincipal = getTextoPrincipal(patterns, ProjetoDeLei, textosPat)
+                    if textoPrincipal != "":
+                        with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
+                            j.write(textoPrincipal)
+
                     
 
                     
