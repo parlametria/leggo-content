@@ -11,6 +11,15 @@ import sys
 def print_usage():
     print("Número errado de parâmetros,o certo é: SepararJustificacoes.py <caminho_com_txt_com_emendas_e_avulsos> <caminho_pasta_escrita>")
 
+def writeFile(pattern, pl, textoPat, newPath, filename):
+    if re.search(pattern,pl):
+        if textoPat == '':
+            textoParaEscrever = pl
+        else:
+            textoParaEscrever = re.split(textoPat, pl, maxsplit = 1, flags = re.IGNORECASE)[0]
+        with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
+            j.write(textoParaEscrever)
+
 if len(sys.argv) < 3:
 	print_usage()
 else:
@@ -43,17 +52,9 @@ else:
             
                 with open(os.path.normpath(os.path.join(dirpath,filename)), 'r', encoding = 'utf-8') as pl:
                     ProjetoDeLei = pl.read()
-                    if re.search(pat,ProjetoDeLei):	
-                        textoParaEscrever = re.split(r"\njustificação\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[0]
-                    elif re.search(pat2,ProjetoDeLei):	
-                        textoParaEscrever = re.split(r"\njustificativa\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[0]
-                    elif re.search(pat3,ProjetoDeLei):	
-                        textoParaEscrever = ProjetoDeLei
-                    else:
-                        continue
-                    with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
-                        j.write(textoParaEscrever)
-                    
+                    writeFile(pat, ProjetoDeLei, r"\njustificação\n", newPath, filename)
+                    writeFile(pat2, ProjetoDeLei, r"\njustificativa\n", newPath, filename)
+                    writeFile(pat3, ProjetoDeLei, '', newPath, filename)
                     
 
                     
