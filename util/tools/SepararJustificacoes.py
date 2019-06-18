@@ -44,11 +44,13 @@ else:
                 with open(os.path.normpath(os.path.join(dirpath,filename)), 'r', encoding = 'utf-8') as pl:
                     ProjetoDeLei = pl.read()
                 
-                    if re.search(pat,ProjetoDeLei) or re.search(pat2,ProjetoDeLei) or re.search(pat3, ProjetoDeLei):
+                    if re.search(pat,ProjetoDeLei) or re.search(pat2,ProjetoDeLei):
                         justificacao = re.split(r"\njustificação\n", ProjetoDeLei, maxsplit = 1, flags = re.IGNORECASE)[0]
                         with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
                             j.write(justificacao)
-
+                     elif re.search(pat3, ProjetoDeLei):
+                        with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
+                            j.write(ProjetoDeLei)
                     
 
                     
