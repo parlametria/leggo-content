@@ -90,5 +90,8 @@ pretty_print "Adicionando a coluna distancia na tabela \nde emendas do back"
        data/distancias/ \
        exported/emendas_raw.csv \
        exported/emendas.csv    
+
+       pretty_print "Inserindo novos dados de emendas no Backend."
+       sudo docker exec $api_container_id sh -c './manage.py flush --no-input; ./manage.py import_data'
     fi
 fi
