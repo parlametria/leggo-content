@@ -52,7 +52,7 @@ pretty_print "Separando Justificações"
 
     for folder in $(ls $DIR_DATA/); do
             echo $DIR_DATA/$folder/txt
-            python3 $LEGGO_CONTENT_REPO_PATH/util/tools/SepararJustificacoes.py $DIR_DATA/$folder/txt $DATA_DIR_PATH/documentos_sem_justificacoes/
+            python3 $LEGGO_CONTENT_REPO_PATH/util/tools/SepararJustificacoes.py $DIR_DATA/$folder/txt $DATA_DIR_PATH/documentos_sem_justificacoes/ $DATA_DIR_PATH/log-arquivos-sem-texto.txt
     done
 
     mkdir -p $DATA_DIR_PATH/emendas_all_dist

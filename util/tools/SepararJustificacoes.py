@@ -9,7 +9,7 @@ import re
 import sys
 
 def print_usage():
-    print("Número errado de parâmetros,o certo é: SepararJustificacoes.py <caminho_com_txt_com_emendas_e_avulsos> <caminho_pasta_escrita>")
+    print("Número errado de parâmetros,o certo é: SepararJustificacoes.py <caminho_pasta_com_emendas_e_avulsos> <caminho_pasta_escrita> <log_arquivos_sem_texto>")
 
 #Retorna a proposição toda se não houver justificação ou
 #da o split quando há justificação e retorna o texto completo
@@ -24,12 +24,13 @@ def getTextoPrincipal(patterns, pl, textosPat):
     
     return ""
 
-if len(sys.argv) < 3:
+if len(sys.argv) < 4:
 	print_usage()
 else:
 	
     dirPath = sys.argv[1]
     justificacoesPath = sys.argv[2]
+    descartadosPath = sys.argv[3]
 
     # # Expressões regulares utilizadas
 
@@ -55,13 +56,17 @@ else:
                 # Cria diretórios no formato /justificacoes/numProposicao/arquivos.txt
                 newPath = justificacoesPath + "/" + filename.split("_")[1] + "/"
                 createDirsIfNotExists(newPath)
-            
-                with open(os.path.normpath(os.path.join(dirpath,filename)), "r", encoding = "utf-8") as pl:
+                docPath = os.path.join(dirpath,filename)
+                with open(os.path.normpath(docPath), "r", encoding = "utf-8") as pl:
                     ProjetoDeLei = pl.read()
                     textoPrincipal = getTextoPrincipal(patterns, ProjetoDeLei, textosPat)
                     if textoPrincipal != "":
                         with open(newPath + os.path.splitext(filename)[0] + '.txt', 'w',encoding = 'utf-8') as j:
                             j.write(textoPrincipal)
+                    else:
+                        print("Documento: " + str(docPath) + " não possui textos")
+                        with open(descartadosPath, 'a', encoding = 'utf-8') as j:
+                            j.write(docPath)
 
                     
 
