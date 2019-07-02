@@ -24,6 +24,9 @@ LEGGO_BACKEND_REPO_PATH=$REPOS_BASE_PATH/leggo-backend/
 LEGGO_CONTENT_REPO_PATH=$REPOS_BASE_PATH/leggo-content/
 VERSOES_PROPOSICOES_REPO_PATH=$REPOS_BASE_PATH/versoes-de-proposicoes/
 
+pretty_print "Limpando as pastas antes de iniciar o pipeline"	
+rm -rf $DATA_DIR_PATH/documentos $DATA_DIR_PATH/documentos_sem_justificacoes/ 
+
 pretty_print "Copiando arquivos do volume para a vm"
 api_container_id=$(sudo docker ps | grep back_api | cut -f 1 -d ' ')
 sudo docker cp $api_container_id:agora-digital-backend/data/emendas_raw.csv $DATA_DIR_PATH
@@ -31,7 +34,7 @@ sudo docker cp $api_container_id:agora-digital-backend/data/emendas_raw_old.csv 
 
 pretty_print "Gerando a tabela com os links \npara os arquivos dos textos e emendas"
 cd $VERSOES_PROPOSICOES_REPO_PATH
-Rscript $VERSOES_PROPOSICOES_REPO_PATH/fetcher.R -o $DATA_DIR_PATH/emendas_raw_old.csv -e $DATA_DIR_PATH/emendas_raw.csv -n $DATA_DIR_PATH/novas_emendas.csv -a $DATA_DIR_PATH/avulsos_iniciais.csv -t $DATA_DIR_PATH/textos.csv -f 1 -d $DATA_DIR_PATH 
+Rscript $VERSOES_PROPOSICOES_REPO_PATH/fetcher.R -o $DATA_DIR_PATH/emendas_raw_old.csv -e $DATA_DIR_PATH/emendas_raw.csv -n $DATA_DIR_PATH/novas_emendas.csv -a $DATA_DIR_PATH/avulsos_iniciais.csv -t $DATA_DIR_PATH/textos.csv -f 1 
 
 pretty_print "Verificando se há novas emendas"
 if [ $(cat $DATA_DIR_PATH/novas_emendas.csv | wc -l) -lt 2 ]
