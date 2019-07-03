@@ -26,15 +26,17 @@ VERSOES_PROPOSICOES_REPO_PATH=$REPOS_BASE_PATH/versoes-de-proposicoes/
 
 pretty_print "Limpando as pastas antes de iniciar o pipeline"	
 rm -rf $DATA_DIR_PATH/documentos $DATA_DIR_PATH/documentos_sem_justificacoes/ 
-
-pretty_print "Copiando arquivos do volume para a vm"
-api_container_id=$(sudo docker ps | grep back_api | cut -f 1 -d ' ')
-sudo docker cp $api_container_id:agora-digital-backend/data/emendas_raw.csv $DATA_DIR_PATH
-sudo docker cp $api_container_id:agora-digital-backend/data/emendas_raw_old.csv $DATA_DIR_PATH
+sudo rm $DATA_DIR_PATH/novas_emendas.csv $DATA_DIR_PATH/avulsos_iniciais.csv $DATA_DIR_PATH/textos.csv
 
 pretty_print "Gerando a tabela com os links \npara os arquivos dos textos e emendas"
 cd $VERSOES_PROPOSICOES_REPO_PATH
-Rscript $VERSOES_PROPOSICOES_REPO_PATH/fetcher.R -o $DATA_DIR_PATH/emendas_raw_old.csv -e $DATA_DIR_PATH/emendas_raw.csv -n $DATA_DIR_PATH/novas_emendas.csv -a $DATA_DIR_PATH/avulsos_iniciais.csv -t $DATA_DIR_PATH/textos.csv -f 1 
+sudo docker-compose run --rm versoes_props Rscript fetcher.R -o data/emendas_raw_old.csv -e data/emendas_raw.csv -n data/novas_emendas.csv -a data/avulsos_iniciais.csv -t data/textos.csv -f 1 
+
+pretty_print "Copiando arquivos do volume para a vm"
+api_container_id=$(sudo docker ps | grep back_api | cut -f 1 -d ' ')
+sudo docker cp $api_container_id:agora-digital-backend/data/novas_emendas.csv $DATA_DIR_PATH
+sudo docker cp $api_container_id:agora-digital-backend/data/avulsos_iniciais.csv $DATA_DIR_PATH
+sudo docker cp $api_container_id:agora-digital-backend/data/textos.csv $DATA_DIR_PATH
 
 pretty_print "Verificando se há novas emendas"
 if [ $(cat $DATA_DIR_PATH/novas_emendas.csv | wc -l) -lt 2 ]
@@ -73,8 +75,7 @@ pretty_print "Calculando as distâncias entre as emendas \ne seus respectivos in
     done
 
 pretty_print "Adicionando a coluna distancia na tabela \nde emendas do back"
-    echo "Instalando versão mais recente do código leggoR..."
-    cd $LEGGO_R_REPO_PATH; git pull; sudo docker-compose build
+    cd $LEGGO_R_REPO_PATH
 
     #Verifica se há distâncias
     if [ $(ls $DATA_DIR_PATH/emendas_all_dist/ | wc -l) -eq 0 ]
