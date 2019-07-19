@@ -7,22 +7,27 @@ pretty_print() {
 
 # Prints script usage
 print_usage() {
-    printf "Chamada Correta: calcula_distancias_emendas.sh <REPOS_BASE_PATH> <DATA_DIR_PATH>"
+    printf "Chamada Correta: calcula_distancias_emendas.sh <REPOS_BASE_PATH> <DATA_DIR_PATH> <ANACONDA_PATH> <ANACONDA_ENV_NAME>"
 }
 
-if [ "$#" -lt 2 ]; then
-  echo "Número errado de parâmetros!"
+if [ "$#" -lt 4 ]; then
+  echo "Número incorreto de parâmetros!"
   print_usage
   exit 1
 fi
 
 REPOS_BASE_PATH=$1
 DATA_DIR_PATH=$2
+ANACONDA_PATH=$3
+ANACONDA_ENV_NAME=$4
 
 LEGGO_R_REPO_PATH=$REPOS_BASE_PATH/leggoR/
 LEGGO_BACKEND_REPO_PATH=$REPOS_BASE_PATH/leggo-backend/
 LEGGO_CONTENT_REPO_PATH=$REPOS_BASE_PATH/leggo-content/
 VERSOES_PROPOSICOES_REPO_PATH=$REPOS_BASE_PATH/versoes-de-proposicoes/
+
+pretty_print "Ativando ambiente anaconda"
+source $ANACONDA_PATH/bin/activate $ANACONDA_ENV_NAME
 
 pretty_print "Limpando as pastas antes de iniciar o pipeline"	
 rm -rf $DATA_DIR_PATH/documentos $DATA_DIR_PATH/documentos_sem_justificacoes/ 
