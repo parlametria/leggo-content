@@ -21,6 +21,10 @@ DATA_DIR_PATH=$2
 ANACONDA_PATH=$3
 ANACONDA_ENV_NAME=$4
 
+pretty_print "Iniciando atualização"
+# Registra a data de início
+date
+
 LEGGO_R_REPO_PATH=$REPOS_BASE_PATH/leggoR/
 LEGGO_BACKEND_REPO_PATH=$REPOS_BASE_PATH/leggo-backend/
 LEGGO_CONTENT_REPO_PATH=$REPOS_BASE_PATH/leggo-content/
