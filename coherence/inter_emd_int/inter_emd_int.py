@@ -115,6 +115,9 @@ for emd,i in zip(emdSentences,files):
 
     print("abrindo emenda:",prefixo_emenda)
     distances = []
+    max_distance = 99999999
+    max_emd = ''
+    max_teor = ''
     
     for teor,j in zip(intSentences,range(len(intSentences))):
         
@@ -122,6 +125,11 @@ for emd,i in zip(emdSentences,files):
             d = model.wmdistance(emd,teor)
             if float("inf") == d:
                 continue
+
+            if d <= max_distance:
+                max_distance = d
+                max_emd = emd
+                max_teor = teor
 
             # Distância para calcular a média
             distances.append(d)
@@ -152,6 +160,33 @@ allDists = np.array(allDists)
 
 indexes = np.array(indexes)
 
+def word2vec(word):
+    from collections import Counter
+    from math import sqrt
+
+    cw = Counter(word)
+    sw = set(cw)
+    lw = sqrt(sum(c*c for c in cw.values()))
+
+    # return a tuple
+    return cw, sw, lw
+
+def cosdis(v1, v2):
+    common = v1[1].intersection(v2[1])
+    return sum(v1[0][ch]*v2[0][ch] for ch in common)/v1[2]/v2[2]
+
+wordtuples = []
+for key in max_teor:
+    for word in max_emd:
+        try:
+            res = cosdis(word2vec(word), word2vec(key))
+            print("The cosine similarity between : {} and : {} is: {}".format(word, key, res*100))
+            wordtuples.append((word, key, res*100))
+        except IndexError:
+            pass
+wordtuples.sort(key = lambda element: element[2], reverse=True)
+for i in wordtuples:
+    print(i, )
 
 #df = pd.DataFrame(np.column_stack([files_read, means, variances, stds, sqdmeans, totdists]), 
 #	          columns=['files','mean_distance', 'variance', 'standard_deviation', 'sqd_means', 'total_distances']).to_csv(str(id_proposicao) + '_features_inter.csv')
