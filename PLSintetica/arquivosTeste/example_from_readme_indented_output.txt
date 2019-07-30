@@ -1,4 +1,4 @@
-['Texto qualquer para ser identificado como objeto.\n',
+['Texto qualquer para ser identificado como objeto.,
  ['',
   [
    ['À Casa Civil da Presidência da República compete',
