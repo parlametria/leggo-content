@@ -1,77 +1,77 @@
 emenda_8_modificativa_136173
-Palavras da emenda: ['art', '1º', 'dêse', 'arts', '37', '44', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'termos', 'projeto', 'lei', 'nº', '1321', '2019', 'seguinte', 'redação', 'art', '32', '6º', 'órgãos', 'partidários', 'municipais', 'referidos', '4º', 'deste', 'artigo', 'inscrição', 'baixada', 'inativada', 'secretaria', 'especial', 'receita', 'federal', 'brasil', 'deverão', 'encaminhar', 'meio', 'representantes', 'receita', 'federal', 'respectiva', 'circunscrição', 'territorial', 'declaração', 'simplificada', 'movimentação', 'financeira', 'arrecadação', 'bens', 'estimáveis', 'dinheiro', 'requerendo', 'reativação', 'inscrição', 'efetivada', 'cobrança', 'taxas', 'multas', 'quaisquer', 'outros', 'encargos', 'relativos', 'ausência', 'prestação', 'contas']
+Palavras da emenda: ['1º', 'dêse', '37', '44', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'termos', 'projeto', 'lei', 'nº', '1321', '2019', 'seguinte', 'redação', '32', '6º', 'órgãos', 'partidários', 'municipais', 'referidos', '4º', 'deste', 'artigo', 'inscrição', 'baixada', 'inativada', 'secretaria', 'especial', 'receita', 'federal', 'brasil', 'deverão', 'encaminhar', 'meio', 'representantes', 'receita', 'federal', 'respectiva', 'circunscrição', 'territorial', 'declaração', 'simplificada', 'movimentação', 'financeira', 'arrecadação', 'bens', 'estimáveis', 'dinheiro', 'requerendo', 'reativação', 'inscrição', 'efetivada', 'cobrança', 'taxas', 'multas', 'quaisquer', 'outros', 'encargos', 'relativos', 'ausência', 'prestação', 'contas']
 Palavras da linha do avulso com menor distância: ['6º', 'órgãos', 'partidários', 'municipais', 'referidos', '4º', 'deste', 'artigo', 'inscrição', 'baixada', 'inativada', 'secretaria', 'especial', 'receita', 'federal', 'brasil', 'deverão', 'encaminhar', 'meio', 'representantes', 'receita', 'federal', 'respectiva', 'circunscrição', 'territorial', 'declaração', 'simplificada', 'movimentação', 'financeira', 'arrecadação', 'bens', 'estimáveis', 'dinheiro', 'requerendo', 'reativação', 'inscrição', 'efetivada', 'cobrança', 'taxas', 'multas', 'quaisquer', 'outros', 'encargos']
-Palavra mais distante do texto da proposição: art
+Palavra mais distante do texto da proposição: receita
 Palavra com maior média: projeto
-Palavra com maior mediana: art
+Palavra com maior mediana: dinheiro
 =======================================================
 emenda_5_modificativa_136173
-Palavras da emenda: ['dá', 'nova', 'redação', '3º', 'art', '3º', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'termos', 'art', '1º', 'projeto', 'lei', 'nº', '1321', '2019', 'art', '3º', '3º', 'prazo', 'vigência', 'órgãos', 'provisórios', 'partidos', 'políticos', '2', 'dois', 'anos', 'nr']
+Palavras da emenda: ['dá', 'nova', 'redação', '3º', '3º', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'termos', '1º', 'projeto', 'lei', 'nº', '1321', '2019', '3º', '3º', 'prazo', 'vigência', 'órgãos', 'provisórios', 'partidos', 'políticos', '2', 'dois', 'anos', 'nr']
 Palavras da linha do avulso com menor distância: ['3º', 'prazo', 'vigência', 'órgãos', 'provisórios', 'partidos', 'políticos', 'poderá', 'ser', '8', 'oito', 'anos']
-Palavra mais distante do texto da proposição: art
+Palavra mais distante do texto da proposição: termos
 Palavra com maior média: termos
 Palavra com maior mediana: termos
 =======================================================
 emenda_6_aditiva_136173
-Palavras da emenda: ['incluase', 'projeto', 'lei', 'nº', '1321', '2019', 'seguinte', 'artigo', 'art', 'xx', 'dêse', 'art', '41a', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'seguinte', 'redação', 'art', '41a', '1º', 'renumeração', 'parágrafo', 'único', '2º', 'é', 'vedado', 'acesso', 'recursos', 'fundo', 'partidário', 'partidos', 'políticos', 'débitos', 'fiscais', 'previdenciários', 'aberto', 'parcelamentos', 'dessa', 'natureza', 'atraso', 'noventa', 'dias', 'nr']
-Palavras da linha do avulso com menor distância: ['55a', 'partidos', 'observado', 'aplicação', 'recursos', 'prevista', 'inciso', 'v', 'caput', 'art', '44', 'desta', 'lei', 'exercícios', 'anteriores', '2019', 'utilizado', 'recursos', 'financiamento', 'candidaturas', 'femininas', 'eleições', '2018', 'poderão', 'ter', 'contas', 'rejeitadas', 'sofrer', 'qualquer', 'outra', 'penalidade']
-Palavra mais distante do texto da proposição: art
+Palavras da emenda: ['incluase', 'projeto', 'lei', 'nº', '1321', '2019', 'seguinte', 'artigo', 'xx', 'dêse', '41a', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'seguinte', 'redação', '41a', '1º', 'renumeração', 'parágrafo', 'único', '2º', 'é', 'vedado', 'acesso', 'recursos', 'fundo', 'partidário', 'partidos', 'políticos', 'débitos', 'fiscais', 'previdenciários', 'aberto', 'parcelamentos', 'dessa', 'natureza', 'atraso', 'noventa', 'dias', 'nr']
+Palavras da linha do avulso com menor distância: ['55a', 'partidos', 'observado', 'aplicação', 'recursos', 'prevista', 'inciso', 'v', 'caput', '44', 'desta', 'lei', 'exercícios', 'anteriores', '2019', 'utilizado', 'recursos', 'financiamento', 'candidaturas', 'femininas', 'eleições', '2018', 'poderão', 'ter', 'contas', 'rejeitadas', 'sofrer', 'qualquer', 'outra', 'penalidade']
+Palavra mais distante do texto da proposição: seguinte
 Palavra com maior média: acesso
 Palavra com maior mediana: acesso
 =======================================================
 emenda_4_supressiva_136173
-Palavras da emenda: ['suprimase', '4º', 'art', '3º', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'lei', 'partidos', 'políticos', 'alterado', 'art', '1º', 'projeto', 'lei', 'nº', '1321', '2019']
+Palavras da emenda: ['suprimase', '4º', '3º', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'lei', 'partidos', 'políticos', 'alterado', '1º', 'projeto', 'lei', 'nº', '1321', '2019']
 Palavras da linha do avulso com menor distância: ['3º', 'prazo', 'vigência', 'órgãos', 'provisórios', 'partidos', 'políticos', 'poderá', 'ser', '8', 'oito', 'anos']
-Palavra mais distante do texto da proposição: art
-Palavra com maior média: art
+Palavra mais distante do texto da proposição: projeto
+Palavra com maior média: projeto
 Palavra com maior mediana: partidos
 =======================================================
 emenda_2_substitutiva_136173
-Palavras da emenda: ['substituase', 'ementa', 'projeto', 'lei', 'nº', '1321', '2019', 'expressão', 'altera', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'lei', 'partidos', 'políticos', 'expressão', 'altera', 'leis', 'nº', '9096', '19', 'setembro', '1995', 'lei', 'partidos', 'políticos', 'nº', '9504', '30', 'setembro', '1997', 'lei', 'eleições', 'acrescentese', 'seguinte', 'art', '3º', 'renumerandose', 'demais', 'art', '3º', 'art', '30', 'lei', 'nº', '9504', '30', 'setembro', '1997', 'passa', 'vigorar', 'seguinte', 'redação', 'art', '30', '8º', 'ausência', 'juntada', 'documentação', 'comprobatória', 'é', 'sanável', 'mediante', 'encaminhamento', 'posterior', 'justiça', 'eleitoral', 'prazo', 'regulamentar', '9º', 'contas', 'julgadas', 'prestadas', 'posteriormente', 'apresentadas', 'objeto', 'novo', 'julgamento', 'utilizadas', 'apenas', 'fins', 'divulgação', 'regularização', 'cadastro', 'eleitoral', 'ocorrerá', 'imediatamente', 'após', 'decisão', 'regularização', 'nr']
-Palavras da linha do avulso com menor distância: ['55a', 'partidos', 'observado', 'aplicação', 'recursos', 'prevista', 'inciso', 'v', 'caput', 'art', '44', 'desta', 'lei', 'exercícios', 'anteriores', '2019', 'utilizado', 'recursos', 'financiamento', 'candidaturas', 'femininas', 'eleições', '2018', 'poderão', 'ter', 'contas', 'rejeitadas', 'sofrer', 'qualquer', 'outra', 'penalidade']
-Palavra mais distante do texto da proposição: art
-Palavra com maior média: ementa
-Palavra com maior mediana: ementa
+Palavras da emenda: ['substituase', 'ementa', 'projeto', 'lei', 'nº', '1321', '2019', 'expressão', 'altera', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'lei', 'partidos', 'políticos', 'expressão', 'altera', 'leis', 'nº', '9096', '19', 'setembro', '1995', 'lei', 'partidos', 'políticos', 'nº', '9504', '30', 'setembro', '1997', 'lei', 'eleições', 'acrescentese', 'seguinte', '3º', 'renumerandose', 'demais', '3º', '30', 'lei', 'nº', '9504', '30', 'setembro', '1997', 'passa', 'vigorar', 'seguinte', 'redação', '30', '8º', 'ausência', 'juntada', 'documentação', 'comprobatória', 'é', 'sanável', 'mediante', 'encaminhamento', 'posterior', 'justiça', 'eleitoral', 'prazo', 'regulamentar', '9º', 'contas', 'julgadas', 'prestadas', 'posteriormente', 'apresentadas', 'objeto', 'novo', 'julgamento', 'utilizadas', 'apenas', 'fins', 'divulgação', 'regularização', 'cadastro', 'eleitoral', 'ocorrerá', 'imediatamente', 'após', 'decisão', 'regularização', 'nr']
+Palavras da linha do avulso com menor distância: ['altera', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'lei', 'partidos', 'políticos', 'fim', 'assegurar', 'autonomia', 'partidos', 'políticos', 'definir', 'prazo', 'duração', 'mandatos', 'membros', 'órgãos', 'partidários', 'permanentes', 'provisórios', 'dá', 'outras', 'providências', 'congresso', 'nacional', 'decreta']
+Palavra mais distante do texto da proposição: eleitoral
+Palavra com maior média: objeto
+Palavra com maior mediana: mediante
 =======================================================
 emenda_11_aditiva_136173
-Palavras da emenda: ['incluase', 'art', '32', 'constante', 'art', '1º', 'pl', 'seguinte', '5º', '5º', 'partido', 'político', 'cumprir', 'disposto', 'caput', 'hipótese', 'desaprovação', 'contas', 'ficará', 'impedido', 'participar', 'pleito', 'eleitoral']
-Palavras da linha do avulso com menor distância: ['55c', 'observância', 'disposto', 'inciso', 'v', 'caput', 'art', '44', 'desta', 'lei', 'exercício', '2018', 'ensejará', 'desaprovação', 'contas']
-Palavra mais distante do texto da proposição: art
+Palavras da emenda: ['incluase', '32', 'constante', '1º', 'pl', 'seguinte', '5º', '5º', 'partido', 'político', 'cumprir', 'disposto', 'caput', 'hipótese', 'desaprovação', 'contas', 'ficará', 'impedido', 'participar', 'pleito', 'eleitoral']
+Palavras da linha do avulso com menor distância: ['55c', 'observância', 'disposto', 'inciso', 'v', 'caput', '44', 'desta', 'lei', 'exercício', '2018', 'ensejará', 'desaprovação', 'contas']
+Palavra mais distante do texto da proposição: participar
 Palavra com maior média: participar
 Palavra com maior mediana: pleito
 =======================================================
 emenda_1_modificativa_136173
-Palavras da emenda: ['dêse', 'arts', '37', '44', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'termos', 'projeto', 'lei', 'nº', '1321', '2019', 'seguinte', 'redação', 'art', '37', '3º', 'sanção', 'refere', 'caput', 'deverá', 'ser', 'aplicada', 'forma', 'proporcional', 'razoável', 'período', 'doze', 'meses', 'pagamento', 'deverá', 'ser', 'feito', 'meio', 'desconto', 'futuros', 'repasses', 'cotas', 'fundo', 'partidário', 'após', 'notificação', 'órgão', 'nacional', 'partido', 'político', 'desde', 'prestação', 'contas', 'julgada', 'juízo', 'tribunal', 'competente', 'cinco', 'anos', 'apresentação', 'nr', 'art', '44', '7º', 'recursos', 'indicados', 'inciso', 'v', 'poderão', 'ser', 'empregados', 'pagamento', 'pessoal', 'logística', 'estrutura', 'física', '8º', 'recursos', 'provenientes', 'fundo', 'partidário', 'poderão', 'ser', 'utilizados', 'ressarcimento', 'multas', 'relativas', 'atos', 'infracionais', 'administrativos', 'eleitorais', 'nr']
-Palavras da linha do avulso com menor distância: ['1º', 'órgão', 'direção', 'nacional', 'partido', 'obrigado', 'abrir', 'conta', 'bancária', 'exclusivamente', 'movimentação', 'fundo', 'partidário', 'aplicação', 'recursos', 'prevista', 'inciso', 'v', 'caput', 'art', '44', 'desta', 'lei', 'observado', 'demais', 'órgãos', 'partido', 'outros', 'tipos', 'receita', 'obrigação', 'prevista', 'neste', 'parágrafo', 'somente', 'aplica', 'existir', 'movimentação', 'financeira']
+Palavras da emenda: ['dêse', '37', '44', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'termos', 'projeto', 'lei', 'nº', '1321', '2019', 'seguinte', 'redação', '37', '3º', 'sanção', 'refere', 'caput', 'deverá', 'ser', 'aplicada', 'forma', 'proporcional', 'razoável', 'período', 'doze', 'meses', 'pagamento', 'deverá', 'ser', 'feito', 'meio', 'desconto', 'futuros', 'repasses', 'cotas', 'fundo', 'partidário', 'após', 'notificação', 'órgão', 'nacional', 'partido', 'político', 'desde', 'prestação', 'contas', 'julgada', 'juízo', 'tribunal', 'competente', 'cinco', 'anos', 'apresentação', 'nr', '44', '7º', 'recursos', 'indicados', 'inciso', 'v', 'poderão', 'ser', 'empregados', 'pagamento', 'pessoal', 'logística', 'estrutura', 'física', '8º', 'recursos', 'provenientes', 'fundo', 'partidário', 'poderão', 'ser', 'utilizados', 'ressarcimento', 'multas', 'relativas', 'atos', 'infracionais', 'administrativos', 'eleitorais', 'nr']
+Palavras da linha do avulso com menor distância: ['1º', 'órgão', 'direção', 'nacional', 'partido', 'obrigado', 'abrir', 'conta', 'bancária', 'exclusivamente', 'movimentação', 'fundo', 'partidário', 'aplicação', 'recursos', 'prevista', 'inciso', 'v', 'caput', '44', 'desta', 'lei', 'observado', 'demais', 'órgãos', 'partido', 'outros', 'tipos', 'receita', 'obrigação', 'prevista', 'neste', 'parágrafo', 'somente', 'aplica', 'existir', 'movimentação', 'financeira']
 Palavra mais distante do texto da proposição: ser
 Palavra com maior média: julgada
 Palavra com maior mediana: administrativos
 =======================================================
 emenda_9_modificativa_136173
-Palavras da emenda: ['art', '3º', 'lei', 'n', '9096', '19', 'setembro', '1995', 'constante', 'art', '1º', 'projeto', 'lei', 'nº', '1321', '2019', 'passa', 'vigorar', 'seguinte', 'redação', 'art', '1º', 'art', '3º', '5º', 'é', 'assegurada', 'filiados', 'igualdade', 'condições', 'concorrer', 'cargos', 'direção', 'órgãos', 'nível', 'nacional', 'estadual', 'distrital', 'municipal', '6º', 'estatuto', 'partido', 'deverá', 'definir', 'regras', 'eleições', 'internas', 'cargos', 'direção', 'órgãos', 'nível', 'nacional', 'estadual', 'distrital', 'municipal', 'observando', 'princípios', 'democráticos', 'voto', 'direto', 'secreto', 'universal', 'periódico', 'alternância', '7º', 'fica', 'vedado', 'partidos', 'dirigidos', 'comissão', 'provisória', 'registrar', 'candidatos', 'pleitos', 'eleitorais', 'respectiva', 'circunscrição', 'bem', 'participar', 'coligações', 'proporcionais', 'majoritárias', 'devendo', 'tempo', 'rádio', 'televisão', 'ser', 'distribuído', 'igualitariamente', 'dentre', 'demais', 'nr']
-Palavras da linha do avulso com menor distância: ['2º', 'certidão', 'órgão', 'superior', 'próprio', 'órgão', 'regional', 'municipal', 'inexistência', 'movimentação', 'financeira', 'fé', 'pública', 'prova', 'documental', 'aplicação', 'art', '32', 'desta', 'lei', 'prejuízo', 'apuração', 'ilegalidade', 'acordo', 'disposto', 'art', '35', 'desta', 'leinr']
-Palavra mais distante do texto da proposição: art
-Palavra com maior média: filiados
-Palavra com maior mediana: filiados
+Palavras da emenda: ['3º', 'lei', 'n', '9096', '19', 'setembro', '1995', 'constante', '1º', 'projeto', 'lei', 'nº', '1321', '2019', 'passa', 'vigorar', 'seguinte', 'redação', '1º', '3º', '5º', 'é', 'assegurada', 'filiados', 'igualdade', 'condições', 'concorrer', 'cargos', 'direção', 'órgãos', 'nível', 'nacional', 'estadual', 'distrital', 'municipal', '6º', 'estatuto', 'partido', 'deverá', 'definir', 'regras', 'eleições', 'internas', 'cargos', 'direção', 'órgãos', 'nível', 'nacional', 'estadual', 'distrital', 'municipal', 'observando', 'princípios', 'democráticos', 'voto', 'direto', 'secreto', 'universal', 'periódico', 'alternância', '7º', 'fica', 'vedado', 'partidos', 'dirigidos', 'comissão', 'provisória', 'registrar', 'candidatos', 'pleitos', 'eleitorais', 'respectiva', 'circunscrição', 'bem', 'participar', 'coligações', 'proporcionais', 'majoritárias', 'devendo', 'tempo', 'rádio', 'televisão', 'ser', 'distribuído', 'igualitariamente', 'dentre', 'demais', 'nr']
+Palavras da linha do avulso com menor distância: ['1º', 'órgão', 'direção', 'nacional', 'partido', 'obrigado', 'abrir', 'conta', 'bancária', 'exclusivamente', 'movimentação', 'fundo', 'partidário', 'aplicação', 'recursos', 'prevista', 'inciso', 'v', 'caput', '44', 'desta', 'lei', 'observado', 'demais', 'órgãos', 'partido', 'outros', 'tipos', 'receita', 'obrigação', 'prevista', 'neste', 'parágrafo', 'somente', 'aplica', 'existir', 'movimentação', 'financeira']
+Palavra mais distante do texto da proposição: cargos
+Palavra com maior média: universal
+Palavra com maior mediana: universal
 =======================================================
 emenda_7_supressiva_136173
-Palavras da emenda: ['suprimase', 'art', '55c', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'lei', 'partidos', 'políticos', 'alterado', 'art', '2º', 'projeto', 'lei', 'nº', '1321', '2019']
+Palavras da emenda: ['suprimase', '55c', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'lei', 'partidos', 'políticos', 'alterado', '2º', 'projeto', 'lei', 'nº', '1321', '2019']
 Palavras da linha do avulso com menor distância: ['3º', 'prazo', 'vigência', 'órgãos', 'provisórios', 'partidos', 'políticos', 'poderá', 'ser', '8', 'oito', 'anos']
-Palavra mais distante do texto da proposição: art
-Palavra com maior média: art
+Palavra mais distante do texto da proposição: projeto
+Palavra com maior média: projeto
 Palavra com maior mediana: partidos
 =======================================================
 emenda_3_supressiva_136173
-Palavras da emenda: ['suprimase', '7º', 'art', '32', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'lei', 'partidos', 'políticos', 'alterado', 'art', '1º', 'projeto', 'lei', 'nº', '1321', '2019']
+Palavras da emenda: ['suprimase', '7º', '32', 'lei', 'nº', '9096', '19', 'setembro', '1995', 'lei', 'partidos', 'políticos', 'alterado', '1º', 'projeto', 'lei', 'nº', '1321', '2019']
 Palavras da linha do avulso com menor distância: ['3º', 'prazo', 'vigência', 'órgãos', 'provisórios', 'partidos', 'políticos', 'poderá', 'ser', '8', 'oito', 'anos']
-Palavra mais distante do texto da proposição: art
-Palavra com maior média: art
+Palavra mais distante do texto da proposição: projeto
+Palavra com maior média: projeto
 Palavra com maior mediana: partidos
 =======================================================
 emenda_10_modificativa_136173
-Palavras da emenda: ['arts', '14', '15', 'lei', 'n', '9096', '19', 'setembro', '1995', 'constantes', 'art', '1º', 'projeto', 'lei', 'nº', '1321', '2019', 'passam', 'vigorar', 'seguinte', 'redação', 'art', '1º', 'art', '14', 'parágrafo', 'único', 'estatutos', 'deverão', 'estabelecer', 'mecanismos', 'garantir', 'democracia', 'interna', 'partido', 'político', 'previsão', 'representatividade', 'transparência', 'deliberações', 'publicidade', 'prestações', 'contas', 'decisões', 'tomadas', 'instâncias', 'deliberativas', 'âmbito', 'nacional', 'estadual', 'distrital', 'municipal', 'zonal', 'nr', 'art', '15', 'vi', 'condições', 'forma', 'escolha', 'candidatos', 'cargos', 'funções', 'eletivas', 'garantia', 'ampla', 'efetiva', 'participação', 'filiados', 'nesta', 'escolha', 'ix', 'procedimentos', 'democráticos', 'serem', 'seguidos', 'alterações', 'programa', 'estatuto', 'observem', 'participação', 'efetiva', 'filiados', 'diretamente', 'meios', 'representativos', 'x', 'previsão', 'maioria', 'filiados', 'respectiva', 'base', 'federada', 'possa', 'convocar', 'realização', 'congressos', 'plenárias', 'assembleias', 'afins', 'fins', 'deliberativos', 'fins', 'discussão', 'teses', 'posicionamentos', 'partido', 'nr']
-Palavras da linha do avulso com menor distância: ['1º', 'órgão', 'direção', 'nacional', 'partido', 'obrigado', 'abrir', 'conta', 'bancária', 'exclusivamente', 'movimentação', 'fundo', 'partidário', 'aplicação', 'recursos', 'prevista', 'inciso', 'v', 'caput', 'art', '44', 'desta', 'lei', 'observado', 'demais', 'órgãos', 'partido', 'outros', 'tipos', 'receita', 'obrigação', 'prevista', 'neste', 'parágrafo', 'somente', 'aplica', 'existir', 'movimentação', 'financeira']
-Palavra mais distante do texto da proposição: art
+Palavras da emenda: ['14', '15', 'lei', 'n', '9096', '19', 'setembro', '1995', 'constantes', '1º', 'projeto', 'lei', 'nº', '1321', '2019', 'passam', 'vigorar', 'seguinte', 'redação', '1º', '14', 'parágrafo', 'único', 'estatutos', 'deverão', 'estabelecer', 'mecanismos', 'garantir', 'democracia', 'interna', 'partido', 'político', 'previsão', 'representatividade', 'transparência', 'deliberações', 'publicidade', 'prestações', 'contas', 'decisões', 'tomadas', 'instâncias', 'deliberativas', 'âmbito', 'nacional', 'estadual', 'distrital', 'municipal', 'zonal', 'nr', '15', 'vi', 'condições', 'forma', 'escolha', 'candidatos', 'cargos', 'funções', 'eletivas', 'garantia', 'ampla', 'efetiva', 'participação', 'filiados', 'nesta', 'escolha', 'ix', 'procedimentos', 'democráticos', 'serem', 'seguidos', 'alterações', 'programa', 'estatuto', 'observem', 'participação', 'efetiva', 'filiados', 'diretamente', 'meios', 'representativos', 'x', 'previsão', 'maioria', 'filiados', 'respectiva', 'base', 'federada', 'possa', 'convocar', 'realização', 'congressos', 'plenárias', 'assembleias', 'afins', 'fins', 'deliberativos', 'fins', 'discussão', 'teses', 'posicionamentos', 'partido', 'nr']
+Palavras da linha do avulso com menor distância: ['1º', 'órgão', 'direção', 'nacional', 'partido', 'obrigado', 'abrir', 'conta', 'bancária', 'exclusivamente', 'movimentação', 'fundo', 'partidário', 'aplicação', 'recursos', 'prevista', 'inciso', 'v', 'caput', '44', 'desta', 'lei', 'observado', 'demais', 'órgãos', 'partido', 'outros', 'tipos', 'receita', 'obrigação', 'prevista', 'neste', 'parágrafo', 'somente', 'aplica', 'existir', 'movimentação', 'financeira']
+Palavra mais distante do texto da proposição: filiados
 Palavra com maior média: afins
-Palavra com maior mediana: mecanismos
+Palavra com maior mediana: afins
 =======================================================

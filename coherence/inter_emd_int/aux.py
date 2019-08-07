@@ -5,6 +5,8 @@ import sys
 from collections import defaultdict
 import traceback
 
+stop_words = set(stopwords.words('portuguese') + list(punctuation) + ['art', 'arts', 'Art', 'Arts'])
+
 def tokanizer_files(path, file):
     emdSentences = []
     file = open(path + '/' + str(file), 'r', encoding = 'UTF8')
@@ -12,7 +14,6 @@ def tokanizer_files(path, file):
     tokenized_sentences = []
     line = re.sub(r'[^\w\d\s]+', '', line)
     tokenized_sentences.append(line.lower().split())
-    stop_words = set(stopwords.words('portuguese') + list(punctuation))
     for t in tokenized_sentences:
         emdSentences.append([w for w in t if w not in stop_words]) 
 
@@ -28,7 +29,7 @@ def get_avulso_inicial(path, file, files):
 
 def quebra_avulso_sentencas(file_avulso_inicial):
     intSentences = []
-    sub = re.split("(\r\n|\r|\n|“)+Art|(\r\n|\r|\n)+§",  str(file_avulso_inicial.read()), flags=re.IGNORECASE)
+    sub = re.split("(\r\n|\r|\n|“)+art|(\r\n|\r|\n)+§",  str(file_avulso_inicial.read()), flags=re.IGNORECASE)
     for line in sub:
         if (line != None and line.strip() != ""):
             tokenized_sentences = []
@@ -36,7 +37,6 @@ def quebra_avulso_sentencas(file_avulso_inicial):
             line = re.sub(r'[^\w\d\s]+', '', line)
             
             tokenized_sentences.append(line.lower().split())
-            stop_words = set(stopwords.words('portuguese') + list(punctuation))
             for t in tokenized_sentences:
                 intSentences.append([w for w in t if w not in stop_words])
 
@@ -46,7 +46,7 @@ def calcula_distancia(emd, intSentences, distances, indexes, model, i):
     min_teor_sentence_dist = sys.maxsize
     min_teor_sentence = ""
     for teor,j in zip(intSentences,range(len(intSentences))):
-        if len(emd) > 4 and len(teor)> 4:
+        if len(emd) > 4 and len(teor) > 4:
             d = model.wmdistance(emd,teor)
             if float("inf") == d:
                 continue
