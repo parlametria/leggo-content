@@ -4,6 +4,7 @@ from string import punctuation
 import sys
 from collections import defaultdict
 import traceback
+import gensim
 
 stop_words = set(stopwords.words('portuguese') + list(punctuation) + ['art', 'arts', 'Art', 'Arts'])
 
@@ -11,6 +12,7 @@ def tokanizer_files(path, file):
     emdSentences = []
     file = open(path + '/' + str(file), 'r', encoding = 'UTF8')
     line = file.read()
+    line = " ".join(gensim.utils.simple_preprocess(line))
     tokenized_sentences = []
     line = re.sub(r'[^\w\d\s]+', '', line)
     tokenized_sentences.append(line.lower().split())
@@ -29,13 +31,13 @@ def get_avulso_inicial(path, file, files):
 
 def quebra_avulso_sentencas(file_avulso_inicial):
     intSentences = []
-    sub = re.split("(\r\n|\r|\n|“)+art|(\r\n|\r|\n)+§",  str(file_avulso_inicial.read()), flags=re.IGNORECASE)
+    sub = re.split("(\r\n|\r|\n|“)+art|(\r\n|\r|\n)+§", str(file_avulso_inicial.read()), flags=re.IGNORECASE)
     for line in sub:
         if (line != None and line.strip() != ""):
             tokenized_sentences = []
             line = str(line)
+            line = " ".join(gensim.utils.simple_preprocess(line))
             line = re.sub(r'[^\w\d\s]+', '', line)
-            
             tokenized_sentences.append(line.lower().split())
             for t in tokenized_sentences:
                 intSentences.append([w for w in t if w not in stop_words])
