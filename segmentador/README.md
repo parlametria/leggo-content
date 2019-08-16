@@ -1,13 +1,53 @@
-Segmentador de Emendas <br /> <br />
+Arquivos:
+	modelo.model: treinado com cem iterações
+	modelo1000.model: treinado com mil iterações
 
-As emendas à PLs possuem uma estrutura que consiste, no geral, em uma introdução seguida de pares de anúncio do que será feito (emenda substitutiva/modificativa, aditiva ou supressiva) e a alteração em si. A ideia é segmentar o texto dessas emendas de forma que todas essas partes fiquem separadas. <br /> <br />
-Para isso foi utilizado uma abordagem supervisionada com o modelo de Conditional Random Fields (CRF), que tem como entrada uma lista de features para cada palavra e uma tag que identifica o que essa palavra representa para o segmento (nada, início, meio ou fim). Tudo isso para cada um dos segmentos <br /> <br />
-As features são construídas a partir de cada palavra no segmento e as utilizadas (no momento) são: <br />
-	* A palavra em minúsculo <br />
-	* Se a palavra está em maiúsculo (booleano) <br />
-	* Se a palavra é um título (booleano) <br />
-	* Se a palavra é um dígito (booleano) <br />
-	* POS-Tag da palavra <br />
-	* Se a palavra é a primeira do bloco <br />
-	* Se a palavra é a última do bloco <br />
-	* E todas estas mesmas features para a palavra anterior e posterior, se houver (criação de contexto) <br />
+Metodologia:
+	1. Rodar o treino_segmentador.py para treinar o modelo
+	2. Rodar o segmentador_generico.py para segmentar os textos das emendas e salvar o que foi predito em arquivos (um arquivo por emenda)
+	3. Rodar o divide_predicao_em_blocos.py para separar a predição em blocos (apenas pra organização)
+
+
+treino_segmentador
+	local de arquivos de entrada sys.argv[1]
+	arquivo_modelo sys.argv[2]
+	caminho_salvar (resultados, caminho pra salvar) sys.argv[3]
+
+
+segmentador_generico
+	sys.argv[1] local com os arquivos
+	sys.argv[2] arquivo do modelo treinado
+	sys.argv[3] local para salvar as predições
+
+
+
+divide_predicao_em_blocos
+	sys.argv[1] local com os arquivos PREDITOS (o sys.argv[3] do segmentador_generico)
+	sys.argv[2] local para salvar os arquivos divididos em blocos
+	
+
+
+	PROCURAR POR OPEN E LISTDIR TAMBÉM
+
+
+
+
+Contém todos arquivos necessários para treinar um modelo de segmentação e utilizá-lo para segmentar arquivos de emendas diversos.
+A pasta já contém um modelo pré-treinado (modelo.model) e seus resultados (resultados_janela_4.txt).
+
+Metodologia:
+	1. Rodar o treino pelo comando "treino_segmentador.py local1 arq1 local2" para treinar o modelo, sendo:
+		local1 -> local com os arquivos de treino
+		arq1 -> nome do arquivo que conterá o binário do modelo
+		local2 -> local para salvar os resultados obtidos
+
+	2. Rodar o segmentador através do comando "segmentador_generico.py local1 arq1 local2" para segmentar os textos das emendas e salvar o que foi predito em arquivos (um arquivo por emenda), sendo:
+		local1 -> local com os arquivos que se deseja segmentar
+		arq1 -> nome do arquivo que contém o binário do modelo já treinado (arq1 do passo anterior)
+		local2 -> local para salvar as predições (segmentos obtidos)
+		
+	3. Rodar o organizador de segmentos em blocos pelo comando "divide_predicao_em_blocos.py local1 local2" para separar a predição em blocos (apenas pra organização), sendo:
+		local1 -> local com os arquivos preditos (local2 do passo anterior)
+		local2 -> local para salvar os arquivos divididos em blocos
+
+
