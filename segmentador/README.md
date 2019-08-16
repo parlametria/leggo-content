@@ -2,6 +2,7 @@ Contém todos arquivos necessários para treinar um modelo de segmentação e ut
 A pasta já contém um modelo pré-treinado (modelo.model) e seus resultados (resultados_janela_4.txt).
 
 Metodologia:
+
 	1. Rodar o treino pelo comando "treino_segmentador.py local1 arq1 local2" para treinar o modelo, sendo:
 		local1 -> local com os arquivos de treino
 		arq1 -> nome do arquivo que conterá o binário do modelo
