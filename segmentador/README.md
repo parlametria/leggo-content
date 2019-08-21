@@ -1,5 +1,5 @@
 Contém todos arquivos necessários para treinar um modelo de segmentação e utilizá-lo para segmentar arquivos de emendas diversos.
-A pasta já contém um modelo pré-treinado (modelo.model) e seus resultados (resultados_janela_4.txt).
+A pasta já contém um modelo pré-treinado (modelo.model, treinado com os arquivos da pasta tagFiles) e seus resultados (resultados_janela_4.txt).
 
 Metodologia:
 
