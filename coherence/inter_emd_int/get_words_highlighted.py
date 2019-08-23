@@ -87,6 +87,7 @@ for emd, i in zip(emdSentences, files):
     f.write(str(prefixo_emenda) + "\n")
     
     min_teor_sentence = calcula_distancia(emd, intSentences, [], indexes, model, i)
+    print(show_diff(' '.join(min_teor_sentence), ' '.join(emd)))
 
     distancesDict = palavras_destoantes(get_distance_func(modelFunction, model), min_teor_sentence, emd)
     
