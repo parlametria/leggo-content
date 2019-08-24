@@ -32,7 +32,7 @@ def obtem_lista_termos(arqv):
 def main():
         TAMANHO_OPCOES_CONJUNTO = 4
 
-        hierarquia = { #TODO: rever questão da hierarquia, aparentemente inciso e parágrafo são do mesmo nível (?)
+        hierarquia = { 
                 'artigo': 0,
                 'inciso': 1,
                 'alinea': 2,

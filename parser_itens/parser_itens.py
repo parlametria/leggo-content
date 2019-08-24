@@ -51,7 +51,8 @@ def main():
 
 
                 texto = ' '.join(texto.lower().split()) #deixando apenas um espaço em branco
-                texto = texto.replace('“ ', '“').replace(' ”', '”').replace("' ", "'").replace(" '", "'") #formatando as palavras para as alíneas sem alteração de sentido TODO: “ != ", adicionar o equivalente para o caractere '
+                texto = texto.replace('“ ', '“').replace(' ”', '”').replace("' ", "'").replace(" '", "'") #formatando as palavras para as alíneas sem alteração de sentido
+                texto = texto.replace('‘ ', '‘').replace(' ’', '’').replace('" ', '"').replace(' "', '"')
 
                 palavras = texto.split() #convertendo em lista de palavras
                 print(palavras)
