@@ -1,4 +1,3 @@
-#import openpyxl
 import requests
 import time
 import sys
@@ -47,7 +46,6 @@ def operacoes_obtencao_arquivos_csv():
 			print(nome_arquivo)
 			print(link_emenda)
 
-			#requisicao = requests.get("https://www.camara.leg.br/proposicoesWeb/prop_mostrarintegra?codteor=1070351&filename=PL+5254/2013", allow_redirects = True)
 			time.sleep(2)
 			resp = requests.get(link_emenda, allow_redirects = True)
 
@@ -55,7 +53,7 @@ def operacoes_obtencao_arquivos_csv():
 			while meta_redirect(resp.content):
 				resp = requests.get(meta_redirect(resp.content), allow_redirects = True) 
 			print(resp.url)
-		# if requisicao.status_code == 200 and 'pdf' in requisicao.headers['content-type']: #se houve sucesso e se trata-se de um pdf
+
 			if resp.status_code == 200: #se houve sucesso e se trata-se de um pdf
 				with open('teores_emendas/' + nome_arquivo.replace('/', '___').replace(' ', '_') + '.html', 'wb') as arquivo: #salva substituindo caracteres especiais por válidos 
 					arquivo.write(resp.content)

@@ -81,7 +81,6 @@ def obtem_texto_publicado(link_publicado, anos, indice_anos, numero_PL_MPV, link
 	time.sleep(0.1)
 	fonte_publicado = requests.get(link_publicado)
 	fonte_publicado = fonte_publicado.text
-	#print(fonte_publicado)
 	soup_publicado = BeautifulSoup(fonte_publicado, 'lxml')
 	texto_publicado = soup_publicado.find('div', class_ = 'texto')
 	if(texto_publicado is None):
@@ -185,9 +184,8 @@ def main():
 	contador_documentos = 1 #para visualização no terminal
 	indice_anos = 0 #alterar conforme necessário
 
-	for cont in anos: #cont não é utilizado, apenas para o loop
+	for _ in anos:
 		driver = inicia_acesso(url)
-		#print(driver.page_source)
 
 		soup_principal = BeautifulSoup(driver.page_source, 'lxml') #inicia coletando a página inicial
 
