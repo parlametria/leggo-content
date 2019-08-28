@@ -7,10 +7,10 @@ import httplib2
 def meta_redirect(content):
 	soup  = BeautifulSoup(content)
 
-	result = soup.find("meta",attrs={"http-equiv":"refresh"})
+	result = soup.find('meta',attrs={'http-equiv':'refresh'})
 	if result:
-		wait,text=result["content"].split(";")
-	if text.strip().lower().startswith("url="):
+		wait,text=result['content'].split(';')
+	if text.strip().lower().startswith('url='):
 		url = text[4:]
 		return url
 	return None
@@ -84,7 +84,7 @@ def main():
 
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
 
 

@@ -18,7 +18,7 @@ def obtem_txts():
 			imgPage = wi(image = img)
 			imageBlobs.append(imgPage.make_blob('jpeg'))
 
-		recognized_text = ""
+		recognized_text = ''
 		for imgBlob in imageBlobs:
 			im = Image.open(io.BytesIO(imgBlob))
 			text = pytesseract.image_to_string(im, lang = 'por')
@@ -36,5 +36,5 @@ def main():
 	obtem_txts()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 	main()
