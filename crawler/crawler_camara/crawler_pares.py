@@ -21,9 +21,9 @@ import sys
 
 
 def print_usage():
-	print("Número errado de parâmetros, o certo é: crawler_pares.py <output_dir1> <output_dir2> <output_dir3>")
+	print('Número errado de parâmetros, o certo é: crawler_pares.py <output_dir1> <output_dir2> <output_dir3>')
 
-
+  
 ###################################################
 ################################################### Funções
 ###################################################
@@ -134,7 +134,6 @@ def obtem_texto_original_e_html_tramitacao(link_originaria, anos, numero_PL_MPV,
 	return requisicao, fonte_originaria
 
 
-
 def obtem_link_proxima_pagina(driver):
 	lista_ul_li = driver.find_element_by_class_name('proxima') #encontra o elemento com o link para a próxima página (elemento único)
 
@@ -143,7 +142,6 @@ def obtem_link_proxima_pagina(driver):
 		return link
 	except NoSuchElementException: #se não tiver link, acabou a paginação desse ano
 		return 'sai_loop'
-
 
 
 def salva_dados(anos, dia_e_mes, numero_PL_MPV, fonte_originaria, texto_publicado, requisicao, link_para_PL_MPV, link_originaria, link_publicado, indice_anos):
@@ -176,11 +174,9 @@ def atualiza_arquivo_anos(anos, indice_anos):
 ################################################### Programa principal
 ###################################################
 def main():
-
-	if (len(sys.argv) != 4):
+  if (len(sys.argv) != 4):
   		print_usage()
   		exit()
-
 
 	url = 'http://www2.camara.leg.br/busca/?o=relevance&v=legislacao&colecao=S&conteudolegin=&numero=&ano=&tiponormaF=Lei+Ordin%C3%A1ria' #página inicial, fixa
 
