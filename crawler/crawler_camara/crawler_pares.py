@@ -20,6 +20,9 @@ import time
 import sys
 
 
+def print_usage():
+	print("Número errado de parâmetros, o certo é: crawler_pares.py <output_dir1> <output_dir2> <output_dir3>")
+
 
 ###################################################
 ################################################### Funções
@@ -173,6 +176,12 @@ def atualiza_arquivo_anos(anos, indice_anos):
 ################################################### Programa principal
 ###################################################
 def main():
+
+	if (len(sys.argv) != 4):
+  		print_usage()
+  		exit()
+
+
 	url = 'http://www2.camara.leg.br/busca/?o=relevance&v=legislacao&colecao=S&conteudolegin=&numero=&ano=&tiponormaF=Lei+Ordin%C3%A1ria' #página inicial, fixa
 
 	with open('paginacao_por_anos.txt', 'r') as arquivo:

@@ -4,6 +4,11 @@ import sys
 from bs4 import BeautifulSoup
 import httplib2
 
+
+def print_usage():
+	print("Número errado de parâmetros, o certo é: crawler_30mil.py <output_dir>")
+
+
 def meta_redirect(content):
 	soup  = BeautifulSoup(content)
 
@@ -80,8 +85,11 @@ def operacoes_obtencao_arquivos_csv():
                                 arquivo.write(str(linha_final) + '\n') #a final se mantém
 
 def main():
-	operacoes_obtencao_arquivos_csv()
 
+	if (len(sys.argv) != 2):
+  		print_usage()
+	else:
+		operacoes_obtencao_arquivos_csv()
 
 
 if __name__ == '__main__':

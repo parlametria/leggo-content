@@ -5,6 +5,10 @@ from wand.image import Image as wi
 import os
 import sys
 
+def print_usage():
+	print("Número errado de parâmetros, o certo é: conversor_OCR.py <input_dir> <output_dir>")
+
+
 def obtem_txts():
 	arquivos = os.listdir(sys.argv[1] + '/')
 
@@ -29,11 +33,12 @@ def obtem_txts():
 			arq.write(recognized_text)
 	
 
-
-
-
 def main():
-	obtem_txts()
+
+	if (len(sys.argv) != 3):
+  		print_usage()
+	else:
+		obtem_txts()
 
 
 if __name__ == '__main__':
