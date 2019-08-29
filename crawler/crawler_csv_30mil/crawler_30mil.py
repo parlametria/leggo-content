@@ -6,7 +6,7 @@ import httplib2
 
 
 def print_usage():
-	print("Número errado de parâmetros, o certo é: crawler_30mil.py <output_dir>")
+	print('Número errado de parâmetros, o certo é: crawler_30mil.py <output_dir>')
 
 
 def meta_redirect(content):

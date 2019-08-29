@@ -6,7 +6,7 @@ import os
 import sys
 
 def print_usage():
-	print("Número errado de parâmetros, o certo é: conversor_OCR.py <input_dir> <output_dir>")
+	print('Número errado de parâmetros, o certo é: conversor_OCR.py <input_dir> <output_dir>')
 
 
 def obtem_txts():
