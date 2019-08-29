@@ -17,14 +17,14 @@ Leitura dos Dados
 emendas = clfe.cria_df_treino("../data/tag_files")
 ```
 
-Criação do Modelo
+Criação do Modelo `emend_clf_pipe`
 ```
 clf = clfe.cria_modelo(emendas)
 ```
 
-Exemplo de predição
+Exemplo de predição. Carrega o modelo `emend_clf_pipe` que está no mesmo diretório. Como entreda, pode ser apontado qualquer diretório em `data/blocos/`.
 ```
-print(clfe.preve_emenda("./dados/blocos"))
+print(clfe.preve_emenda("../data/blocos/exemplo_2_blocos"))
 Gera a saída:
 ['O' 'SUP']
 ```
