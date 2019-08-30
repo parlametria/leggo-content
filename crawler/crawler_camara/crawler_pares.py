@@ -174,9 +174,9 @@ def atualiza_arquivo_anos(anos, indice_anos):
 ################################################### Programa principal
 ###################################################
 def main():
-  if (len(sys.argv) != 4):
-  		print_usage()
-  		exit()
+	if (len(sys.argv) != 4):
+		print_usage()
+		exit()
 
 	url = 'http://www2.camara.leg.br/busca/?o=relevance&v=legislacao&colecao=S&conteudolegin=&numero=&ano=&tiponormaF=Lei+Ordin%C3%A1ria' #página inicial, fixa
 
