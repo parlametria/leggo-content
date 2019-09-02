@@ -39,7 +39,6 @@ def separa_em_blocos(pares_palavra_tag, tamanho_janela = 1):
 	return documentos
 
 
-
 def criador_de_features(documento, posicao_do_par, pos_tags_documento):
 	'''
 	Dado um documento/bloco e a posição do par palavra-tag atual obtém as features desse par.
@@ -95,6 +94,46 @@ def criador_de_features(documento, posicao_do_par, pos_tags_documento):
 	return features
 
 
+def segmenta(contador_blocos_documento, X, TAMANHO_JANELA, lista_arquivos):
+	#algoritmo:
+	#cada arquivo tem um número de blocos salvo em contador_blocos_documento
+	#então, pra cada valor nessa lista de tamanhos
+		#itera, lendo os N próximos elementos de X (sendo N o tamanho dos blocos)
+			#pega a classificação, adiciona na string de saída
+		#salva a saída no arquivo de predição daquela emenda
+		#continua pro próximo arquivo
+	tagger = pycrfsuite.Tagger()
+	tagger.open(sys.argv[2])
+
+	iterador_X_global = 0
+	contador_arquivos = 0
+	for num_blocos_atual in contador_blocos_documento:
+		saida_arq = ""
+		for i in range(num_blocos_atual):
+			unidade_x_teste = X[iterador_X_global]
+			#e aqui a avaliação do que vai ser feito depende da localização do bloco. No caso, o tamanho da janela é 4 SEMPRE (ou o valor definido em TAMANHO_JANELA).
+			#assim sendo, os 4 primeiros são casos de borda. Os demais são simples de serem tratados
+			
+			tag_pred = tagger.tag(unidade_x_teste) #taggea todo o bloco, mas queremos apenas a palavra que nos interessa e isso depende se ela é caso de borda ou não
+			print(tag_pred)
+			aux = TAMANHO_JANELA if (i >= TAMANHO_JANELA) else i
+			print(unidade_x_teste[aux][1].split('=')[1] + ' ' + str(aux))
+			if(i >= TAMANHO_JANELA): #se for um bloco não de borda
+				saida_arq += unidade_x_teste[TAMANHO_JANELA][1].split('=')[1] + ' ' + tag_pred[TAMANHO_JANELA] + '\n' #a tag que nos interessa é a da palavra central, na quarta posição
+			else: #se for um bloco de borda de início
+				saida_arq += unidade_x_teste[i][1].split('=')[1] + ' ' + tag_pred[i] + '\n' #a tag que nos interessa é indexada pelo contador i se ela for borda de início
+
+			print(num_blocos_atual)
+			print(iterador_X_global)
+			print(len(X))
+
+			iterador_X_global += 1
+
+		with open(sys.argv[3] + '/' + lista_arquivos[contador_arquivos] + '_predito.txt', 'w') as arq:
+			arq.write(saida_arq)
+
+		contador_arquivos += 1
+
 
 def main():
 	TAMANHO_JANELA = 4
@@ -131,66 +170,10 @@ def main():
 
 	
 	#classificando
-	tagger = pycrfsuite.Tagger()
-	tagger.open(sys.argv[2])
-
-	#algoritmo:
-	#cada arquivo tem um número de blocos salvo em contador_blocos_documento
-	#então, pra cada valor nessa lista de tamanhos
-		#itera, lendo os N próximos elementos de X (sendo N o tamanho dos blocos)
-			#pega a classificação, adiciona na string de saída
-		#salva a saída no arquivo de predição daquela emenda
-		#continua pro próximo arquivo
-	iterador_X_global = 0
-	contador_arquivos = 0
-	for num_blocos_atual in contador_blocos_documento:
-		saida_arq = ""
-		for i in range(num_blocos_atual):
-			unidade_x_teste = X[iterador_X_global]
-			#e aqui a avaliação do que vai ser feito depende da localização do bloco. No caso, o tamanho da janela é 4 SEMPRE (ou o valor definido em TAMANHO_JANELA).
-			#assim sendo, os 4 primeiros são casos de borda. Os demais são simples de serem tratados
-			
-			tag_pred = tagger.tag(unidade_x_teste) #taggea todo o bloco, mas queremos apenas a palavra que nos interessa e isso depende se ela é caso de borda ou não
-			print(tag_pred)
-			aux = TAMANHO_JANELA if (i >= TAMANHO_JANELA) else i
-			print(unidade_x_teste[aux][1].split('=')[1] + ' ' + str(aux))
-			if(i >= TAMANHO_JANELA): #se for um bloco não de borda
-				saida_arq += unidade_x_teste[TAMANHO_JANELA][1].split('=')[1] + ' ' + tag_pred[TAMANHO_JANELA] + '\n' #a tag que nos interessa é a da palavra central, na quarta posição
-			else: #se for um bloco de borda de início
-				saida_arq += unidade_x_teste[i][1].split('=')[1] + ' ' + tag_pred[i] + '\n' #a tag que nos interessa é indexada pelo contador i se ela for borda de início
-
-			print(num_blocos_atual)
-			print(iterador_X_global)
-			print(len(X))
-
-			iterador_X_global += 1
-
-		with open(sys.argv[3] + '/' + lista_arquivos[contador_arquivos] + '_predito.txt', 'w') as arq:
-			arq.write(saida_arq)
-
-		contador_arquivos += 1
-
-
+	segmenta(contador_blocos_documento, X, TAMANHO_JANELA, lista_arquivos)
 
 
 if __name__ == "__main__":
 	main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
