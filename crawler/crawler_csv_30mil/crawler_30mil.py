@@ -25,7 +25,7 @@ user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 
 
 headers = {'user_agent': user_agent}
 
-def operacoes_obtencao_arquivos_csv():
+def operacoes_obtencao_arquivos_csv(output_dir):
 	'''
 		Operações de coleta de arquivos, para cada linha do .csv tenta coletar o teor da emenda (muitas emendas não têm pdfs e, portanto,
 		não são coletadas).
@@ -60,7 +60,7 @@ def operacoes_obtencao_arquivos_csv():
 			print(resp.url)
 
 			if resp.status_code == 200: #se houve sucesso e se trata-se de um pdf
-				with open('teores_emendas/' + nome_arquivo.replace('/', '___').replace(' ', '_') + '.html', 'wb') as arquivo: #salva substituindo caracteres especiais por válidos 
+				with open(output_dir + '/' + nome_arquivo.replace('/', '___').replace(' ', '_') + '.html', 'wb') as arquivo: #salva substituindo caracteres especiais por válidos 
 					arquivo.write(resp.content)
 
 				with open('log_sucessos.txt', 'a') as arquivo: #salva o nome
@@ -89,7 +89,8 @@ def main():
 	if (len(sys.argv) != 2):
   		print_usage()
 	else:
-		operacoes_obtencao_arquivos_csv()
+		output = sys.argv[1] # estava fixo "teores_emendas/"
+		operacoes_obtencao_arquivos_csv(output)
 
 
 if __name__ == '__main__':
