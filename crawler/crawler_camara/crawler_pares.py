@@ -21,7 +21,7 @@ import sys
 
 
 def print_usage():
-	print('Número errado de parâmetros, o certo é: crawler_pares.py <output_dir1> <output_dir2> <output_dir3>')
+	print('Número errado de parâmetros, o certo é: crawler_pares.py <caminho_textos_originais> <caminho_textos_publicados> <caminho_requisicoes>')
 
   
 ###################################################
@@ -144,14 +144,17 @@ def obtem_link_proxima_pagina(driver):
 		return 'sai_loop'
 
 
-def salva_dados(anos, dia_e_mes, numero_PL_MPV, fonte_originaria, texto_publicado, requisicao, link_para_PL_MPV, link_originaria, link_publicado, indice_anos):
-	with open(sys.argv[1] + '/doc_' + anos[indice_anos] + '_' + dia_e_mes + str(numero_PL_MPV) + '.txt', 'w') as arquivo:
+def salva_dados(dir_textos_originais, dir_textos_publicados, dir_requisicoes,
+	anos, dia_e_mes, numero_PL_MPV, fonte_originaria, texto_publicado, requisicao, 
+	link_para_PL_MPV, link_originaria, link_publicado, indice_anos):
+
+	with open(dir_textos_originais + '/doc_' + anos[indice_anos] + '_' + dia_e_mes + str(numero_PL_MPV) + '.txt', 'w') as arquivo:
 		arquivo.write(fonte_originaria)
 
-	with open(sys.argv[2] + '/doc_' + anos[indice_anos] + '_' + dia_e_mes  + str(numero_PL_MPV) + '.txt', 'w') as arquivo:
+	with open(dir_textos_publicados + '/doc_' + anos[indice_anos] + '_' + dia_e_mes  + str(numero_PL_MPV) + '.txt', 'w') as arquivo:
 		arquivo.write(texto_publicado)
 
-	with open(sys.argv[3] + '/doc_' + anos[indice_anos] + '_' + dia_e_mes + str(numero_PL_MPV) + '.pdf', 'wb') as arquivo:
+	with open(dir_requisicoes + '/doc_' + anos[indice_anos] + '_' + dia_e_mes + str(numero_PL_MPV) + '.pdf', 'wb') as arquivo:
 		arquivo.write(requisicao.content)
 
 	with open('relatorio.txt', 'a') as arquivo:
@@ -177,6 +180,10 @@ def main():
 	if (len(sys.argv) != 4):
 		print_usage()
 		exit()
+
+	textos_originais = sys.argv[1]
+	textos_publicados = sys.argv[2]
+	requisicoes = sys.argv[3]
 
 	url = 'http://www2.camara.leg.br/busca/?o=relevance&v=legislacao&colecao=S&conteudolegin=&numero=&ano=&tiponormaF=Lei+Ordin%C3%A1ria' #página inicial, fixa
 
@@ -214,7 +221,9 @@ def main():
 					requisicao, fonte_originaria = obtem_texto_original_e_html_tramitacao(link_originaria, anos, numero_PL_MPV, link_para_PL_MPV, indice_anos)
 				
 					############################ Salvando os arquivos (colocados no final para que o bloco try-except funcione corretamente)
-					salva_dados(anos, dia_e_mes, numero_PL_MPV, fonte_originaria, texto_publicado, requisicao, link_para_PL_MPV, link_originaria, link_publicado, indice_anos)
+					salva_dados(textos_originais, textos_publicados, requisicoes,
+						anos, dia_e_mes, numero_PL_MPV, fonte_originaria, texto_publicado, requisicao,
+						link_para_PL_MPV, link_originaria, link_publicado, indice_anos)
 
 					print(contador_documentos)
 					contador_documentos += 1
