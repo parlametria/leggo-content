@@ -28,11 +28,12 @@ def separa_em_blocos(pares_palavra_tag, tamanho_janela = 1):
 	'''
 
 	documentos = []
-	for i in range(tamanho_janela):
+	#as iterações foram divididas em três loops, de forma a não necessitar de if's para checagem de casos de borda
+	for i in range(tamanho_janela): #primeiro, itera sobre os N primeiros pares, sendo N o tamanho da janela (caso de borda)
 		documentos.append(pares_palavra_tag[0:i] + [pares_palavra_tag[i]] + pares_palavra_tag[(i + 1):(i + 1 + tamanho_janela)]) 
-	for i in range(tamanho_janela, len(pares_palavra_tag) - tamanho_janela):
-		documentos.append(pares_palavra_tag[(i - tamanho_janela):i] + [pares_palavra_tag[i]] + pares_palavra_tag[(i + 1):(i + 1 + tamanho_janela)]) #os blocos centrais possuem a palavra central + as palavras de borda
-	for i in range(len(pares_palavra_tag) - tamanho_janela, len(pares_palavra_tag)):
+	for i in range(tamanho_janela, len(pares_palavra_tag) - tamanho_janela): #depois itera sobre os pares que não são casos de borda, ou seja, que possuem pelo menos N palavras ao seu redor, sendo N o tamanho da janela
+		documentos.append(pares_palavra_tag[(i - tamanho_janela):i] + [pares_palavra_tag[i]] + pares_palavra_tag[(i + 1):(i + 1 + tamanho_janela)]) 
+	for i in range(len(pares_palavra_tag) - tamanho_janela, len(pares_palavra_tag)): #por fim, itera sobre os últimos pares (caso de borda)
 		documentos.append(pares_palavra_tag[(i - tamanho_janela):i] + [pares_palavra_tag[i]] + pares_palavra_tag[(i + 1):(i + tamanho_janela)])
 
 
