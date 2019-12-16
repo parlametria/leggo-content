@@ -42,10 +42,10 @@ cd $VERSOES_PROPOSICOES_REPO_PATH
 sudo docker-compose run --rm versoes_props Rscript fetcher.R -o data/emendas_raw_old.csv -e data/emendas_raw.csv -n data/novas_emendas.csv -a data/avulsos_iniciais.csv -t data/textos.csv -f 1 
 
 pretty_print "Copiando arquivos do volume para a vm"
-api_container_id=$(sudo docker ps | grep back_api | cut -f 1 -d ' ')
-sudo docker cp $api_container_id:agora-digital-backend/data/novas_emendas.csv $DATA_DIR_PATH
-sudo docker cp $api_container_id:agora-digital-backend/data/avulsos_iniciais.csv $DATA_DIR_PATH
-sudo docker cp $api_container_id:agora-digital-backend/data/textos.csv $DATA_DIR_PATH
+api_container_id=$(sudo docker ps | grep servidor-csvs | cut -f 1 -d ' ')
+sudo docker cp $api_container_id:agora-digital/exported/novas_emendas.csv $DATA_DIR_PATH
+sudo docker cp $api_container_id:agora-digital/exported/avulsos_iniciais.csv $DATA_DIR_PATH
+sudo docker cp $api_container_id:agora-digital/exported/textos.csv $DATA_DIR_PATH
 
 pretty_print "Verificando se há novas emendas"
 if [ $(cat $DATA_DIR_PATH/novas_emendas.csv | wc -l) -lt 2 ]
@@ -92,16 +92,13 @@ pretty_print "Adicionando a coluna distancia na tabela \nde emendas do back"
         echo "Não há novas distâncias"
         exit 0
     else
-       api_container_id=$(sudo docker ps | grep back_api | cut -f 1 -d ' ')
-       sudo docker cp $DATA_DIR_PATH/emendas_all_dist/. $api_container_id:agora-digital-backend/data/emendas_with_distances
+       api_container_id=$(sudo docker ps | grep servidor-csvs | cut -f 1 -d ' ')
+       sudo docker cp $DATA_DIR_PATH/emendas_all_dist/. $api_container_id:agora-digital/exported/emendas_with_distances
        sudo docker-compose run --rm rmod \
        Rscript scripts/update_emendas_dist.R \
        exported/emendas_with_distances \
        data/distancias/ \
        exported/emendas_raw.csv \
        exported/emendas.csv    
-
-       pretty_print "Inserindo novos dados de emendas no Backend."
-       sudo docker exec $api_container_id sh -c './manage.py flush --no-input; ./manage.py import_data'
     fi
 fi
