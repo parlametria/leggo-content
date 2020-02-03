@@ -63,7 +63,7 @@ pretty_print "Convertendo de pdf para txt"
     $LEGGO_CONTENT_REPO_PATH/util/data/calibre_convert.sh $DATA_DIR_PATH/documentos $DATA_DIR_PATH/log-arquivos-sem-texto.txt
 
 pretty_print "Separando Justificações"
-    #Pasta com as emendas e respectivos inteiro teor de cada lei
+#Pasta com as emendas e respectivos inteiro teor de cada lei
     DIR_DATA=$DATA_DIR_PATH/documentos
 
     for folder in $(ls $DIR_DATA/); do
@@ -80,6 +80,8 @@ pretty_print "Calculando as distâncias entre as emendas \ne seus respectivos in
     python3 -c "from nltk import download;download('stopwords')"
 
     for folder in $(ls $EMENDAS_FOLDERPATH/); do
+	echo
+	echo "ID da Proposição: $folder"
         python3 $LEGGO_CONTENT_REPO_PATH/coherence/inter_emd_int/inter_emd_int.py $EMENDAS_FOLDERPATH/$folder $LEGGO_CONTENT_REPO_PATH/coherence/languagemodel/vectors_skipgram_lei_aprovadas.bin $DATA_DIR_PATH/emendas_all_dist/
     done
 
