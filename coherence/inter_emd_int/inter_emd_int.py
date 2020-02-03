@@ -47,19 +47,32 @@ sqdmeans = []
 totdists = []
 model = KeyedVectors.load_word2vec_format(modelPath, binary=True)
 
+DOCS_AVULSO_INICIAL = ["avulso_inicial_da_materia","apresentacao_de_proposicao","apresentacao_de_projeto_de_lei"]
+
 # # Intercoerência
 
 # In[11]:
 
 # Lista de Sentenças de cada emenda
+
+def is_avulso_inicial(filename):
+    result = False
+    for doc_name in DOCS_AVULSO_INICIAL:
+        if doc_name in filename:
+            result = True
+            break
+    return result
+
     
 emdSentences = []
 finalTokenizedSentences = []
 intFile = ""
 for file in files:
+    filename = str(file)
+    #print("Filename: " + filename)
     #Verifica se o texto é de uma emenda
-    if "emenda" in str(file):
-        file = open(emdPath + '/' + str(file), 'r', encoding = 'UTF8')
+    if "emenda" in filename:
+        file = open(emdPath + '/' + filename, 'r', encoding = 'UTF8')
         line = file.read()
         tokenized_sentences = []
         line = re.sub(r'[^\w\d\s]+', '', line)
@@ -69,10 +82,10 @@ for file in files:
             emdSentences.append([w for w in t if w not in stop_words])
 
     #Verifica se existe o texto inicial da materia
-    elif "avulso_inicial_da_materia" in str(file) or "apresentacao_de_proposicao" in str(file):
-        intFile = open(emdPath + '/' + str(file), 'r', encoding = 'UTF8') 
-        id_proposicao = str(file).split('_')[1]
-        print("ID Proposição: " + id_proposicao)
+    elif is_avulso_inicial(filename):
+        intFile = open(emdPath + '/' + filename, 'r', encoding = 'UTF8') 
+        id_proposicao = filename.split('_')[1]
+        #print("ID Proposição: " + id_proposicao)
         files.remove(file)
     else:
         files.remove(file)
@@ -113,7 +126,7 @@ for emd,i in zip(emdSentences,files):
     prefixo_emenda = i.split('.txt')[0]
     files_read.append(prefixo_emenda)
 
-    print("abrindo emenda:",prefixo_emenda)
+    print("\tabrindo emenda:",prefixo_emenda)
     distances = []
     
     for teor,j in zip(intSentences,range(len(intSentences))):
