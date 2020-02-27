@@ -7,7 +7,7 @@ pretty_print() {
 
 # Prints script usage
 print_usage() {
-    printf "Chamada Correta: run_emendas_analysis.sh <VOLUME_MOUNT_PATH>"
+    printf "Chamada Correta: run_emendas_analysis.sh <VOLUME_MOUNT_PATH>\n"
 }
 
 if [ "$#" -lt 1 ]; then

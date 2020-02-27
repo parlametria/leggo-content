@@ -2,3 +2,6 @@ nltk
 gensim
 pandas
 numpy
+unidecode
+pyqt5
+pyemd
