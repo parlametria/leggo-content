@@ -7,16 +7,17 @@ pretty_print() {
 
 # Prints script usage
 print_usage() {
-    printf "Chamada Correta: run_emendas_analysis.sh <VOLUME_MOUNT_PATH>\n"
+    printf "Chamada Correta: run_emendas_analysis.sh <VOLUME_MOUNT_PATH> <LEGGO_DATA_MOUNT_PATH>\n"
 }
 
-if [ "$#" -lt 1 ]; then
+if [ "$#" -lt 2 ]; then
   echo "Número incorreto de parâmetros!"
   print_usage
   exit 1
 fi
 
 VOLUME_MOUNT_PATH=$1
+LEGGO_DATA_MOUNT_PATH=$2
 
 pretty_print "Iniciando atualização"
 # Registra a data de início
@@ -64,4 +65,8 @@ else
             python3 coherence/inter_emd_int/inter_emd_int.py $EMENDAS_FOLDERPATH/$folder \
                 coherence/languagemodel/vectors_skipgram_lei_aprovadas.bin $VOLUME_MOUNT_PATH/emendas_props_distances/
         done
+    
+    pretty_print "Copiando distâncias preliminares calculadas para o volume leggo_data"
+        mkdir -p $LEGGO_DATA_MOUNT_PATH/raw_emendas_distances
+        cp $VOLUME_MOUNT_PATH/emendas_props_distances/*csv $LEGGO_DATA_MOUNT_PATH/raw_emendas_distances
 fi

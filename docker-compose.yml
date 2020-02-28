@@ -7,9 +7,13 @@ services:
      context: ./
      dockerfile: ./Dockerfile
    volumes:
+     - leggo_data:/leggo-content/leggo_data
      - leggo_content_data:/leggo-content/leggo_content_data
 
 volumes:
   leggo_content_data:
     external:
       name: leggo_content_data
+  leggo_data:
+    external:
+      name: leggo_data
