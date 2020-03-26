@@ -40,14 +40,7 @@ else:
     patterns = [pat, pat2, pat3]
     textosPat = [r"\njustificação\n", r"\njustificativa\n", ""]
 
-    # # Cria diretrio se não existe
-    def createDirsIfNotExists(path):
-        if not os.path.exists(path):
-            os.makedirs(path)
-
-    #dirPath = "./pls_leis_tramitacoes/textos_iniciais_txt"
-    #justificacoesPath = "./justificacoes/"
-    createDirsIfNotExists(justificacoesPath)
+    os.makedirs(justificacoesPath, exist_ok=True)
 
     fps = []
 
@@ -55,7 +48,7 @@ else:
         for filename in filenames:
                 # Cria diretórios no formato /justificacoes/numProposicao/arquivos.txt
                 newPath = justificacoesPath + "/" + filename.split("_")[1] + "/"
-                createDirsIfNotExists(newPath)
+                os.makedirs(newPath, exist_ok=True)
                 docPath = os.path.join(dirpath,filename)
                 with open(os.path.normpath(docPath), "r", encoding = "utf-8") as pl:
                     ProjetoDeLei = pl.read()
