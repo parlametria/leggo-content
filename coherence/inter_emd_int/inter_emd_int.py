@@ -73,7 +73,7 @@ for file in files:
         line = re.sub(r'[^\w\d\s]+', '', line)
         tokenized_sentences.append(line.lower().split())
         stop_words = set(stopwords.words('portuguese') + list(punctuation))
-        print("Adicionando tokens para análise")
+        #print("Adicionando tokens para análise")
         for t in tokenized_sentences:
             emdSentences.append([w for w in t if w not in stop_words])
 
