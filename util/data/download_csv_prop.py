@@ -18,13 +18,14 @@ def download_pdfs_from_path(csv_path, campo_prop_id, campo_doc_id, tipo_texto, o
       try:
   
         link = row["inteiro_teor"]
+        casa = row["casa"]
         id_proposicao = str(row[campo_prop_id])
         cd_texto = str(row[campo_doc_id])
 
         full_outputpath = os.path.join(output_dir, id_proposicao, "pdf")
         os.makedirs(full_outputpath, exist_ok=True)
   
-        file_name_tipo = "%s_%s_%s.pdf" % (cd_texto, id_proposicao, tipo_texto)
+        file_name_tipo = "%s_%s_%s_%s.pdf" % (cd_texto, id_proposicao, casa, tipo_texto)
         file_name = os.path.join(full_outputpath, file_name_tipo)
         print(str(link),'->',file_name)
         urllib.request.urlretrieve(link, file_name)
