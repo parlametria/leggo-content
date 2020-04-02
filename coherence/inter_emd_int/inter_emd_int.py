@@ -55,40 +55,33 @@ DOCS_AVULSO_INICIAL = ["avulso_inicial_da_materia","apresentacao_de_proposicao",
 
 # Lista de Sentenças de cada emenda
 
-def is_avulso_inicial(filename):
-    result = False
-    for doc_name in DOCS_AVULSO_INICIAL:
-        if doc_name in filename:
-            result = True
-            break
-    return result
-
-    
 emdSentences = []
 finalTokenizedSentences = []
 intFile = ""
+
+emendas = []
+
 for file in files:
     filename = str(file)
     #print("Filename: " + filename)
     #Verifica se o texto é de uma emenda
-    if "emenda" in filename:
+    if 'emenda' in filename:
+        emendas.append(file)
         file = open(emdPath + '/' + filename, 'r', encoding = 'UTF8')
         line = file.read()
         tokenized_sentences = []
         line = re.sub(r'[^\w\d\s]+', '', line)
         tokenized_sentences.append(line.lower().split())
         stop_words = set(stopwords.words('portuguese') + list(punctuation))
+        #print("Adicionando tokens para análise")
         for t in tokenized_sentences:
             emdSentences.append([w for w in t if w not in stop_words])
 
     #Verifica se existe o texto inicial da materia
-    elif is_avulso_inicial(filename):
+    elif 'avulso' in filename:
         intFile = open(emdPath + '/' + filename, 'r', encoding = 'UTF8') 
         id_proposicao = filename.split('_')[1]
         #print("ID Proposição: " + id_proposicao)
-        files.remove(file)
-    else:
-        files.remove(file)
 
 if len(emdSentences) == 0:
     print("Não existe Emendas para esta proposição")
@@ -122,7 +115,7 @@ allDists = []
 indexes = []
 files_read = []
 
-for emd,i in zip(emdSentences,files):
+for emd,i in zip(emdSentences,emendas):
     prefixo_emenda = i.split('.txt')[0]
     files_read.append(prefixo_emenda)
 

@@ -23,8 +23,9 @@ pretty_print "Iniciando atualização"
 # Registra a data de início
 date
 
-pretty_print "Limpando as pastas antes de iniciar o pipeline"	
-rm -rf $VOLUME_MOUNT_PATH/documentos $VOLUME_MOUNT_PATH/documentos_sem_justificacoes/ 
+pretty_print "Copiando os arquivos de entrada para o volume do leggo-content"
+    cp $LEGGO_DATA_MOUNT_PATH/novas_emendas.csv $VOLUME_MOUNT_PATH/novas_emendas.csv
+    cp $LEGGO_DATA_MOUNT_PATH/avulsos_iniciais_novas_emendas.csv $VOLUME_MOUNT_PATH/avulsos_iniciais_novas_emendas.csv
 
 pretty_print "Verificando se há novas emendas"
 if [ $(cat $VOLUME_MOUNT_PATH/novas_emendas.csv | wc -l) -lt 2 ]
@@ -32,11 +33,14 @@ then
     echo "Não há novas emendas"
     exit 0
 else
+    pretty_print "Limpando as pastas antes de iniciar o pipeline"	
+    rm -rf $VOLUME_MOUNT_PATH/documentos $VOLUME_MOUNT_PATH/documentos_sem_justificacoes/ 
+
     mkdir -p $VOLUME_MOUNT_PATH/documentos
 
     pretty_print "Baixando os arquivos em pdf"
-        python3 util/data/download_csv_prop.py $VOLUME_MOUNT_PATH/novas_emendas.csv $VOLUME_MOUNT_PATH/documentos/ 
-        python3 util/data/download_csv_prop.py $VOLUME_MOUNT_PATH/avulsos_iniciais.csv $VOLUME_MOUNT_PATH/documentos/ 
+        python3 util/data/download_csv_prop.py $VOLUME_MOUNT_PATH/novas_emendas.csv id_ext codigo_emenda emenda $VOLUME_MOUNT_PATH/documentos/ 
+        python3 util/data/download_csv_prop.py $VOLUME_MOUNT_PATH/avulsos_iniciais_novas_emendas.csv id_proposicao codigo_texto avulso $VOLUME_MOUNT_PATH/documentos/ 
 
     pretty_print "Convertendo de pdf para txt"
         util/data/calibre_convert.sh $VOLUME_MOUNT_PATH/documentos $VOLUME_MOUNT_PATH/log-arquivos-sem-texto.txt
