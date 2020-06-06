@@ -1,5 +1,6 @@
 '''
-Classificador CRF
+Treina um classificador CRF utilizando como documento uma janela de tamanho k.
+Uma janela com k = 4, por exemplo, significa que o bloco possui uma palavra central, as quatro anteriores e as quatro posteriores.
 '''
 
 
@@ -9,6 +10,7 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import KFold
 import numpy as np
 import os
+import sys
 
 
 #import spacy
@@ -26,34 +28,37 @@ def leitura_de_dados(arquivo_de_entrada):
 
 	pares_palavra_tag = []
 	for linha in linhas:
-		tupla = tuple(linha.split())
+		palavra_tag = linha.split()
+		if 'B-' in palavra_tag[1]:
+			palavra_tag[1] = 'I' #inicia um bloco
+		else:
+			palavra_tag[1] = 'O' #não inicia um bloco
+		tupla = tuple(palavra_tag)
 		#print(tupla)
 		pares_palavra_tag.append(tupla)
 
 	return pares_palavra_tag
 
 
-def separa_em_blocos(pares_palavra_tag):
+
+def separa_em_blocos(pares_palavra_tag, tamanho_janela = 1):
 	'''
 	Separa o documento em diferentes blocos/segmentos.
 	Retorna uma lista de documentos/blocos.
 	'''
 
-	documentos = [] 
-	documento = []
-	for i in range(len(pares_palavra_tag)):
-		documento.append(pares_palavra_tag[i])
-		if('B-' in pares_palavra_tag[i][1] and len(documento) > 1): #se encontrar um Begin (depois de uma sequência de Outs ou NÃO logo após um End, len(documento) > 1) 
-			aux = documento.pop()
-			documentos.append(documento)
-			documento = []
-			documento.append(aux)
-		else:
-			if('E-' in pares_palavra_tag[i][1]): #se encontrar um End
-				documentos.append(documento)
-				documento = []
+	documentos = []
+	#as iterações foram divididas em três loops, de forma a não necessitar de if's para checagem de casos de borda
+	for i in range(tamanho_janela): #primeiro, itera sobre os N primeiros pares, sendo N o tamanho da janela (caso de borda)
+		documentos.append(pares_palavra_tag[0:i] + [pares_palavra_tag[i]] + pares_palavra_tag[(i + 1):(i + 1 + tamanho_janela)]) 
+	for i in range(tamanho_janela, len(pares_palavra_tag) - tamanho_janela): #depois itera sobre os pares que não são casos de borda, ou seja, que possuem pelo menos N palavras ao seu redor, sendo N o tamanho da janela
+		documentos.append(pares_palavra_tag[(i - tamanho_janela):i] + [pares_palavra_tag[i]] + pares_palavra_tag[(i + 1):(i + 1 + tamanho_janela)]) 
+	for i in range(len(pares_palavra_tag) - tamanho_janela, len(pares_palavra_tag)): #por fim, itera sobre os últimos pares (caso de borda)
+		documentos.append(pares_palavra_tag[(i - tamanho_janela):i] + [pares_palavra_tag[i]] + pares_palavra_tag[(i + 1):(i + tamanho_janela)])
+
 
 	return documentos
+
 
 
 #def criador_de_features(documento, posicao_do_par, doc_nlp):
@@ -82,7 +87,6 @@ def criador_de_features(documento, posicao_do_par, pos_tags_documento):
 
 	#aqui podem ser acrescentadas features dependendo da posição da palavra no documento/bloco
 	#por exemplo, palavras que estão entre as primeira e última palavras do bloco podem tomar como features as palavras ao redor
-	
 	if posicao_do_par > 0: #se houver palavras anteriores
 		palavra_anterior = documento[posicao_do_par - 1][0]
 		
@@ -95,10 +99,6 @@ def criador_de_features(documento, posicao_do_par, pos_tags_documento):
 		])
 	else:
 		features.append('BOS') #início de documento
-
-
-
-		
 
 	if posicao_do_par < len(documento) - 1:
 		palavra_posterior = documento[posicao_do_par + 1][0]
@@ -114,29 +114,18 @@ def criador_de_features(documento, posicao_do_par, pos_tags_documento):
 		features.append('EOS') #fim de documento
 
 	
-
 	return features
 
 
 def resultados_parciais(arquivo_modelo, X_teste, y_teste):
 	'''
-	Imprime os resultados (precisão e recall)
+	Imprime os resultados do modelo treinado com o fold atual
 	'''
 
-
-	#labels_possiveis = ['O', 'B-SUB', 'B-MOD', 'B-ADD', 'B-SUP', 'I-SUB', 'I-MOD', 'I-ADD', 'I-SUP', 'E-SUB', 'E-MOD', 'E-ADD', 'E-SUP']
-	labels_possiveis = ['O', 'B-MOD', 'B-ADD', 'B-SUP', 'I-MOD', 'I-ADD', 'I-SUP', 'E-MOD', 'E-ADD', 'E-SUP']
+	labels_possiveis = ['O', 'I']
 	mapa_labels = {
 		'O': 0,
-		'B-MOD': 1,
-		'B-ADD': 2,
-		'B-SUP': 3,
-		'I-MOD': 4,
-		'I-ADD': 5,
-		'I-SUP': 6,
-		'E-MOD': 7,
-		'E-ADD': 8,
-		'E-SUP': 9
+		'I': 1
 	}
 
 	tagger = pycrfsuite.Tagger()
@@ -148,14 +137,18 @@ def resultados_parciais(arquivo_modelo, X_teste, y_teste):
 	y_teste_np = np.array([mapa_labels[y_teste_i] for labels_documento in y_teste for y_teste_i in labels_documento]) #labels corretas
 
 	dic_results = classification_report(y_teste_np, y_pred_np, labels = np.arange(len(mapa_labels)), target_names = labels_possiveis, output_dict = True)
-	#print(dic_results)
+
 
 	return dic_results
-	
-	
 
-def resultados_validacao_cruzada(todos_resultados):
-	labels_possiveis = ['O', 'B-MOD', 'B-ADD', 'B-SUP', 'I-MOD', 'I-ADD', 'I-SUP', 'E-MOD', 'E-ADD', 'E-SUP']
+
+
+def resultados_validacao_cruzada(todos_resultados, caminho_salvar):
+	'''
+	Salva os resultados finais do modelo treinado
+	'''
+
+	labels_possiveis = ['O', 'I']
 	dic_resultados_kfold = {}
 	for label_atual in labels_possiveis:
 		dic_resultados_kfold[label_atual] = {}
@@ -179,6 +172,12 @@ def resultados_validacao_cruzada(todos_resultados):
 	for label in dic_resultados_kfold.keys():
 		print(label + '\t\t' + str(round(dic_resultados_kfold[label]['precision'], 4)) + '\t\t\t' + str(round(dic_resultados_kfold[label]['recall'], 4)) + '\t\t\t' + str(round(dic_resultados_kfold[label]['f1-score'], 4)))
 
+	with open(caminho_salvar, 'w') as arq:
+		arq.write('\t\t\t\tResultados 5-Fold\n')
+		arq.write('label \t\t precision \t\t recall \t\t f1-score\n')
+		for label in dic_resultados_kfold.keys():
+			arq.write(label + '\t\t' + str(round(dic_resultados_kfold[label]['precision'], 4)) + '\t\t\t' + str(round(dic_resultados_kfold[label]['recall'], 4)) + '\t\t\t' + str(round(dic_resultados_kfold[label]['f1-score'], 4)) + '\n')
+		
 
 
 def main():
@@ -190,72 +189,77 @@ def main():
 	#nlp = spacy.load('pt_core_news_sm')
 
 	pares_palavra_tag = []
-	for arquivo in os.listdir('tagFiles/'): #diretório com arquivos de treino e teste
-		#print(arquivo)
-		pares_palavra_tag += leitura_de_dados('tagFiles/' + arquivo)
+	for arquivo in os.listdir(sys.argv[1] + '/'): #diretório com arquivos de treino e teste
+		pares_palavra_tag += leitura_de_dados(sys.argv[1] + '/' + arquivo)
 
-
-	#pares_com_O = [tupla for tupla in pares_palavra_tag if tupla[1] == 'O'] #pares apenas com out of segment
-	#pares_palavra_tag = [tupla for tupla in pares_palavra_tag if tupla[1] != 'O'] #pares apenas com segmentos com conteúdo informativo
 	
-	documentos = separa_em_blocos(pares_palavra_tag) #cada segmento é um documento, as tags B e E indicam o início e o fim de um segmento
-	tagger = pickle.load(open("tagger_portugues.pkl", "rb"))
+	janelas = [4] #lista com tamanhos de janela que se deseja testar, no caso já sabe-se que a janela de tamanho 4 obteve um bom desempenho
+	for tamanho_janela in janelas:
+		documentos = separa_em_blocos(pares_palavra_tag, tamanho_janela) #cada segmento é um documento
+
+		tagger = pickle.load(open("tagger_portugues.pkl", "rb"))
 	
+		X = [] #lista de listas, cada lista contém as features de palavras de um mesmo documento
+		y = [] #lista de listas, cada lista contém as labels de palavras de um mesmo documento
+		for documento in documentos:
+			Xi = [] #vetor de features, cada posição contém as features de uma palavra
+			yi = [] #vetor de labels, cada posição contém as labels de uma palavra
+			pos_tags_documento = tagger.tag(list(zip(*documento))[0])
+			for i in range(len(documento)):
+				Xi.append(criador_de_features(documento, i, pos_tags_documento))
+				yi.append(documento[i][1])
+			X.append(Xi)
+			y.append(yi)
 
-	X = [] #lista de lista, cada lista contém as features de palavras de um mesmo documento
-	y = [] #lista de lista, cada lista contém as labels de palavras de um mesmo documento
-	for documento in documentos:
-		Xi = [] #vetor de features, cada posição contém as features de uma palavra
-		yi = [] #vetor de labels, cada posição contém as labels de uma palavra
-		#aux = list(zip(*documento))[0]
-		#doc_nlp = nlp(' '.join(aux))
-		pos_tags_documento = tagger.tag(list(zip(*documento))[0])
-		for i in range(len(documento)):
-			#Xi.append(criador_de_features(documento, i, doc_nlp))
-			Xi.append(criador_de_features(documento, i, pos_tags_documento))
-			yi.append(documento[i][1])
-		X.append(Xi)
-		y.append(yi)
+		X = np.array(X)
+		y = np.array(y)
+		kf_5 = KFold(n_splits = 5, shuffle = True) #5-Fold
+		todos_resultados = [] #sumarização dos resultados
+		for indice_treino, indice_teste in kf_5.split(X):
+			print('em treino...')
+			X_treino, X_teste = X[indice_treino], X[indice_teste]
+			y_treino, y_teste = y[indice_treino], y[indice_teste]	
 
+			modelo = pycrfsuite.Trainer(verbose = True)
 
-	#5-Fold
-	X = np.array(X)
-	y = np.array(y)
-	kf_5 = KFold(n_splits = 5, shuffle = True)
-	todos_resultados = [] #sumarização dos resultados
-	for indice_treino, indice_teste in kf_5.split(X):
-		print('em treino...')
-		X_treino, X_teste = X[indice_treino], X[indice_teste]
-		y_treino, y_teste = y[indice_treino], y[indice_teste]	
+			for unidade_x, unidade_y in zip(X_treino, y_treino):
+				modelo.append(unidade_x, unidade_y)
 
+			modelo.set_params({
+				'c1': 0.1,
+				'c2': 0.01,
+				'max_iterations': 100
+				#'all_possible_transitions': True
+				#'feature.possible_transitions': True
+			})
 
+			modelo.train(sys.argv[2])
 
+			dic_results = resultados_parciais(sys.argv[2], X_teste, y_teste)
+
+			todos_resultados.append(dic_results)
+			
+
+		#treino final, utilizando todos dados
 		modelo = pycrfsuite.Trainer(verbose = True)
-
-
-		for unidade_x, unidade_y in zip(X_treino, y_treino):
+		for unidade_x, unidade_y in zip(X, y):
 			modelo.append(unidade_x, unidade_y)
-
-
+		modelo.train(sys.argv[2])
 		modelo.set_params({
-			'c1': 0.1,
-			'c2': 0.01,
-			'max_iterations': 1000,
-			#'all_possible_transitions': True
-			'feature.possible_transitions': True
-		})
+				'c1': 0.1,
+				'c2': 0.01,
+				'max_iterations': 1000
+				#'all_possible_transitions': True
+				#'feature.possible_transitions': True
+			})
+		modelo.train(sys.argv[2])
 
-		modelo.train('modelo.model')
-
-		dic_results = resultados_parciais('modelo.model', X_teste, y_teste)
-
-		todos_resultados.append(dic_results)
-
-
-	resultados_validacao_cruzada(todos_resultados)
-	
+		resultados_validacao_cruzada(todos_resultados, sys.argv[3] + '/' + str(tamanho_janela) + '.txt')
 	
 
-
+	
 if __name__ == "__main__":
 	main()
+
+
+

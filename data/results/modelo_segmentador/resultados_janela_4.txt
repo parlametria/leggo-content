@@ -1,0 +1,4 @@
+				Resultados 5-Fold
+label 		 precision 		 recall 		 f1-score
+O		0.9986			0.9994			0.999
+I		0.8554			0.7358			0.7908
