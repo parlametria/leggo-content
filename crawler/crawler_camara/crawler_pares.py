@@ -20,7 +20,10 @@ import time
 import sys
 
 
+def print_usage():
+	print('Número errado de parâmetros, o certo é: crawler_pares.py <caminho_textos_originais> <caminho_textos_publicados> <caminho_requisicoes>')
 
+  
 ###################################################
 ################################################### Funções
 ###################################################
@@ -28,14 +31,14 @@ def inicia_acesso(url): #inicia webdriver
 	driver = webdriver.Firefox()
 	driver.implicitly_wait(30)
 	driver.get(url)
-	driver.find_element_by_id("ide").click() #para expandir os anos visíveis
+	driver.find_element_by_id('ide').click() #para expandir os anos visíveis
 
 	return driver
 
 
 
 def encontra_elemento_ano(soup_principal, anos, indice_anos):
-	lista_li = soup_principal.find("li", {"id": "id2"})
+	lista_li = soup_principal.find('li', {'id': 'id2'})
 	lista_anos_site = lista_li.find_all('li')
 	for elem in lista_anos_site:
 		if(anos[indice_anos] in elem.text): #se for o ano atualmente procurado
@@ -61,17 +64,17 @@ def obtem_links_dos_textos(link_para_PL_MPV, anos, indice_anos):
 	classe_sessao = divdadosNorma.find_all('div', class_ = 'sessao')
 	valido = 0
 	for cont_sess in range(0, len(classe_sessao)):
-		if("Proposição Originária:" in classe_sessao[cont_sess].text):
+		if('Proposição Originária:' in classe_sessao[cont_sess].text):
 			valido = 1
 			break
 	if(valido == 0): #se não há proposição originária
-		with open("log.txt", "a") as arquivo:
-			arquivo.write(anos[indice_anos] + "_" + "^^^" + "SPO^^^" + "Sem Proposição Originária^^^" + link_para_PL_MPV + "\n")
+		with open('log.txt', 'a') as arquivo:
+			arquivo.write(anos[indice_anos] + '_' + '^^^' + 'SPO^^^' + 'Sem Proposição Originária^^^' + link_para_PL_MPV + '\n')
 		pass
 
 	link_publicado = inicio_link + classe_sessao[0].a['href'] #primeira div com class sessao dentro da div com class dadosNorma
 	link_originaria = classe_sessao[cont_sess].a['href'] #segunda div com class sessao dentro da div com class dadosNorma
-	numero_PL_MPV = "_" + classe_sessao[cont_sess].a.string.replace(" ", "_").replace("/", "__") + "_"
+	numero_PL_MPV = '_' + classe_sessao[cont_sess].a.string.replace(' ', '_').replace('/', '__') + '_'
 
 	return link_publicado, link_originaria, numero_PL_MPV, dia_e_mes
 
@@ -81,12 +84,11 @@ def obtem_texto_publicado(link_publicado, anos, indice_anos, numero_PL_MPV, link
 	time.sleep(0.1)
 	fonte_publicado = requests.get(link_publicado)
 	fonte_publicado = fonte_publicado.text
-	#print(fonte_publicado)
 	soup_publicado = BeautifulSoup(fonte_publicado, 'lxml')
 	texto_publicado = soup_publicado.find('div', class_ = 'texto')
 	if(texto_publicado is None):
-		with open("log.txt", "a") as arquivo:
-			arquivo.write(anos[indice_anos] + "_" + str(numero_PL_MPV) + "^^^" + "STP^^^" + "Sem Texto Publicado^^^" + link_para_PL_MPV + "\n")
+		with open('log.txt', 'a') as arquivo:
+			arquivo.write(anos[indice_anos] + '_' + str(numero_PL_MPV) + '^^^' + 'STP^^^' + 'Sem Texto Publicado^^^' + link_para_PL_MPV + '\n')
 		raise Exception
 
 	texto_publicado = texto_publicado.text
@@ -107,24 +109,24 @@ def obtem_texto_original_e_html_tramitacao(link_originaria, anos, numero_PL_MPV,
 
 	aux = soup_originaria.find('a', class_ = 'rightIconified iconDetalhe linkDownloadTeor')['href']
 	if(aux is None or 'Tramitacao' in aux):
-		with open("log.txt", "a") as arquivo:
-			arquivo.write(anos[indice_anos] + "_" + str(numero_PL_MPV) + "^^^" + "TAT^^^" + "Texto Apenas na Tramitação^^^" + link_para_PL_MPV + "\n")
+		with open('log.txt', 'a') as arquivo:
+			arquivo.write(anos[indice_anos] + '_' + str(numero_PL_MPV) + '^^^' + 'TAT^^^' + 'Texto Apenas na Tramitação^^^' + link_para_PL_MPV + '\n')
 		raise Exception #ou seja, o link existe mas é só em fase de tramitação: não há um texto de PL original
 	aux = aux.split('?')[1]
 
 	link_download = 'http://www.camara.gov.br/proposicoesWeb/prop_mostrarintegra?' + aux
 
 	requisicao = requests.get(link_download, allow_redirects = True)
-	if("page=" in requisicao.url or "PAGE=" in requisicao.url): #se na url final após os redirecionamentos há uma indicação de página então está num diário maior
-		with open("log.txt", "a") as arquivo:
-			arquivo.write(anos[indice_anos] + "_" + str(numero_PL_MPV) + "^^^" + "TD^^^" + "Texto em Diário^^^" + link_para_PL_MPV + "\n")
+	if('page=' in requisicao.url or 'PAGE=' in requisicao.url): #se na url final após os redirecionamentos há uma indicação de página então está num diário maior
+		with open('log.txt', 'a') as arquivo:
+			arquivo.write(anos[indice_anos] + '_' + str(numero_PL_MPV) + '^^^' + 'TD^^^' + 'Texto em Diário^^^' + link_para_PL_MPV + '\n')
 		raise Exception
 
 
-	if("Licensed to the Apache Software Foundation (ASF)" in str(requisicao.content)): #só possui essa string se o link para o pdf NÃO existe
+	if('Licensed to the Apache Software Foundation (ASF)' in str(requisicao.content)): #só possui essa string se o link para o pdf NÃO existe
 																						#e nesse caso o binário (.pdf) contém exatamente essa string e podemos fazer str(requisicao.content)
-		with open("log.txt", "a") as arquivo:
-			arquivo.write(anos[indice_anos] + "_" + str(numero_PL_MPV) + "^^^" + "SP^^^" + "Sem PDF^^^" + link_para_PL_MPV + "\n")
+		with open('log.txt', 'a') as arquivo:
+			arquivo.write(anos[indice_anos] + '_' + str(numero_PL_MPV) + '^^^' + 'SP^^^' + 'Sem PDF^^^' + link_para_PL_MPV + '\n')
 		raise Exception #e então levanta uma exceção
 	else:
 		print('com pdf')
@@ -132,30 +134,31 @@ def obtem_texto_original_e_html_tramitacao(link_originaria, anos, numero_PL_MPV,
 	return requisicao, fonte_originaria
 
 
-
 def obtem_link_proxima_pagina(driver):
-	lista_ul_li = driver.find_element_by_class_name("proxima") #encontra o elemento com o link para a próxima página (elemento único)
+	lista_ul_li = driver.find_element_by_class_name('proxima') #encontra o elemento com o link para a próxima página (elemento único)
 
 	try: #tenta obter link da próxima página
-		link = lista_ul_li.find_element_by_tag_name("a") #obtem o link desse elemento
+		link = lista_ul_li.find_element_by_tag_name('a') #obtem o link desse elemento
 		return link
 	except NoSuchElementException: #se não tiver link, acabou a paginação desse ano
-		return "sai_loop"
+		return 'sai_loop'
 
 
+def salva_dados(dir_textos_originais, dir_textos_publicados, dir_requisicoes,
+	anos, dia_e_mes, numero_PL_MPV, fonte_originaria, texto_publicado, requisicao, 
+	link_para_PL_MPV, link_originaria, link_publicado, indice_anos):
 
-def salva_dados(anos, dia_e_mes, numero_PL_MPV, fonte_originaria, texto_publicado, requisicao, link_para_PL_MPV, link_originaria, link_publicado, indice_anos):
-	with open(sys.argv[1] + '/doc_' + anos[indice_anos] + "_" + dia_e_mes + str(numero_PL_MPV) + '.txt', 'w') as arquivo:
+	with open(dir_textos_originais + '/doc_' + anos[indice_anos] + '_' + dia_e_mes + str(numero_PL_MPV) + '.txt', 'w') as arquivo:
 		arquivo.write(fonte_originaria)
 
-	with open(sys.argv[2] + '/doc_' + anos[indice_anos] + "_" + dia_e_mes  + str(numero_PL_MPV) + '.txt', 'w') as arquivo:
+	with open(dir_textos_publicados + '/doc_' + anos[indice_anos] + '_' + dia_e_mes  + str(numero_PL_MPV) + '.txt', 'w') as arquivo:
 		arquivo.write(texto_publicado)
 
-	with open(sys.argv[3] + '/doc_' + anos[indice_anos] + "_" + dia_e_mes + str(numero_PL_MPV) + '.pdf', 'wb') as arquivo:
+	with open(dir_requisicoes + '/doc_' + anos[indice_anos] + '_' + dia_e_mes + str(numero_PL_MPV) + '.pdf', 'wb') as arquivo:
 		arquivo.write(requisicao.content)
 
 	with open('relatorio.txt', 'a') as arquivo:
-		arquivo.write('doc_' + anos[indice_anos] + "_" + dia_e_mes + str(numero_PL_MPV) + '\n')
+		arquivo.write('doc_' + anos[indice_anos] + '_' + dia_e_mes + str(numero_PL_MPV) + '\n')
 		arquivo.write(link_para_PL_MPV + '\n')
 		arquivo.write(link_originaria + '\n')
 		arquivo.write(link_publicado + '\n')
@@ -164,7 +167,7 @@ def salva_dados(anos, dia_e_mes, numero_PL_MPV, fonte_originaria, texto_publicad
 
 
 def atualiza_arquivo_anos(anos, indice_anos):
-	with open("paginacao_por_anos.txt", "w") as arquivo: #atualiza o arquivo de anos deixando apenas os que faltam. se ocorrer exceção maior ou erro o programa reinicia e continua de onde parou
+	with open('paginacao_por_anos.txt', 'w') as arquivo: #atualiza o arquivo de anos deixando apenas os que faltam. se ocorrer exceção maior ou erro o programa reinicia e continua de onde parou
 		for aux_anos in range(indice_anos, len(anos)):
 			arquivo.write(str(anos[aux_anos]) + '\n')
 
@@ -174,9 +177,17 @@ def atualiza_arquivo_anos(anos, indice_anos):
 ################################################### Programa principal
 ###################################################
 def main():
-	url = "http://www2.camara.leg.br/busca/?o=relevance&v=legislacao&colecao=S&conteudolegin=&numero=&ano=&tiponormaF=Lei+Ordin%C3%A1ria" #página inicial, fixa
+	if (len(sys.argv) != 4):
+		print_usage()
+		exit()
 
-	with open("paginacao_por_anos.txt", "r") as arquivo:
+	textos_originais = sys.argv[1]
+	textos_publicados = sys.argv[2]
+	requisicoes = sys.argv[3]
+
+	url = 'http://www2.camara.leg.br/busca/?o=relevance&v=legislacao&colecao=S&conteudolegin=&numero=&ano=&tiponormaF=Lei+Ordin%C3%A1ria' #página inicial, fixa
+
+	with open('paginacao_por_anos.txt', 'r') as arquivo:
 		anos = arquivo.readlines()
 
 	for i in range(0, len(anos)):
@@ -185,9 +196,8 @@ def main():
 	contador_documentos = 1 #para visualização no terminal
 	indice_anos = 0 #alterar conforme necessário
 
-	for cont in anos: #cont não é utilizado, apenas para o loop
+	for _ in anos:
 		driver = inicia_acesso(url)
-		#print(driver.page_source)
 
 		soup_principal = BeautifulSoup(driver.page_source, 'lxml') #inicia coletando a página inicial
 
@@ -211,7 +221,9 @@ def main():
 					requisicao, fonte_originaria = obtem_texto_original_e_html_tramitacao(link_originaria, anos, numero_PL_MPV, link_para_PL_MPV, indice_anos)
 				
 					############################ Salvando os arquivos (colocados no final para que o bloco try-except funcione corretamente)
-					salva_dados(anos, dia_e_mes, numero_PL_MPV, fonte_originaria, texto_publicado, requisicao, link_para_PL_MPV, link_originaria, link_publicado, indice_anos)
+					salva_dados(textos_originais, textos_publicados, requisicoes,
+						anos, dia_e_mes, numero_PL_MPV, fonte_originaria, texto_publicado, requisicao,
+						link_para_PL_MPV, link_originaria, link_publicado, indice_anos)
 
 					print(contador_documentos)
 					contador_documentos += 1
@@ -222,7 +234,7 @@ def main():
 
 
 			link = obtem_link_proxima_pagina(driver)
-			if(link == "sai_loop"): #se não retornar um link a paginação deste ano acabou, então sai do loop
+			if(link == 'sai_loop'): #se não retornar um link a paginação deste ano acabou, então sai do loop
 				break
 			link.click() #clica no link, e agora o objeto driver está na próxima página pra onde o link leva
 
@@ -237,5 +249,5 @@ def main():
 		time.sleep(2) #espera um tempo e retorna, abrindo o webdriver novamente (início do loop)
 
 
-if __name__== "__main__":
+if __name__== '__main__':
 	main()
